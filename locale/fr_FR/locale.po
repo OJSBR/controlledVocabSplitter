@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-08-07T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-08-07T00:00:00+00:00\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: fr-FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Séparateur de vocabulaire contrôlé"
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Sépare les mots-clés, sujets, disciplines et agences de financement collés sur une seule ligne en autant de termes que l'auteur avait en tête — dans le champ lui-même et à chaque enregistrement."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Les auteurs sélectionnent souvent la ligne de mots-clés de leur manuscrit, la copient et la collent entièrement dans le champ, ce qui enregistre un seul terme très long au lieu de plusieurs. Choisissez ci-dessous quels vocabulaires sont séparés et quels séparateurs sont pris en compte."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vocabulaires"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Seuls les vocabulaires cochés ici sont modifiés. Tout le reste est enregistré exactement tel qu'il a été saisi."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Séparateurs"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Un seul séparateur est utilisé par entrée : le premier de la liste ci-dessous qui y figure. Une liste écrite avec des points-virgules et des virgules n'est donc coupée qu'aux points-virgules."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vocabulaire"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Séparer"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Séparateur"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Utiliser"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Point-virgule"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonothérapie ; Stress oxydatif ; Réglementation"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Virgule suivie d'une espace"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonothérapie, Stress oxydatif, Réglementation"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Point suivi d'une espace"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonothérapie. Stress oxydatif. Réglementation"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "La virgule est le cas risqué"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Une vedette-matière inversée telle que \"Hypertension artérielle gravidique, Syndrome\" est un terme unique et serait coupée en deux. Désactivez la virgule si la revue indexe avec MeSH ou DeCS."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Ce qui n'est jamais coupé"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Le point ne sépare que lorsqu'une espace le suit, ce qui préserve les références juridiques comme \"Lei 13.964/2019\", et jamais lorsqu'il ferme une lettre isolée, ce qui préserve \"S. aureus\" et \"E. coli\"."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Les enregistrements déjà stockés ne sont pas modifiés avant leur prochain enregistrement. Pour réparer un fonds existant en une seule passe, lancez le script tools/fixExistingVocabs.php fourni avec le plugin ; il ne fait que simuler, sauf si vous lui demandez d'écrire."
+

@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-08-07T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-08-07T00:00:00+00:00\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Separatore di vocabolario controllato"
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Separa parole chiave, soggetti, discipline e agenzie di finanziamento incollate su una sola riga nei termini che l'autore intendeva — nel campo stesso e a ogni salvataggio."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Gli autori spesso selezionano la riga delle parole chiave nel manoscritto, la copiano e la incollano tutta nel campo, salvando un unico termine lunghissimo invece di molti. Scegli qui sotto quali vocabolari vengono separati e quali separatori valgono."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vocabolari"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Vengono toccati solo i vocabolari selezionati qui. Tutto il resto viene salvato esattamente come è stato scritto."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Separatori"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Per ogni voce si usa un solo separatore: il primo dell'elenco qui sotto che vi compare. Un elenco scritto con punti e virgola e virgole viene quindi tagliato solo sui punti e virgola."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vocabolario"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Separare"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Separatore"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Usare"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Punto e virgola"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonoterapia; Stress ossidativo; Regolamentazione"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Virgola seguita da uno spazio"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonoterapia, Stress ossidativo, Regolamentazione"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Punto seguito da uno spazio"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonoterapia. Stress ossidativo. Regolamentazione"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "La virgola è quella rischiosa"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Un descrittore invertito come \"Ipertensione indotta dalla gravidanza, Sindrome\" è un termine unico e verrebbe tagliato in due. Disattiva la virgola se la rivista indicizza con MeSH o DeCS."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Ciò che non viene mai tagliato"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Il punto separa solo quando è seguito da uno spazio, il che tiene intatti riferimenti normativi come \"Lei 13.964/2019\", e mai quando chiude una lettera isolata, il che tiene intatti \"S. aureus\" e \"E. coli\"."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "I record già salvati restano come sono fino al salvataggio successivo. Per sistemare un archivio esistente in una sola passata, esegui lo script tools/fixExistingVocabs.php fornito con il plugin; è una simulazione, a meno che non gli si chieda di scrivere."
+

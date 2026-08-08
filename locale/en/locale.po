@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-08-07T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-08-07T00:00:00+00:00\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Controlled Vocabulary Splitter"
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Splits keywords, subjects, disciplines and supporting agencies that were pasted as a single line into the separate terms the author meant — in the field itself and on every save."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Authors often select the keyword line in their manuscript, copy it and paste the whole thing into the field, which stores one long term instead of several. Choose below which vocabularies are split and which separators are honoured."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vocabularies"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Only the vocabularies ticked here are touched. Everything else is stored exactly as it was typed."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Separators"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Only one separator is used per entry: the first of the ones below that occurs in it. A list written with semicolons and commas is therefore cut on the semicolons alone."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vocabulary"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Split"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Separator"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Use"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Semicolon"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozone therapy; Oxidative stress; Regulation"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Comma followed by a space"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozone therapy, Oxidative stress, Regulation"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Period followed by a space"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozone therapy. Oxidative stress. Regulation"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "The comma is the risky one"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "An inverted subject heading such as \"Hypertension, Pregnancy-Induced\" is a single term and would be cut in two. Turn the comma off if your journal indexes with MeSH or DeCS."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "What is never cut"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "A period only separates when a space follows it, which keeps legal references such as \"Lei 13.964/2019\" whole, and never when it closes a single letter, which keeps \"S. aureus\" and \"E. coli\" whole."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Records already stored are left alone until they are saved again. To repair an existing archive in one pass, run the tools/fixExistingVocabs.php script that ships with this plugin; it is a dry run unless you ask it to write."
+

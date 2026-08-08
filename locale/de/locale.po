@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-08-07T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-08-07T00:00:00+00:00\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Trenner für kontrolliertes Vokabular"
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Trennt Schlagwörter, Themen, Fachgebiete und fördernde Einrichtungen, die als eine einzige Zeile eingefügt wurden, in die vom Autor gemeinten Einzelbegriffe — im Feld selbst und bei jedem Speichern."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Autorinnen und Autoren markieren häufig die Schlagwortzeile im Manuskript, kopieren sie und fügen sie komplett in das Feld ein; gespeichert wird dann ein einziger langer Begriff statt mehrerer. Wählen Sie unten, welche Vokabulare getrennt werden und welche Trennzeichen gelten."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vokabulare"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Nur die hier angehakten Vokabulare werden angefasst. Alles andere wird genau so gespeichert, wie es eingegeben wurde."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Trennzeichen"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Pro Eintrag wird nur ein Trennzeichen verwendet: das erste aus der Liste unten, das darin vorkommt. Eine Liste mit Semikola und Kommata wird daher nur an den Semikola getrennt."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vokabular"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Trennen"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Trennzeichen"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Verwenden"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Semikolon"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozontherapie; Oxidativer Stress; Regulierung"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Komma gefolgt von einem Leerzeichen"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozontherapie, Oxidativer Stress, Regulierung"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Punkt gefolgt von einem Leerzeichen"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozontherapie. Oxidativer Stress. Regulierung"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Das Komma ist das riskante Zeichen"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Ein invertiertes Schlagwort wie \"Schwangerschaftsinduzierte Hypertonie, Syndrom\" ist ein einziger Begriff und würde in zwei zerschnitten. Schalten Sie das Komma ab, wenn Ihre Zeitschrift mit MeSH oder DeCS erschließt."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Was nie zerschnitten wird"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Ein Punkt trennt nur, wenn ein Leerzeichen folgt — das hält Rechtsverweise wie \"Lei 13.964/2019\" zusammen — und nie, wenn er einen einzelnen Buchstaben abschließt, was \"S. aureus\" und \"E. coli\" zusammenhält."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Bereits gespeicherte Datensätze bleiben unangetastet, bis sie erneut gespeichert werden. Um einen vorhandenen Bestand in einem Durchgang zu reparieren, führen Sie das mitgelieferte Skript tools/fixExistingVocabs.php aus; es simuliert nur, sofern Sie es nicht zum Schreiben auffordern."
+

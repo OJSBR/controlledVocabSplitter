@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-08-07T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-08-07T00:00:00+00:00\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Separador de Vocabulario Controlado"
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Separa palabras clave, temas, disciplinas y agencias de apoyo pegadas en una sola línea en los términos que el autor quiso decir — en el propio campo y en cada guardado."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Es habitual que el autor seleccione la línea de palabras clave del manuscrito, la copie y la pegue entera en el campo, lo que guarda un término largo en lugar de varios. Elija abajo qué vocabularios se separan y qué separadores valen."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vocabularios"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Solo se tocan los vocabularios marcados aquí. Todo lo demás se guarda tal como se escribió."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Separadores"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Solo se usa un separador por registro: el primero de la lista de abajo que aparezca en él. Una lista escrita con punto y coma y comas se corta, por tanto, solo en los puntos y comas."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vocabulario"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Separar"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Separador"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Usar"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Punto y coma"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonoterapia; Estrés oxidativo; Regulación"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Coma seguida de espacio"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonoterapia, Estrés oxidativo, Regulación"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Punto seguido de espacio"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonoterapia. Estrés oxidativo. Regulación"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "La coma es la arriesgada"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Un descriptor invertido como \"Hipertensión Inducida en el Embarazo, Síndrome\" es un solo término y quedaría cortado en dos. Desactive la coma si la revista indiza con MeSH o DeCS."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Lo que nunca se corta"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "El punto solo separa cuando le sigue un espacio, lo que mantiene enteras referencias legales como \"Lei 13.964/2019\", y nunca cuando cierra una letra sola, lo que mantiene enteros \"S. aureus\" y \"E. coli\"."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Los registros ya guardados no se tocan hasta que se vuelvan a guardar. Para reparar un archivo completo de una vez, ejecute el script tools/fixExistingVocabs.php que acompaña al plugin; solo simula, salvo que le pida escribir."
+
