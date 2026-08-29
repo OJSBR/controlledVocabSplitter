@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: hu\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Kontrollált szótár szétválasztó"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Szétválasztja az egy sorként beillesztett kulcsszavakat, tárgyszavakat, tudományterületeket és támogató szervezeteket azokra a külön kifejezésekre, amelyeket a szerző szánt – magában a mezőben és minden mentéskor."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "A szerzők gyakran kijelölik a kéziratban a kulcsszavak sorát, kimásolják, és egészében beillesztik a mezőbe, így több helyett egyetlen hosszú kifejezés kerül tárolásra. Alább válassza ki, mely szótárak legyenek szétválasztva és mely elválasztók számítsanak."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Szótárak"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Csak az itt bejelölt szótárakat érinti. Minden más pontosan úgy tárolódik, ahogy beírták."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Elválasztók"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Bejegyzésenként csak egy elválasztó érvényesül: az alábbiak közül az első, amely előfordul benne. Egy pontosvesszőkkel és vesszőkkel írt lista így csak a pontosvesszőknél szakad szét."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Szótár"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Szétválasztás"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Elválasztó"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Használat"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Pontosvessző"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ózonterápia; Oxidatív stressz; Szabályozás"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Vessző, utána szóköz"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ózonterápia, Oxidatív stressz, Szabályozás"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Pont, utána szóköz"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ózonterápia. Oxidatív stressz. Szabályozás"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "A vessző a kockázatos"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Az olyan invertált tárgyszó, mint a „Hypertension, Pregnancy-Induced”, egyetlen kifejezés, és kettévágódna. Kapcsolja ki a vesszőt, ha a folyóirata MeSH vagy DeCS szerint indexel."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Amit soha nem vág szét"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "A pont csak akkor választ el, ha szóköz követi – így maradnak egyben az olyan jogi hivatkozások, mint a „Lei 13.964/2019” –, és soha, ha egyetlen betű után áll, így marad egyben az „S. aureus” és az „E. coli”."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "A már tárolt rekordok érintetlenek maradnak, amíg újra nem mentik őket. A meglévő archívum egy menetben történő javításához futtassa a bővítménnyel érkező tools/fixExistingVocabs.php szkriptet; alapból csak próbafuttatás, hacsak nem kéri az írást."

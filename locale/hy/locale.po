@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: hy\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Վերահսկվող բառապաշարի բաժանիչ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Բաժանում է մեկ տողով տեղադրված բանալի բառերը, թեմաները, ոլորտներն ու աջակցող կազմակերպությունները այն առանձին եզրույթների, որոնք հեղինակը նկատի ուներ՝ հենց դաշտում և ամեն պահպանման ժամանակ։"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Հեղինակները հաճախ ընտրում են ձեռագրի բանալի բառերի տողը, պատճենում և ամբողջությամբ տեղադրում դաշտում, ինչի պատճառով մի քանիսի փոխարեն պահվում է մեկ երկար եզրույթ։ Ստորև ընտրեք, թե որ բառապաշարներն են բաժանվում և որ բաժանիչներն են հաշվի առնվում։"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Բառապաշարներ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Փոփոխվում են միայն այստեղ նշված բառապաշարները։ Մնացած ամեն ինչ պահվում է ճիշտ այնպես, ինչպես մուտքագրվել է։"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Բաժանիչներ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Յուրաքանչյուր գրառման համար օգտագործվում է միայն մեկ բաժանիչ՝ ստորև թվարկվածներից առաջինը, որը հանդիպում է դրանում։ Ուստի կետ-ստորակետերով և ստորակետերով գրված ցանկը կտրվում է միայն կետ-ստորակետերով։"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Բառապաշար"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Բաժանել"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Բաժանիչ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Օգտագործում"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Կետ-ստորակետ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Օզոնաթերապիա; Օքսիդատիվ սթրես; Կարգավորում"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Ստորակետ և հետո բացատ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Օզոնաթերապիա, Օքսիդատիվ սթրես, Կարգավորում"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Կետ և հետո բացատ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Օզոնաթերապիա. Օքսիդատիվ սթրես. Կարգավորում"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Ռիսկայինը ստորակետն է"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Շրջված առարկայական վերնագիրը, ինչպիսին է «Hypertension, Pregnancy-Induced»-ը, մեկ եզրույթ է և կկտրվեր երկու մասի։ Անջատեք ստորակետը, եթե ձեր ամսագիրը ինդեքսավորում է MeSH-ով կամ DeCS-ով։"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Ինչը երբեք չի բաժանվում"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Կետը բաժանում է միայն այն դեպքում, երբ դրան հաջորդում է բացատ, ինչը ամբողջական է պահում իրավական հղումները, ինչպիսին է «Lei 13.964/2019», և երբեք՝ մեկ տառից հետո, ինչը ամբողջական է պահում «S. aureus»-ը և «E. coli»-ն։"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Արդեն պահված գրառումները մնում են անփոփոխ, մինչև նորից չպահվեն։ Առկա արխիվը մեկ անցումով ուղղելու համար գործարկեք այս հավելման հետ եկող tools/fixExistingVocabs.php սկրիպտը. այն փորձնական գործարկում է, եթե գրելը հատուկ չպահանջեք։"

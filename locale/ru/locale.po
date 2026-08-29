@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ru\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Разделитель контролируемых словарей"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Разделяет ключевые слова, предметные рубрики, дисциплины и поддерживающие организации, вставленные одной строкой, на отдельные термины, которые имел в виду автор, — прямо в поле и при каждом сохранении."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Авторы часто выделяют строку ключевых слов в рукописи, копируют её и вставляют целиком в поле, из-за чего сохраняется один длинный термин вместо нескольких. Ниже выберите, какие словари разделяются и какие разделители учитываются."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Словари"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Затрагиваются только отмеченные здесь словари. Всё остальное сохраняется ровно так, как было введено."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Разделители"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Для каждой записи используется только один разделитель: первый из перечисленных ниже, который в ней встречается. Поэтому список, написанный с точками с запятой и запятыми, разрезается только по точкам с запятой."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Словарь"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Разделить"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Разделитель"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Использование"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Точка с запятой"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Озонотерапия; Окислительный стресс; Регуляция"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Запятая с последующим пробелом"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Озонотерапия, Окислительный стресс, Регуляция"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Точка с последующим пробелом"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Озонотерапия. Окислительный стресс. Регуляция"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Рискованна именно запятая"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Инвертированная предметная рубрика вроде «Hypertension, Pregnancy-Induced» — это один термин, и он был бы разрезан надвое. Отключите запятую, если ваш журнал индексируется по MeSH или DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Что никогда не разделяется"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Точка разделяет только тогда, когда за ней идёт пробел, — это сохраняет целыми правовые ссылки вроде «Lei 13.964/2019», — и никогда после одиночной буквы, что сохраняет «S. aureus» и «E. coli»."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Уже сохранённые записи не трогаются, пока их не сохранят снова. Чтобы починить существующий архив за один проход, запустите скрипт tools/fixExistingVocabs.php, который поставляется с модулем; это пробный прогон, если только вы не попросите его писать."

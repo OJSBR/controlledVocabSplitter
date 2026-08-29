@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ca\n"
+
+
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Divisor de vocabularis controlats"
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Divideix les paraules clau, matèries, disciplines i agències de suport que s'han enganxat en una sola línia en els termes separats que l'autor volia dir, al mateix camp i en cada desada."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Sovint els autors seleccionen la línia de paraules clau del manuscrit, la copien i l'enganxen sencera al camp, cosa que desa un sol terme llarg en comptes de diversos. Trieu a continuació quins vocabularis es divideixen i quins separadors es tenen en compte."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vocabularis"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Només es toquen els vocabularis marcats aquí. La resta es desa exactament tal com s'ha escrit."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Separadors"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Només s'utilitza un separador per entrada: el primer dels següents que hi aparegui. Per tant, una llista escrita amb punts i comes i comes es talla només pels punts i comes."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vocabulari"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Divideix"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Separador"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Ús"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Punt i coma"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonoteràpia; Estrès oxidatiu; Regulació"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Coma seguida d'un espai"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonoteràpia, Estrès oxidatiu, Regulació"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Punt seguit d'un espai"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonoteràpia. Estrès oxidatiu. Regulació"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "La coma és la arriscada"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Un encapçalament de matèria invertit com «Hypertension, Pregnancy-Induced» és un sol terme i quedaria partit en dos. Desactiveu la coma si la vostra revista indexa amb MeSH o DeCS."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Què no es talla mai"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "El punt només separa quan va seguit d'un espai, cosa que manté senceres referències legals com «Lei 13.964/2019», i mai quan tanca una sola lletra, cosa que manté senceres «S. aureus» i «E. coli»."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Els registres ja emmagatzemats no es toquen fins que es tornin a desar. Per reparar un arxiu existent d'una sola passada, executeu l'script tools/fixExistingVocabs.php que acompanya aquest connector; és una execució de prova tret que li demaneu que escrigui."

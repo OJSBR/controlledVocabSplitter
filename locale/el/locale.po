@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: el\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Διαχωριστής ελεγχόμενου λεξιλογίου"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Διαχωρίζει λέξεις-κλειδιά, θέματα, γνωστικά πεδία και φορείς υποστήριξης που επικολλήθηκαν ως μία γραμμή στους επιμέρους όρους που εννοούσε ο συγγραφέας — στο ίδιο το πεδίο και σε κάθε αποθήκευση."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Οι συγγραφείς συχνά επιλέγουν τη γραμμή με τις λέξεις-κλειδιά στο χειρόγραφο, την αντιγράφουν και την επικολλούν ολόκληρη στο πεδίο, οπότε αποθηκεύεται ένας μακρύς όρος αντί για πολλούς. Επιλέξτε παρακάτω ποια λεξιλόγια διαχωρίζονται και ποια διαχωριστικά λαμβάνονται υπόψη."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Λεξιλόγια"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Επηρεάζονται μόνο τα λεξιλόγια που έχουν επιλεγεί εδώ. Όλα τα άλλα αποθηκεύονται ακριβώς όπως πληκτρολογήθηκαν."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Διαχωριστικά"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Χρησιμοποιείται μόνο ένα διαχωριστικό ανά καταχώριση: το πρώτο από τα παρακάτω που εμφανίζεται σε αυτήν. Έτσι, μια λίστα γραμμένη με ερωτηματικά και κόμματα κόβεται μόνο στα ερωτηματικά."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Λεξιλόγιο"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Διαχωρισμός"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Διαχωριστικό"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Χρήση"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Ερωτηματικό (;)"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Οζονοθεραπεία· Οξειδωτικό στρες· Ρύθμιση"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Κόμμα ακολουθούμενο από κενό"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Οζονοθεραπεία, Οξειδωτικό στρες, Ρύθμιση"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Τελεία ακολουθούμενη από κενό"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Οζονοθεραπεία. Οξειδωτικό στρες. Ρύθμιση"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Το κόμμα είναι το επικίνδυνο"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Μια αντεστραμμένη θεματική επικεφαλίδα όπως «Hypertension, Pregnancy-Induced» είναι ένας ενιαίος όρος και θα κοβόταν στα δύο. Απενεργοποιήστε το κόμμα αν το περιοδικό σας ευρετηριάζει με MeSH ή DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Τι δεν κόβεται ποτέ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Η τελεία διαχωρίζει μόνο όταν ακολουθεί κενό, πράγμα που διατηρεί ακέραιες νομικές παραπομπές όπως «Lei 13.964/2019», και ποτέ όταν έπεται ενός μόνο γράμματος, διατηρώντας ακέραια τα «S. aureus» και «E. coli»."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Οι ήδη αποθηκευμένες εγγραφές δεν θίγονται μέχρι να αποθηκευτούν ξανά. Για να διορθώσετε το υπάρχον αρχείο με μία κίνηση, εκτελέστε το σενάριο tools/fixExistingVocabs.php που συνοδεύει το πρόσθετο· εκτελείται δοκιμαστικά, εκτός αν του ζητήσετε να γράψει."

@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: nb_NO\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Deler av kontrollerte vokabularer"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Deler nøkkelord, emner, fagfelt og støtteinstitusjoner som er limt inn som én linje, i de enkeltstående termene forfatteren mente – i selve feltet og ved hver lagring."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Forfattere markerer ofte nøkkelordlinjen i manuskriptet, kopierer den og limer hele linjen inn i feltet, slik at det lagres én lang term i stedet for flere. Velg nedenfor hvilke vokabularer som deles, og hvilke skilletegn som gjelder."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vokabularer"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Bare vokabularene som er merket av her, berøres. Alt annet lagres nøyaktig slik det ble skrevet."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Skilletegn"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Bare ett skilletegn brukes per oppføring: det første av dem nedenfor som forekommer i den. En liste skrevet med semikolon og komma deles derfor bare ved semikolonene."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vokabular"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Del opp"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Skilletegn"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Bruk"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Semikolon"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonterapi; Oksidativt stress; Regulering"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Komma etterfulgt av mellomrom"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonterapi, Oksidativt stress, Regulering"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Punktum etterfulgt av mellomrom"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonterapi. Oksidativt stress. Regulering"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Det er kommaet som er risikabelt"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "En invertert emneterm som «Hypertension, Pregnancy-Induced» er én term og ville blitt delt i to. Slå av kommaet hvis tidsskriftet ditt indekserer med MeSH eller DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Hva som aldri deles"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Punktumet skiller bare når det følges av et mellomrom, noe som holder juridiske henvisninger som «Lei 13.964/2019» hele, og aldri når det står etter én enkelt bokstav, noe som holder «S. aureus» og «E. coli» hele."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Allerede lagrede poster røres ikke før de lagres på nytt. Kjør skriptet tools/fixExistingVocabs.php som følger med dette tillegget, for å reparere et eksisterende arkiv i én omgang; det er en prøvekjøring med mindre du ber det skrive."

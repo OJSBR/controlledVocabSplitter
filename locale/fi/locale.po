@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: fi\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Kontrolloitujen sanastojen jakaja"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Jakaa yhtenä rivinä liitetyt avainsanat, aiheet, tieteenalat ja tukevat organisaatiot erillisiksi termeiksi, jotka kirjoittaja tarkoitti — itse kentässä ja joka tallennuksella."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Kirjoittajat maalaavat usein käsikirjoituksensa avainsanarivin, kopioivat sen ja liittävät koko rivin kenttään, jolloin tallentuu yksi pitkä termi useiden sijaan. Valitse alta, mitkä sanastot jaetaan ja mitkä erottimet otetaan huomioon."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Sanastot"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Vain tässä valitut sanastot käsitellään. Kaikki muu tallennetaan täsmälleen sellaisena kuin se on kirjoitettu."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Erottimet"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Kutakin merkintää kohden käytetään vain yhtä erotinta: ensimmäistä alla olevista, joka siinä esiintyy. Puolipistein ja pilkuin kirjoitettu luettelo katkaistaan siis vain puolipisteiden kohdalta."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Sanasto"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Jaa"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Erotin"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Käyttö"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Puolipiste"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Otsoniterapia; Oksidatiivinen stressi; Säätely"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Pilkku ja sen jälkeen välilyönti"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Otsoniterapia, Oksidatiivinen stressi, Säätely"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Piste ja sen jälkeen välilyönti"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Otsoniterapia. Oksidatiivinen stressi. Säätely"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Pilkku on riskialtis"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Käänteinen asiasana, kuten ”Hypertension, Pregnancy-Induced”, on yksi termi ja katkeaisi kahtia. Poista pilkku käytöstä, jos lehtesi indeksoi MeSH- tai DeCS-sanastolla."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Mitä ei koskaan katkaista"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Piste erottaa vain, kun sitä seuraa välilyönti, mikä säilyttää juridiset viitteet kuten ”Lei 13.964/2019” kokonaisina, eikä koskaan yksittäisen kirjaimen jäljessä, mikä säilyttää ilmaukset ”S. aureus” ja ”E. coli”."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Jo tallennettuihin tietueisiin ei kosketa ennen kuin ne tallennetaan uudelleen. Korjaa olemassa oleva arkisto yhdellä ajolla suorittamalla lisäosan mukana tuleva tools/fixExistingVocabs.php -skripti; se on koeajo, ellet pyydä sitä kirjoittamaan."

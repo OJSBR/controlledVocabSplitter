@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: sr_Latn\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Razdvajač kontrolisanih rečnika"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Deli ključne reči, teme, discipline i institucije podrške nalepljene kao jedan red na pojedinačne termine koje je autor imao u vidu — u samom polju i pri svakom čuvanju."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Autori često označe red sa ključnim rečima u rukopisu, kopiraju ga i nalepe u celini u polje, pa se umesto više termina sačuva jedan dugačak. Izaberite ispod koji rečnici se dele i koji razdvajači se uvažavaju."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Rečnici"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Menjaju se samo rečnici označeni ovde. Sve ostalo se čuva tačno onako kako je otkucano."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Razdvajači"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Po unosu se koristi samo jedan razdvajač: prvi od navedenih koji se u njemu pojavi. Zato se lista pisana tačkama-zarezima i zarezima deli samo na tačkama-zarezima."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Rečnik"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Podeli"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Razdvajač"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Upotreba"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Tačka-zarez"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonoterapija; Oksidativni stres; Regulacija"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Zarez praćen razmakom"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonoterapija, Oksidativni stres, Regulacija"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Tačka praćena razmakom"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonoterapija. Oksidativni stres. Regulacija"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Rizičan je zarez"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Invertovana predmetna odrednica poput „Hypertension, Pregnancy-Induced“ jeste jedan termin i bila bi presečena na dva. Isključite zarez ako vaš časopis indeksira po MeSH ili DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Šta se nikada ne deli"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Tačka razdvaja samo kada je prati razmak, što čuva celim pravne reference poput „Lei 13.964/2019“, a nikada kada dolazi posle jednog slova, čime ostaju celi „S. aureus“ i „E. coli“."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Već sačuvani zapisi ostaju netaknuti dok se ponovo ne sačuvaju. Da biste popravili postojeću arhivu iz jednog prolaza, pokrenite skriptu tools/fixExistingVocabs.php koja dolazi uz ovaj dodatak; to je probni prolaz osim ako mu ne zatražite upis."

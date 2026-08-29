@@ -1,78 +1,75 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2026-08-07T00:00:00+00:00\n"
-"PO-Revision-Date: 2026-08-07T00:00:00+00:00\n"
-"Last-Translator: OJSBR\n"
-"Language-Team: OJSBR\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: gl\n"
 
 
 msgid "plugins.generic.controlledVocabSplitter.displayName"
-msgstr "Separador de Vocabulario Controlado"
+msgstr "Divisor de vocabularios controlados"
 
 msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Separa palabras clave, temas, disciplinas y agencias de apoyo pegadas en una sola línea en los términos que el autor quiso decir — en el propio campo y en cada guardado."
+msgstr "Divide as palabras clave, materias, disciplinas e axencias de apoio pegadas nunha soa liña nos termos separados que a autoría pretendía — no propio campo e en cada gardado."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
-msgstr "Es habitual que el autor seleccione la línea de palabras clave del manuscrito, la copie y la pegue entera en el campo, lo que guarda un término largo en lugar de varios. Elija abajo qué vocabularios se separan y qué separadores valen."
+msgstr "A autoría adoita seleccionar a liña de palabras clave do manuscrito, copiala e pegala enteira no campo, o que garda un único termo longo no canto de varios. Escolla a continuación que vocabularios se dividen e que separadores se teñen en conta."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
 msgstr "Vocabularios"
 
 msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
-msgstr "Solo se tocan los vocabularios marcados aquí. Todo lo demás se guarda tal como se escribió."
+msgstr "Só se tocan os vocabularios marcados aquí. Todo o demais gárdase exactamente como se escribiu."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
 msgstr "Separadores"
 
 msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
-msgstr "Solo se usa un separador por registro: el primero de la lista de abajo que aparezca en él. Una lista escrita con punto y coma y comas se corta, por tanto, solo en los puntos y comas."
+msgstr "Só se emprega un separador por entrada: o primeiro dos de embaixo que apareza nela. Así, unha lista escrita con puntos e comas e comas córtase só nos puntos e comas."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
 msgstr "Vocabulario"
 
 msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
-msgstr "Separar"
+msgstr "Dividir"
 
 msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
 msgstr "Separador"
 
 msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
-msgstr "Usar"
+msgstr "Uso"
 
 msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
-msgstr "Punto y coma"
+msgstr "Punto e coma"
 
 msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
 msgstr "Ozonoterapia; Estrés oxidativo; Regulación"
 
 msgid "plugins.generic.controlledVocabSplitter.separator.comma"
-msgstr "Coma seguida de espacio"
+msgstr "Coma seguida dun espazo"
 
 msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
 msgstr "Ozonoterapia, Estrés oxidativo, Regulación"
 
 msgid "plugins.generic.controlledVocabSplitter.separator.period"
-msgstr "Punto seguido de espacio"
+msgstr "Punto seguido dun espazo"
 
 msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
 msgstr "Ozonoterapia. Estrés oxidativo. Regulación"
 
 msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
-msgstr "La coma es la arriesgada"
+msgstr "A coma é a arriscada"
 
 msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
-msgstr "Un descriptor invertido como \"Hipertensión Inducida en el Embarazo, Síndrome\" es un solo término y quedaría cortado en dos. Desactive la coma si la revista indiza con MeSH o DeCS."
+msgstr "Un encabezamento de materia invertido como «Hypertension, Pregnancy-Induced» é un único termo e quedaría partido en dous. Desactive a coma se a súa revista indexa con MeSH ou DeCS."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
-msgstr "Lo que nunca se corta"
+msgstr "Que nunca se corta"
 
 msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
-msgstr "El punto solo separa cuando le sigue un espacio, lo que mantiene enteras referencias legales como \"Lei 13.964/2019\", y nunca cuando cierra una letra sola, lo que mantiene enteros \"S. aureus\" y \"E. coli\"."
+msgstr "O punto só separa cando o segue un espazo, o que mantén enteiras referencias legais como «Lei 13.964/2019», e nunca cando pecha unha soa letra, o que mantén enteiras «S. aureus» e «E. coli»."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
-msgstr "Los registros ya guardados no se tocan hasta que se vuelvan a guardar. Para reparar un archivo completo de una vez, ejecute el script tools/fixExistingVocabs.php que acompaña al plugin; solo simula, salvo que le pida escribir."
+msgstr "Os rexistros xa gardados non se tocan ata que se garden de novo. Para reparar un arquivo existente nunha soa pasada, execute o script tools/fixExistingVocabs.php que acompaña este complemento; é unha execución de proba agás que lle pida escribir."

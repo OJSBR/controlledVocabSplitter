@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: cs\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Dělič řízených slovníků"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Rozdělí klíčová slova, předmětová hesla, obory a podporující instituce vložené jako jeden řádek na jednotlivé termíny, které autor zamýšlel — přímo v poli a při každém uložení."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Autoři často označí řádek s klíčovými slovy v rukopisu, zkopírují jej a celý vloží do pole, takže se uloží jeden dlouhý termín místo několika. Níže zvolte, které slovníky se dělí a které oddělovače se respektují."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Slovníky"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Upravují se pouze zde zaškrtnuté slovníky. Vše ostatní se uloží přesně tak, jak bylo napsáno."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Oddělovače"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Na každý záznam se použije jen jeden oddělovač: první z níže uvedených, který se v něm vyskytne. Seznam napsaný se středníky a čárkami se proto dělí jen na střednících."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Slovník"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Rozdělit"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Oddělovač"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Použití"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Středník"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonoterapie; Oxidační stres; Regulace"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Čárka následovaná mezerou"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonoterapie, Oxidační stres, Regulace"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Tečka následovaná mezerou"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonoterapie. Oxidační stres. Regulace"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Riziková je čárka"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Invertované předmětové heslo jako „Hypertension, Pregnancy-Induced“ je jediný termín a rozdělilo by se na dva. Pokud váš časopis indexuje pomocí MeSH nebo DeCS, čárku vypněte."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Co se nikdy nerozděluje"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Tečka odděluje jen tehdy, když po ní následuje mezera, což zachová právní odkazy jako „Lei 13.964/2019“ vcelku, a nikdy po jediném písmenu, což zachová „S. aureus“ a „E. coli“."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Již uložené záznamy zůstávají beze změny, dokud nejsou znovu uloženy. Chcete-li opravit stávající archiv jedním průchodem, spusťte skript tools/fixExistingVocabs.php, který je součástí tohoto modulu; bez výslovného pokynu k zápisu jde jen o zkušební běh."

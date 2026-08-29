@@ -10,6 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Controlled Vocabulary Splitter"
 
@@ -75,4 +76,3 @@ msgstr "A period only separates when a space follows it, which keeps legal refer
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Records already stored are left alone until they are saved again. To repair an existing archive in one pass, run the tools/fixExistingVocabs.php script that ships with this plugin; it is a dry run unless you ask it to write."
-

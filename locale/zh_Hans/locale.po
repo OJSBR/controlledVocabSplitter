@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: zh_Hans\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "受控词表拆分器"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "把以整行粘贴的关键词、主题、学科和资助机构，拆分成作者本意的独立词条——在字段内即时进行，且每次保存都会执行。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "作者常常直接选中稿件中的关键词那一行，复制后整段粘贴到字段里，结果只存了一个长词条而不是多个。请在下面选择要拆分哪些词表、以及采用哪些分隔符。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "词表"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "只处理此处勾选的词表。其余内容按输入原样保存。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "分隔符"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "每条记录只使用一个分隔符：下列分隔符中最先出现的那个。因此同时含分号和逗号的列表，只会按分号拆分。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "词表"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "拆分"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "分隔符"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "使用"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "分号"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "臭氧疗法; 氧化应激; 调节"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "逗号后跟空格"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "臭氧疗法, 氧化应激, 调节"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "句点后跟空格"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "臭氧疗法. 氧化应激. 调节"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "有风险的是逗号"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "像“Hypertension, Pregnancy-Induced”这样的倒置主题词是一个完整词条，会被切成两半。若贵刊使用 MeSH 或 DeCS 编制索引，请关闭逗号。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "绝不会被拆分的内容"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "句点只有在其后跟空格时才作为分隔符，这样“Lei 13.964/2019”这类法条引用不会被切开；紧跟单个字母时绝不分隔，因此“S. aureus”和“E. coli”也保持完整。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "已保存的记录在再次保存之前不会被改动。若要一次性修复既有数据，请运行本插件自带的 tools/fixExistingVocabs.php 脚本；除非明确要求写入，否则它只做试运行。"

@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: fa\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "جداکنندهٔ واژگان کنترل‌شده"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "کلیدواژه‌ها، موضوع‌ها، رشته‌ها و نهادهای پشتیبان را که به‌صورت یک سطر چسبانده شده‌اند به همان اصطلاح‌های جدا که نویسنده در نظر داشته تفکیک می‌کند — در خود فیلد و در هر بار ذخیره."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "نویسندگان اغلب سطر کلیدواژه‌های دست‌نوشتهٔ خود را انتخاب و کپی می‌کنند و همه را یک‌جا در فیلد می‌چسبانند؛ در نتیجه به‌جای چند اصطلاح، یک اصطلاح بلند ذخیره می‌شود. در ادامه انتخاب کنید کدام واژگان تفکیک شوند و کدام جداکننده‌ها معتبر باشند."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "واژگان"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "تنها واژگان تیک‌خورده در اینجا دستکاری می‌شوند. باقی موارد دقیقاً همان‌گونه که تایپ شده ذخیره می‌شود."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "جداکننده‌ها"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "برای هر ورودی تنها یک جداکننده به کار می‌رود: نخستین موردی از فهرست زیر که در آن پیدا شود. بنابراین فهرستی که با نقطه‌ویرگول و ویرگول نوشته شده باشد، فقط از نقطه‌ویرگول‌ها بریده می‌شود."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "واژگان"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "تفکیک"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "جداکننده"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "استفاده"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "نقطه‌ویرگول"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "اوزون‌درمانی؛ تنش اکسایشی؛ تنظیم"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "ویرگول به‌همراه فاصله"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "اوزون‌درمانی، تنش اکسایشی، تنظیم"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "نقطه به‌همراه فاصله"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "اوزون‌درمانی. تنش اکسایشی. تنظیم"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "ویرگول همان مورد پرخطر است"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "سرعنوان موضوعی وارونه مانند «Hypertension, Pregnancy-Induced» یک اصطلاح واحد است و به دو بخش بریده می‌شود. اگر نشریهٔ شما با MeSH یا DeCS نمایه می‌کند، ویرگول را خاموش کنید."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "چه چیزی هرگز بریده نمی‌شود"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "نقطه تنها زمانی جدا می‌کند که پس از آن فاصله بیاید — چنین است که ارجاع‌های حقوقی مانند «Lei 13.964/2019» دست‌نخورده می‌مانند — و هرگز پس از یک حرف تنها جدا نمی‌کند، پس «S. aureus» و «E. coli» نیز سالم می‌مانند."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "رکوردهای ذخیره‌شده تا زمانی که دوباره ذخیره نشوند دست‌نخورده می‌مانند. برای اصلاح یک‌بارهٔ آرشیو موجود، اسکریپت tools/fixExistingVocabs.php را که همراه این افزونه است اجرا کنید؛ مگر آنکه نوشتن را بخواهید، فقط اجرای آزمایشی است."

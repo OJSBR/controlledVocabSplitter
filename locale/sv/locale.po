@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: sv\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Delare av kontrollerade vokabulärer"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Delar nyckelord, ämnen, discipliner och stödjande organisationer som klistrats in som en enda rad i de separata termer som författaren avsåg – i själva fältet och vid varje sparning."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Författare markerar ofta nyckelordsraden i sitt manus, kopierar den och klistrar in hela raden i fältet, vilket lagrar en enda lång term i stället för flera. Välj nedan vilka vokabulärer som delas och vilka avgränsare som gäller."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vokabulärer"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Endast de vokabulärer som är markerade här påverkas. Allt annat sparas exakt som det skrevs."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Avgränsare"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Endast en avgränsare används per post: den första av nedanstående som förekommer i den. En lista skriven med semikolon och kommatecken delas därför bara vid semikolonen."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vokabulär"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Dela"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Avgränsare"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Användning"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Semikolon"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonterapi; Oxidativ stress; Reglering"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Kommatecken följt av blanksteg"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonterapi, Oxidativ stress, Reglering"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Punkt följd av blanksteg"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonterapi. Oxidativ stress. Reglering"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Det är kommatecknet som är riskabelt"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "En inverterad ämnesrubrik som ”Hypertension, Pregnancy-Induced” är en enda term och skulle klippas itu. Stäng av kommatecknet om din tidskrift indexerar med MeSH eller DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Vad som aldrig delas"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Punkten delar bara när den följs av ett blanksteg, vilket håller juridiska hänvisningar som ”Lei 13.964/2019” hela, och aldrig när den står efter en enda bokstav, vilket håller ”S. aureus” och ”E. coli” hela."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Redan lagrade poster lämnas orörda tills de sparas igen. Kör skriptet tools/fixExistingVocabs.php som följer med tillägget för att reparera ett befintligt arkiv i ett svep; det är en provkörning om du inte ber det skriva."

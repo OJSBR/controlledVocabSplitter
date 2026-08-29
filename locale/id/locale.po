@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: id\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Pemisah Kosakata Terkendali"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Memisahkan kata kunci, subjek, disiplin, dan lembaga pendukung yang ditempel sebagai satu baris menjadi istilah-istilah terpisah yang dimaksud penulis — di dalam bidangnya sendiri dan pada setiap penyimpanan."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Penulis sering memblok baris kata kunci pada naskahnya, menyalinnya, lalu menempelkan seluruhnya ke dalam bidang, sehingga tersimpan satu istilah panjang alih-alih beberapa. Pilih di bawah ini kosakata mana yang dipisah dan pemisah mana yang dihormati."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Kosakata"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Hanya kosakata yang dicentang di sini yang disentuh. Selebihnya disimpan persis seperti yang diketik."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Pemisah"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Hanya satu pemisah yang dipakai per entri: yang pertama muncul di antara pilihan di bawah. Karena itu, daftar yang ditulis dengan titik koma dan koma hanya dipotong pada titik komanya."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Kosakata"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Pisahkan"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Pemisah"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Penggunaan"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Titik koma"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Terapi ozon; Stres oksidatif; Regulasi"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Koma diikuti spasi"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Terapi ozon, Stres oksidatif, Regulasi"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Titik diikuti spasi"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Terapi ozon. Stres oksidatif. Regulasi"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Komalah yang berisiko"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Tajuk subjek terbalik seperti \"Hypertension, Pregnancy-Induced\" adalah satu istilah dan akan terpotong menjadi dua. Matikan koma bila jurnal Anda mengindeks dengan MeSH atau DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Apa yang tidak pernah dipotong"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Titik hanya memisahkan bila diikuti spasi, sehingga rujukan hukum seperti \"Lei 13.964/2019\" tetap utuh, dan tidak pernah memisahkan bila menutup satu huruf, sehingga \"S. aureus\" dan \"E. coli\" tetap utuh."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Rekaman yang sudah tersimpan dibiarkan apa adanya sampai disimpan ulang. Untuk memperbaiki arsip yang ada dalam sekali jalan, jalankan skrip tools/fixExistingVocabs.php yang disertakan plugin ini; secara bawaan hanya uji coba kecuali Anda memintanya menulis."

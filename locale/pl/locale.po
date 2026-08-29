@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: pl\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Rozdzielacz słowników kontrolowanych"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Dzieli słowa kluczowe, tematy, dyscypliny i instytucje wspierające wklejone jako jeden wiersz na osobne terminy, o które autorowi chodziło — w samym polu i przy każdym zapisie."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Autorzy często zaznaczają w maszynopisie wiersz ze słowami kluczowymi, kopiują go i wklejają w całości do pola, przez co zapisuje się jeden długi termin zamiast kilku. Wybierz poniżej, które słowniki są dzielone i które separatory są uwzględniane."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Słowniki"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Zmieniane są tylko zaznaczone tutaj słowniki. Cała reszta zapisywana jest dokładnie tak, jak wpisano."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Separatory"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Na jeden wpis stosowany jest tylko jeden separator: pierwszy z poniższych, który w nim wystąpi. Lista zapisana średnikami i przecinkami jest więc dzielona wyłącznie na średnikach."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Słownik"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Podziel"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Separator"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Użycie"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Średnik"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonoterapia; Stres oksydacyjny; Regulacja"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Przecinek, po którym następuje spacja"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonoterapia, Stres oksydacyjny, Regulacja"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Kropka, po której następuje spacja"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonoterapia. Stres oksydacyjny. Regulacja"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Ryzykowny jest przecinek"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Odwrócone hasło przedmiotowe, takie jak „Hypertension, Pregnancy-Induced”, jest jednym terminem i zostałoby przecięte na dwa. Wyłącz przecinek, jeśli Twoje czasopismo indeksuje w MeSH lub DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Czego nigdy nie dzieli"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Kropka dzieli tylko wtedy, gdy następuje po niej spacja, dzięki czemu odwołania prawne w rodzaju „Lei 13.964/2019” pozostają całe, i nigdy wtedy, gdy zamyka pojedynczą literę, dzięki czemu całe pozostają „S. aureus” i „E. coli”."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Już zapisane rekordy pozostają nietknięte, dopóki nie zostaną zapisane ponownie. Aby naprawić istniejące archiwum za jednym razem, uruchom skrypt tools/fixExistingVocabs.php dołączony do tej wtyczki; domyślnie działa na sucho, chyba że poprosisz o zapis."

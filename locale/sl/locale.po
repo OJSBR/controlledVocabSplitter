@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: sl\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Delilnik nadzorovanih slovarjev"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Ključne besede, teme, discipline in podporne ustanove, prilepljene kot ena vrstica, razdeli na ločene izraze, ki jih je avtor imel v mislih – v samem polju in ob vsakem shranjevanju."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Avtorji pogosto označijo vrstico s ključnimi besedami v rokopisu, jo kopirajo in v celoti prilepijo v polje, zato se shrani en sam dolg izraz namesto več. Spodaj izberite, kateri slovarji se delijo in katera ločila se upoštevajo."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Slovarji"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Spremenijo se samo tukaj označeni slovarji. Vse drugo se shrani natanko tako, kot je bilo vneseno."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Ločila"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Za vsak vnos se uporabi le eno ločilo: prvo od spodnjih, ki se v njem pojavi. Seznam, zapisan s podpičji in vejicami, se zato razdeli samo na podpičjih."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Slovar"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Razdeli"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Ločilo"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Uporaba"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Podpičje"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonoterapija; Oksidativni stres; Uravnavanje"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Vejica, ki ji sledi presledek"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonoterapija, Oksidativni stres, Uravnavanje"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Pika, ki ji sledi presledek"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonoterapija. Oksidativni stres. Uravnavanje"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Tvegana je vejica"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Obrnjeno predmetno geslo, kot je »Hypertension, Pregnancy-Induced«, je en sam izraz in bi se razpolovilo. Če vaša revija indeksira z MeSH ali DeCS, vejico izklopite."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Kaj se nikoli ne razdeli"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Pika loči le, kadar ji sledi presledek, kar ohrani cele pravne navedbe, kot je »Lei 13.964/2019«, in nikoli, kadar sledi eni sami črki, kar ohrani cela izraza »S. aureus« in »E. coli«."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Že shranjeni zapisi ostanejo nedotaknjeni, dokler niso znova shranjeni. Za popravilo obstoječega arhiva v enem prehodu zaženite skript tools/fixExistingVocabs.php, ki je priložen temu vtičniku; to je preizkusni zagon, razen če mu naročite pisanje."

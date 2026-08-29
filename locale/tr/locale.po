@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: tr\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Denetimli Sözlük Ayırıcı"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Tek satır olarak yapıştırılan anahtar sözcükleri, konuları, disiplinleri ve destekleyen kurumları, yazarın kastettiği ayrı terimlere böler — alanın kendisinde ve her kaydedişte."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Yazarlar çoğu kez makalelerindeki anahtar sözcük satırını seçip kopyalar ve tümünü alana yapıştırır; böylece birkaç terim yerine tek bir uzun terim kaydedilir. Hangi sözlüklerin ayrılacağını ve hangi ayırıcıların dikkate alınacağını aşağıdan seçin."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Sözlükler"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Yalnızca burada işaretlenen sözlüklere dokunulur. Geri kalan her şey yazıldığı gibi saklanır."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Ayırıcılar"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Her girdide yalnızca bir ayırıcı kullanılır: aşağıdakilerden o girdide ilk geçen. Bu nedenle noktalı virgül ve virgülle yazılmış bir liste yalnızca noktalı virgüllerden ayrılır."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Sözlük"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Ayır"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Ayırıcı"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Kullanım"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Noktalı virgül"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozon tedavisi; Oksidatif stres; Düzenleme"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Virgül ve ardından boşluk"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozon tedavisi, Oksidatif stres, Düzenleme"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Nokta ve ardından boşluk"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozon tedavisi. Oksidatif stres. Düzenleme"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Riskli olan virgüldür"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "\"Hypertension, Pregnancy-Induced\" gibi ters çevrilmiş konu başlığı tek bir terimdir ve ikiye bölünürdü. Derginiz MeSH veya DeCS ile dizinleniyorsa virgülü kapatın."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Asla bölünmeyenler"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Nokta yalnızca ardından boşluk geldiğinde ayırır; bu sayede \"Lei 13.964/2019\" gibi hukuki göndermeler bölünmez. Tek harften sonra geldiğinde ise asla ayırmaz, böylece \"S. aureus\" ve \"E. coli\" de bütün kalır."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Zaten kayıtlı olan veriler yeniden kaydedilene kadar değişmeden kalır. Mevcut arşivi tek seferde onarmak için bu eklentiyle gelen tools/fixExistingVocabs.php betiğini çalıştırın; yazmasını istemedikçe yalnızca deneme çalıştırması yapar."

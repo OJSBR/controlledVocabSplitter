@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ro\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Separator de vocabulare controlate"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Împarte cuvintele-cheie, subiectele, disciplinele și agențiile de sprijin lipite ca o singură linie în termenii separați pe care autorul i-a avut în vedere — chiar în câmp și la fiecare salvare."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Autorii selectează adesea linia cu cuvinte-cheie din manuscris, o copiază și o lipesc integral în câmp, astfel încât se stochează un singur termen lung în loc de mai mulți. Alegeți mai jos ce vocabulare se împart și ce separatori sunt respectați."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Vocabulare"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Sunt afectate doar vocabularele bifate aici. Tot restul se stochează exact așa cum a fost tastat."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Separatori"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Se folosește un singur separator per intrare: primul dintre cele de mai jos care apare în ea. Astfel, o listă scrisă cu punct și virgulă și cu virgule este tăiată doar la punct și virgulă."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Vocabular"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Împarte"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Separator"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Utilizare"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Punct și virgulă"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozonoterapie; Stres oxidativ; Reglare"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Virgulă urmată de spațiu"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozonoterapie, Stres oxidativ, Reglare"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Punct urmat de spațiu"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozonoterapie. Stres oxidativ. Reglare"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Virgula este cea riscantă"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Un descriptor inversat precum „Hypertension, Pregnancy-Induced” este un singur termen și ar fi tăiat în două. Dezactivați virgula dacă revista dvs. indexează cu MeSH sau DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Ce nu se taie niciodată"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Punctul separă doar când este urmat de un spațiu, ceea ce păstrează intacte referințe juridice precum „Lei 13.964/2019”, și niciodată când urmează o singură literă, ceea ce păstrează intacte „S. aureus” și „E. coli”."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Înregistrările deja stocate rămân neatinse până la o nouă salvare. Pentru a repara o arhivă existentă dintr-o singură trecere, rulați scriptul tools/fixExistingVocabs.php livrat cu acest modul; este o rulare de probă dacă nu îi cereți să scrie."

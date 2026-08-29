@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: vi\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Bộ tách từ vựng có kiểm soát"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Tách các từ khóa, chủ đề, ngành và cơ quan tài trợ được dán thành một dòng thành những thuật ngữ riêng mà tác giả muốn — ngay trong ô nhập và ở mỗi lần lưu."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Tác giả thường bôi đen dòng từ khóa trong bản thảo, sao chép và dán nguyên vào ô, khiến hệ thống lưu một cụm dài thay vì nhiều từ khóa. Hãy chọn bên dưới những bộ từ vựng nào được tách và những dấu phân tách nào được áp dụng."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Bộ từ vựng"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Chỉ những bộ từ vựng được đánh dấu ở đây mới bị tác động. Mọi thứ khác được lưu đúng như đã nhập."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Các dấu phân tách"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Mỗi mục chỉ dùng một dấu phân tách: dấu đầu tiên trong các lựa chọn bên dưới xuất hiện trong mục đó. Vì vậy, danh sách viết bằng dấu chấm phẩy lẫn dấu phẩy chỉ được tách ở dấu chấm phẩy."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Bộ từ vựng"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Tách"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Dấu phân tách"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Sử dụng"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Dấu chấm phẩy"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Liệu pháp ozone; Stress oxy hóa; Điều hòa"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Dấu phẩy theo sau là dấu cách"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Liệu pháp ozone, Stress oxy hóa, Điều hòa"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Dấu chấm theo sau là dấu cách"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Liệu pháp ozone. Stress oxy hóa. Điều hòa"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Dấu phẩy mới là rủi ro"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Một tiêu đề chủ đề đảo như \"Hypertension, Pregnancy-Induced\" là một thuật ngữ duy nhất và sẽ bị cắt làm đôi. Hãy tắt dấu phẩy nếu tạp chí của bạn lập chỉ mục theo MeSH hoặc DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Những gì không bao giờ bị tách"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Dấu chấm chỉ tách khi có dấu cách theo sau, nhờ đó các tham chiếu pháp lý như \"Lei 13.964/2019\" được giữ nguyên, và không bao giờ tách khi đứng sau một chữ cái đơn, nhờ đó \"S. aureus\" và \"E. coli\" cũng được giữ nguyên."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Các bản ghi đã lưu vẫn giữ nguyên cho tới khi được lưu lại. Để sửa toàn bộ kho hiện có trong một lần, hãy chạy tập lệnh tools/fixExistingVocabs.php đi kèm trình cắm này; mặc định chỉ chạy thử trừ khi bạn yêu cầu ghi."

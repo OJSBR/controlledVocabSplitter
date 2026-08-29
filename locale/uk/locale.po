@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: uk\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Розділювач контрольованих словників"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Розділяє ключові слова, предметні рубрики, дисципліни та організації підтримки, вставлені одним рядком, на окремі терміни, які мав на увазі автор, — просто в полі й під час кожного збереження."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Автори часто виділяють рядок ключових слів у рукописі, копіюють його й вставляють цілком у поле, через що зберігається один довгий термін замість кількох. Нижче виберіть, які словники розділяються і які роздільники враховуються."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Словники"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Змінюються лише позначені тут словники. Усе інше зберігається точно так, як було введено."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Роздільники"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Для кожного запису використовується лише один роздільник: перший із наведених нижче, який у ньому трапляється. Тому список, написаний з крапками з комою й комами, розрізається лише по крапках з комою."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Словник"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Розділити"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Роздільник"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Використання"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Крапка з комою"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Озонотерапія; Окисний стрес; Регуляція"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Кома, за якою йде пробіл"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Озонотерапія, Окисний стрес, Регуляція"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Крапка, за якою йде пробіл"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Озонотерапія. Окисний стрес. Регуляція"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "Ризикована саме кома"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Інвертована предметна рубрика на кшталт «Hypertension, Pregnancy-Induced» — це один термін, і його розрізало б надвоє. Вимкніть кому, якщо ваш журнал індексується за MeSH або DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Що ніколи не розділяється"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "Крапка розділяє лише тоді, коли за нею йде пробіл, — це зберігає цілими правові посилання на кшталт «Lei 13.964/2019», — і ніколи після однієї літери, що зберігає «S. aureus» та «E. coli»."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Уже збережені записи лишаються недоторканими, доки їх не збережуть знову. Щоб полагодити наявний архів за один прохід, запустіть скрипт tools/fixExistingVocabs.php, який постачається з модулем; це пробний запуск, якщо ви прямо не попросите записувати."

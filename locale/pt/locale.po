@@ -10,6 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Separador de Vocabulário Controlado"
 
@@ -75,4 +76,3 @@ msgstr "O ponto só separa quando vem seguido de espaço, o que mantém inteiras
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Os registos já guardados ficam como estão até à gravação seguinte. Para corrigir um acervo inteiro de uma vez, execute o script tools/fixExistingVocabs.php que acompanha o plugin; ele apenas simula, a não ser que lhe peça para gravar."
-

@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ar\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "مُقسِّم المفردات المضبوطة"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "يفصل الكلمات المفتاحية والموضوعات والتخصصات والجهات الداعمة التي لُصقت في سطر واحد إلى المصطلحات المنفصلة التي قصدها المؤلف — في الحقل نفسه ومع كل عملية حفظ."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "كثيراً ما يحدّد المؤلفون سطر الكلمات المفتاحية في مخطوطهم وينسخونه ثم يلصقونه كاملاً في الحقل، فيُخزَّن مصطلح واحد طويل بدل عدة مصطلحات. اختر أدناه أي المفردات تُقسَّم وأي الفواصل تُعتمد."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "المفردات"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "لا يُمسّ إلا ما تم تحديده هنا من مفردات. أما ما عداها فيُخزَّن تماماً كما كُتب."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "الفواصل"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "يُستخدم فاصل واحد فقط لكل مُدخَل: أوّل الفواصل أدناه ورودًا فيه. لذا فقائمة مكتوبة بفواصل منقوطة وفواصل تُقطَع عند الفواصل المنقوطة وحدها."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "المفردات"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "الفصل"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "الفاصل"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "استخدام"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "فاصلة منقوطة"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "العلاج بالأوزون؛ الإجهاد التأكسدي؛ التنظيم"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "فاصلة متبوعة بمسافة"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "العلاج بالأوزون، الإجهاد التأكسدي، التنظيم"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "نقطة متبوعة بمسافة"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "العلاج بالأوزون. الإجهاد التأكسدي. التنظيم"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "الفاصلة هي الخطرة"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "عنوان موضوعي مقلوب مثل \"Hypertension, Pregnancy-Induced\" مصطلح واحد وسيُقطع إلى قسمين. أوقِف الفاصلة إذا كانت مجلتك تفهرس بـ MeSH أو DeCS."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "ما لا يُقطَع أبداً"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "لا تفصل النقطة إلا إذا تبعتها مسافة، وهو ما يُبقي مراجع قانونية مثل \"Lei 13.964/2019\" سليمة، ولا تفصل أبداً إذا جاءت بعد حرف واحد، وهو ما يُبقي \"S. aureus\" و\"E. coli\" سليمين."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "لا تُمسّ السجلات المخزَّنة من قبل حتى تُحفَظ من جديد. ولإصلاح أرشيف قائم دفعة واحدة، شغّل السكربت tools/fixExistingVocabs.php المرفق بهذا الملحق؛ فهو تشغيل تجريبي ما لم تطلب منه الكتابة."

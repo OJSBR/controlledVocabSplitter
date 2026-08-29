@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ka\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "კონტროლირებადი ლექსიკონის გამყოფი"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "ერთ სტრიქონად ჩასმულ საკვანძო სიტყვებს, თემებს, დისციპლინებსა და დამხმარე ორგანიზაციებს ჰყოფს იმ ცალკეულ ტერმინებად, რომლებსაც ავტორი გულისხმობდა — თავად ველში და ყოველი შენახვისას."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "ავტორები ხშირად ხელნაწერში საკვანძო სიტყვების სტრიქონს ირჩევენ, აკოპირებენ და მთლიანად სვამენ ველში, რის გამოც რამდენიმეს ნაცვლად ერთი გრძელი ტერმინი ინახება. ქვემოთ აირჩიეთ, რომელი ლექსიკონები დაიყოს და რომელი გამყოფები იმოქმედოს."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "ლექსიკონები"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "იცვლება მხოლოდ აქ მონიშნული ლექსიკონები. დანარჩენი ინახება ზუსტად ისე, როგორც აკრიფეს."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "გამყოფები"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "თითო ჩანაწერზე მხოლოდ ერთი გამყოფი გამოიყენება: ქვემოთ ჩამოთვლილთაგან პირველი, რომელიც მასში გვხვდება. ამიტომ წერტილ-მძიმეებით და მძიმეებით დაწერილი სია მხოლოდ წერტილ-მძიმეებზე იჭრება."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "ლექსიკონი"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "დაყოფა"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "გამყოფი"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "გამოყენება"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "წერტილ-მძიმე"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "ოზონოთერაპია; ოქსიდაციური სტრესი; რეგულაცია"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "მძიმე და შემდეგ ჰარე"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "ოზონოთერაპია, ოქსიდაციური სტრესი, რეგულაცია"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "წერტილი და შემდეგ ჰარე"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "ოზონოთერაპია. ოქსიდაციური სტრესი. რეგულაცია"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "სარისკო სწორედ მძიმეა"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "შებრუნებული საგნობრივი სათაური, როგორიცაა „Hypertension, Pregnancy-Induced“, ერთი ტერმინია და ორად გაიჭრებოდა. გამორთეთ მძიმე, თუ თქვენი ჟურნალი MeSH-ით ან DeCS-ით ინდექსირდება."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "რა არასოდეს იჭრება"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "წერტილი მხოლოდ მაშინ ჰყოფს, როცა მას ჰარე მოსდევს — ეს ინარჩუნებს იურიდიულ მითითებებს, როგორიცაა „Lei 13.964/2019“ — და არასოდეს ჰყოფს ერთი ასოს შემდეგ, რაც უცვლელს ტოვებს „S. aureus“-სა და „E. coli“-ს."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "უკვე შენახული ჩანაწერები ხელუხლებელი რჩება, სანამ ხელახლა არ შეინახება. არსებული არქივის ერთ ჯერზე გასასწორებლად გაუშვით ამ დანამატთან მოსული სკრიპტი tools/fixExistingVocabs.php; ის მხოლოდ საცდელად მუშაობს, თუ ჩაწერას პირდაპირ არ მოსთხოვთ."

@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: nl\n"
+
+
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "Splitser van gecontroleerde woordenlijsten"
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Splitst trefwoorden, onderwerpen, disciplines en ondersteunende instanties die als één regel zijn geplakt in de afzonderlijke termen die de auteur bedoelde — in het veld zelf en bij elke opslag."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "Auteurs selecteren vaak de trefwoordenregel in hun manuscript, kopiëren die en plakken het geheel in het veld, waardoor één lange term wordt opgeslagen in plaats van meerdere. Kies hieronder welke woordenlijsten worden gesplitst en welke scheidingstekens gelden."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "Woordenlijsten"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "Alleen de hier aangevinkte woordenlijsten worden aangepast. Al het andere wordt precies opgeslagen zoals het is ingetypt."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "Scheidingstekens"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "Per invoer wordt slechts één scheidingsteken gebruikt: het eerste van de onderstaande dat erin voorkomt. Een lijst met puntkomma's en komma's wordt dus alleen op de puntkomma's gesplitst."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "Woordenlijst"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "Splitsen"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "Scheidingsteken"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "Gebruik"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "Puntkomma"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "Ozontherapie; Oxidatieve stress; Regulatie"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "Komma gevolgd door een spatie"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "Ozontherapie, Oxidatieve stress, Regulatie"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "Punt gevolgd door een spatie"
+
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "Ozontherapie. Oxidatieve stress. Regulatie"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "De komma is het risico"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "Een omgekeerde onderwerpsaanduiding als “Hypertension, Pregnancy-Induced” is één term en zou in tweeën worden geknipt. Zet de komma uit als uw tijdschrift indexeert met MeSH of DeCS."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "Wat nooit wordt gesplitst"
+
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "De punt splitst alleen wanneer er een spatie op volgt, waardoor juridische verwijzingen als “Lei 13.964/2019” heel blijven, en nooit wanneer ze op één letter volgt, waardoor “S. aureus” en “E. coli” heel blijven."
+
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "Reeds opgeslagen records blijven onaangeroerd tot ze opnieuw worden opgeslagen. Voer het script tools/fixExistingVocabs.php uit dat bij deze plug-in wordt geleverd om een bestaand archief in één keer te herstellen; het is een proefrun tenzij u het vraagt te schrijven."

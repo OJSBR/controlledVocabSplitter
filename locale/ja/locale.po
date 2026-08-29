@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ja\n"
+
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.displayName"
+msgstr "統制語彙スプリッター"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "1 行として貼り付けられたキーワード・主題・分野・支援機関を、著者が意図した個々の語に分割します。項目内で、また保存のたびに実行されます。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.description"
+msgstr "著者は原稿のキーワード行をそのまま選択・コピーして項目に貼り付けることが多く、その結果、複数の語ではなく 1 つの長い語として保存されてしまいます。どの語彙を分割し、どの区切り記号を有効にするかを以下で選んでください。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.title"
+msgstr "語彙"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.fields.hint"
+msgstr "ここでチェックした語彙だけが対象になります。それ以外は入力されたとおりに保存されます。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.title"
+msgstr "区切り記号"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.separators.hint"
+msgstr "1 件につき区切り記号は 1 種類だけ使われます。下の候補のうち、その項目に最初に現れたものです。したがって、セミコロンとカンマが混じったリストはセミコロンだけで分割されます。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.vocabulary"
+msgstr "語彙"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.split"
+msgstr "分割"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.separator"
+msgstr "区切り記号"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.column.use"
+msgstr "使用"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon"
+msgstr "セミコロン"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.semicolon.example"
+msgstr "オゾン療法; 酸化ストレス; 調節"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma"
+msgstr "カンマ＋スペース"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.comma.example"
+msgstr "オゾン療法, 酸化ストレス, 調節"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period"
+msgstr "ピリオド＋スペース"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.separator.period.example"
+msgstr "オゾン療法. 酸化ストレス. 調節"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.title"
+msgstr "危ないのはカンマ"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.comma.body"
+msgstr "「Hypertension, Pregnancy-Induced」のような倒置形の件名標目は 1 つの用語であり、2 つに切られてしまいます。MeSH や DeCS で索引付けしているジャーナルでは、カンマをオフにしてください。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.title"
+msgstr "分割されないもの"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.safety.body"
+msgstr "ピリオドは、後ろに空白が続くときだけ区切りとして働きます。そのため「Lei 13.964/2019」のような法令参照はそのまま残ります。1文字の後ろにあるピリオドでは決して区切らないので、「S. aureus」や「E. coli」も分割されません。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.settings.hint"
+msgstr "すでに保存済みのレコードは、再度保存されるまで変更されません。既存のデータを一括で直すには、本プラグイン付属の tools/fixExistingVocabs.php を実行してください。書き込みを明示しない限り、動作は試行のみです。"

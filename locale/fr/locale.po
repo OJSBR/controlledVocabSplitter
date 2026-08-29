@@ -5,10 +5,11 @@ msgstr ""
 "PO-Revision-Date: 2026-08-07T00:00:00+00:00\n"
 "Last-Translator: OJSBR\n"
 "Language-Team: OJSBR\n"
-"Language: fr-FR\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
 
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Séparateur de vocabulaire contrôlé"
@@ -75,4 +76,3 @@ msgstr "Le point ne sépare que lorsqu'une espace le suit, ce qui préserve les 
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Les enregistrements déjà stockés ne sont pas modifiés avant leur prochain enregistrement. Pour réparer un fonds existant en une seule passe, lancez le script tools/fixExistingVocabs.php fourni avec le plugin ; il ne fait que simuler, sauf si vous lui demandez d'écrire."
-

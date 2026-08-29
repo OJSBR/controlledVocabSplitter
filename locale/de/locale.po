@@ -10,6 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Trenner für kontrolliertes Vokabular"
 
@@ -75,4 +76,3 @@ msgstr "Ein Punkt trennt nur, wenn ein Leerzeichen folgt — das hält Rechtsver
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Bereits gespeicherte Datensätze bleiben unangetastet, bis sie erneut gespeichert werden. Um einen vorhandenen Bestand in einem Durchgang zu reparieren, führen Sie das mitgelieferte Skript tools/fixExistingVocabs.php aus; es simuliert nur, sofern Sie es nicht zum Schreiben auffordern."
-
