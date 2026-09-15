@@ -85,10 +85,9 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 		cy.get(settingsForm + ' input[id="cvsSeparator-comma"]').should('be.checked');
 	});
 
-	it('Saves a keyword line entered as one term as separate terms', function() {
-		if (!submissionId) {
-			this.skip();
-		}
+	// Defined only with a submission to edit: this.skip() inside a test breaks the
+	// failed-log hook of PKP's Cypress support.
+	(submissionId ? it : it.skip)('Saves a keyword line entered as one term as separate terms', function() {
 		const line = 'Palatal Expansion. Clinical Protocol. Orthopedic appliance.';
 		const keywords = 'input[id^="metadata-keywords-control"]';
 		const field = () => cy.get(keywords).first().closest('.pkpFormField');
