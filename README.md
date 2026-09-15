@@ -1,10 +1,10 @@
 # Controlled Vocabulary Splitter — OJS plugin
 
 [![OJS](https://img.shields.io/badge/OJS-3.5-brightgreen)](https://pkp.sfu.ca/ojs/)
-[![Version](https://img.shields.io/badge/version-1.0.0.1-blue)](version.xml)
+[![Version](https://img.shields.io/badge/version-1.0.0.2-blue)](version.xml)
 [![License](https://img.shields.io/badge/license-GPL--3.0-lightgrey)](LICENSE)
 
-**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.0.1/controlledVocabSplitter-1.0.0.1.tar.gz) — or browse all [Releases](../../releases).
+**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.0.2/controlledVocabSplitter-1.0.0.2.tar.gz) — or browse all [Releases](../../releases).
 
 A generic plugin for **Open Journal Systems (OJS)** that splits **keywords, subjects,
 disciplines and supporting agencies pasted as a single line** into the separate terms the
@@ -17,7 +17,7 @@ author meant — in the field itself and on every save — **without patching OJ
 
 | OJS version | Branch | Plugin release |
 |-------------|--------|----------------|
-| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.0.1 |
+| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.0.2 |
 
 ## The problem
 
@@ -133,26 +133,36 @@ published with `STYLE_SEQUENCE_LAST`, which lands it after `js/build.js` and bef
 
 ## Tests
 
-A functional [Cypress](https://www.cypress.io/) test lives in
-`cypress/tests/functional/ControlledVocabSplitter.cy.js`, following the conventions of the
-tests shipped with OJS plugins: it enables the plugin, opens its settings, turns the comma
-separator off, saves and reopens the form to assert the change was persisted.
+- **PHP suite** (`tests/`, 19 tests, standalone runner or PKP's PHPUnit): the plugin classes
+  against the installed PKP (including the guard that compares the core repository signature,
+  types included, before replacing it), a sample of the splitting rules, the templates and the 38
+  translations.
 
-Two PHP suites cover the rest:
+  ```bash
+  php plugins/generic/controlledVocabSplitter/tests/run.php
+  lib/pkp/lib/vendor/bin/phpunit --configuration lib/pkp/tests/phpunit.xml --no-coverage "$PWD/plugins/generic/controlledVocabSplitter/tests"
+  ```
 
-```bash
-php plugins/generic/controlledVocabSplitter/tests/regression.php
-php plugins/generic/controlledVocabSplitter/tests/regression_http.php
-```
+- **Regression suites** (test sites only — they create and delete submissions and a temporary
+  manager, and restore everything they touch):
 
-The first covers the rules and real writes through every server-side path; the second logs
-into the site and drives the REST API, the settings screen and the backend pages. Both restore
-everything they touch and exit non-zero on failure.
+  ```bash
+  php plugins/generic/controlledVocabSplitter/tests/regression.php
+  php plugins/generic/controlledVocabSplitter/tests/regression_http.php
+  ```
 
-Because the rules exist twice — PHP for the server, JavaScript for the browser — the suite
-writes `tests/cases.json` with the PHP result of every case, and the browser is checked against
-that fixture. `tests/CASES.md` documents the blocks, how to run the parity check, and what
-still has to be tried by hand.
+  The first (360 cases) covers the rules and real writes through every server-side path; the
+  second (33 cases) logs into the site and drives the REST API, the settings screen and the
+  backend pages. It needs the login form without a captcha during the run
+  (`[captcha] altcha_on_login = off`) and never tries to solve one.
+
+- **Cypress** (`cypress/tests/functional/ControlledVocabSplitter.cy.js`): the settings persist
+  and are put back; a keyword line pasted into the metadata form becomes separate terms (it fails
+  without the plugin's script); and the browser rules give the same result as PHP for every case
+  in `tests/cases.json`. Parameters: `contextPath`, `adminUser`, `adminPassword`, `submissionId`.
+
+Verified on OJS 3.5.0.3, with the core signature also checked against 3.5.0.5. `tests/CASES.md`
+documents the blocks and the parity check.
 
 ## Credits & authorship
 
@@ -275,26 +285,18 @@ restringem o alcance. Rode como o dono dos arquivos, nunca como root, e depois l
 
 ### Testes
 
-Um teste funcional [Cypress](https://www.cypress.io/) fica em
-`cypress/tests/functional/ControlledVocabSplitter.cy.js`, seguindo a convenção dos testes que
-acompanham os plugins do OJS: ele habilita o plugin, abre as configurações, desliga o separador
-vírgula, salva e reabre o formulário para conferir que a mudança persistiu.
+- **Suíte PHP** (`tests/`, 19 testes, pelo `tests/run.php` ou pelo PHPUnit do PKP): classes do
+  plugin contra o PKP instalado (inclusive a guarda que confere a assinatura do repositório do
+  núcleo, com tipos, antes de substituí-lo), amostra das regras, templates e as 38 traduções.
+- **Baterias de regressão** (só em site de teste): `tests/regression.php` (360 casos, regras e
+  gravações reais por todos os caminhos do servidor) e `tests/regression_http.php` (33 casos, com
+  login real, API REST, tela de configuração e páginas do painel). A segunda exige o login sem
+  captcha durante a rodada (`altcha_on_login = off`) e nunca tenta resolver um.
+- **Cypress**: configurações persistem e voltam ao original; lista de palavras-chave colada no
+  formulário de metadados vira termos separados (reprova sem o script do plugin); e as regras do
+  navegador dão o mesmo resultado do PHP em todos os casos de `tests/cases.json`.
 
-Duas baterias em PHP cobrem o resto:
-
-```bash
-php plugins/generic/controlledVocabSplitter/tests/regression.php
-php plugins/generic/controlledVocabSplitter/tests/regression_http.php
-```
-
-A primeira cobre as regras e gravações reais por todos os caminhos do servidor; a segunda loga
-no site e usa a API REST, a tela de configuração e as páginas do painel. As duas restauram tudo
-o que tocam e saem com código diferente de zero se algo falhar.
-
-Como as regras existem duas vezes — PHP no servidor, JavaScript no navegador — a bateria grava
-`tests/cases.json` com o resultado do PHP de cada caso, e o navegador é conferido contra essa
-fixture. O `tests/CASES.md` documenta os blocos, como rodar a conferência de paridade e o que
-ainda precisa ser testado na mão.
+Verificado no OJS 3.5.0.3, com a assinatura do núcleo conferida também no 3.5.0.5.
 
 ### Créditos e autoria
 

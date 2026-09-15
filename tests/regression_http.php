@@ -15,15 +15,16 @@
  *        Creates and deletes a temporary journal manager; restores the plugin
  *        settings. See tests/CASES.md.
  *
+ *        The login form must not ask for a captcha during the run
+ *        ([captcha] altcha_on_login = off on a test site): the suite never
+ *        tries to solve one.
+ *
  * Usage: php plugins/generic/controlledVocabSplitter/tests/regression_http.php [--keep]
  */
 
 use APP\core\Application;
 use APP\core\PageRouter;
 use APP\facades\Repo;
-use AltchaOrg\Altcha\Altcha;
-use AltchaOrg\Altcha\ChallengeOptions;
-use AltchaOrg\Altcha\Hasher\Algorithm;
 use Illuminate\Support\Facades\DB;
 use PKP\config\Config;
 use PKP\controlledVocab\ControlledVocab;
@@ -113,22 +114,6 @@ function assertEquals($expected, $actual, string $message = 'value differs from 
 //
 // HTTP client with a session
 //
-function altchaPayload(): string
-{
-    $altcha = new Altcha(Config::getVar('captcha', 'altcha_hmackey'));
-    $max = (int) (Config::getVar('captcha', 'altcha_encrypt_number') ?: 10000);
-    $challenge = $altcha->createChallenge(new ChallengeOptions(algorithm: Algorithm::SHA256, maxNumber: $max));
-    for ($n = 0; $n <= $max; $n++) {
-        if (hash('sha256', $challenge->salt . $n) === $challenge->challenge) {
-            return base64_encode(json_encode([
-                'algorithm' => $challenge->algorithm, 'challenge' => $challenge->challenge,
-                'number' => $n, 'salt' => $challenge->salt, 'signature' => $challenge->signature,
-            ]));
-        }
-    }
-    throw new RuntimeException('could not solve the altcha challenge');
-}
-
 class Session
 {
     public string $jar;
@@ -200,7 +185,7 @@ class Session
         }
         $response = $this->postForm("{$PAGE}/{$uiLocale}/login/signIn", [
             'username' => $username, 'password' => $password, 'csrfToken' => $matches[1],
-            'altcha' => altchaPayload(), 'remember' => 0, 'source' => '',
+            'remember' => 0, 'source' => '',
         ]);
         if (str_contains($response['body'], 'name="password"')) {
             throw new RuntimeException("login failed for {$username}");
@@ -281,6 +266,11 @@ $ORIGINAL = [
 $managerId = null;
 $CREATED = [];
 $fatalFailure = null;
+
+if (Config::getVar('captcha', 'altcha') && Config::getVar('captcha', 'altcha_on_login')) {
+    fwrite(STDERR, "The login form asks for a captcha: turn [captcha] altcha_on_login off for the run on a test site.\n");
+    exit(2);
+}
 
 echo "controlledVocabSplitter — end-to-end suite\n";
 echo "site: {$BASE} | journal: {$JOURNAL}\n";

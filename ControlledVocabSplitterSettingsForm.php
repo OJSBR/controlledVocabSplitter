@@ -90,6 +90,7 @@ class ControlledVocabSplitterSettingsForm extends Form
         $templateMgr = TemplateManager::getManager($request);
         $templateMgr->assign([
             'pluginName' => $this->plugin->getName(),
+            'cvsStyleUrl' => $request->getBaseUrl() . '/' . $this->plugin->getPluginPath() . '/css/settings.css',
             'fieldRows' => $fieldRows,
             'separatorRows' => $separatorRows,
         ]);

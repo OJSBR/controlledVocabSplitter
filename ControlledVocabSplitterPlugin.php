@@ -110,12 +110,15 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
             return false;
         }
 
-        $expected = ['symbolic', 'vocabs', 'assocType', 'assocId', 'deleteFirst'];
+        // Names and types both: a parameter or return type changed by the core
+        // is as fatal to the subclass as a renamed one.
+        $expected = ['string $symbolic', 'array $vocabs', 'int $assocType', '?int $assocId', 'bool $deleteFirst'];
 
-        return array_map(
-            fn (\ReflectionParameter $parameter): string => $parameter->getName(),
-            $method->getParameters()
-        ) === $expected;
+        return (string) $method->getReturnType() === 'void'
+            && array_map(
+                fn (\ReflectionParameter $parameter): string => $parameter->getType() . ' $' . $parameter->getName(),
+                $method->getParameters()
+            ) === $expected;
     }
 
     //

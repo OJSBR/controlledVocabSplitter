@@ -11,7 +11,9 @@ php plugins/generic/controlledVocabSplitter/tests/regression.php
 php plugins/generic/controlledVocabSplitter/tests/regression_http.php
 ```
 
-Run them as the account that owns the files, never as root.
+Run them as the account that owns the files, never as root. `regression_http.php` logs in for
+real: turn `[captcha] altcha_on_login` off for the run on the test site, and back on afterwards —
+the suite refuses to start while the login form asks for a captcha.
 
 The first covers the rules and real writes, through the same path as the metadata form
 (`Repo::publication()->edit()`) and as the native XML import
@@ -46,10 +48,12 @@ Manager one (`UG_MANAGER`).
 | K | Writes `cases.json`, the fixture used to prove parity with the JavaScript rules |
 | HA–HE | End to end: session, REST API, script publication in the backend, settings screen, permissions |
 
-A functional [Cypress](https://www.cypress.io/) test lives in
-`cypress/tests/functional/ControlledVocabSplitter.cy.js`, following the conventions of the
-tests shipped with OJS plugins: it enables the plugin, opens its settings, unticks a separator,
-saves, and reopens the form to assert the change was persisted.
+A functional [Cypress](https://www.cypress.io/) spec lives in
+`cypress/tests/functional/ControlledVocabSplitter.cy.js`: it unticks a separator, saves, reopens
+the form to assert the change was persisted and puts it back; pastes a keyword line into the
+metadata form of `submissionId` and expects separate terms; and runs every case of
+`tests/cases.json` that uses all three separators through the browser rules. The parity check
+below is still the way to cover the cases with a subset of separators.
 
 ## Parity between PHP and JavaScript
 

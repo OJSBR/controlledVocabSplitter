@@ -7,7 +7,7 @@
  * Makes the controlled-vocabulary field split a pasted list into separate tags.
  *
  * The rules below are a mirror of ControlledVocabSplitter.php, deliberately kept
- * dumb and explicit so the two can be compared term by term; tests/CASOS.md
+ * dumb and explicit so the two can be compared term by term; tests/CASES.md
  * documents how the parity is verified. The server applies the same rules on
  * every write, so this file is what the author sees, never what guarantees the
  * data.

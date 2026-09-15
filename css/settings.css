@@ -1,0 +1,26 @@
+/**
+ * @file plugins/generic/controlledVocabSplitter/css/settings.css
+ *
+ * Copyright (c) 2026 OJSBR (https://ojsbr.com)
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
+ *
+ * Settings form of the plugin.
+ */
+.cvsTable { width:100%; border-collapse:collapse; margin:.4em 0 1.2em; }
+.cvsTable th, .cvsTable td { padding:.7em .9em; border-bottom:1px solid #e3e9ef; text-align:left; vertical-align:top; }
+.cvsTable thead th { background:#f4f7fb; color:#33414e; font-size:.92em; }
+.cvsTable tbody tr:hover { background:#fafbfc; }
+.cvsTable td.cvsCheck, .cvsTable th.cvsCheck { text-align:center; width:6em; }
+.cvsTable input[type="checkbox"] { width:16px; height:16px; margin:0; cursor:pointer; }
+.cvsName { font-weight:700; color:#16232f; }
+.cvsExample { display:block; font-size:.85em; color:#61707e; margin-top:.25em; }
+.cvsExample code { background:#f2f5f8; padding:.1em .35em; border-radius:3px; }
+.cvsHeading { margin:1.4em 0 .3em; font-size:1.05em; font-weight:700; color:#16232f; }
+.cvsNotice {
+	margin:1em 0; padding:.9em 1.1em; border:1px solid #e6cf6a; border-left:4px solid #d8b520;
+	background:#fffbe9; border-radius:6px; line-height:1.5;
+}
+.cvsNotice strong { color:#6b5600; }
+.cvsNotice--info { border-color:#b9d3e6; border-left-color:#3a6ea5; background:#f2f7fb; }
+.cvsNotice--info strong { color:#20486e; }
+.cvsHint { color:#61707e; margin:.6em 0 0; font-size:.93em; line-height:1.5; }

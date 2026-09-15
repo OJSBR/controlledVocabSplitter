@@ -16,26 +16,7 @@
 	{rdelim});
 </script>
 
-<style>
-	.cvsTable {ldelim} width:100%; border-collapse:collapse; margin:.4em 0 1.2em; {rdelim}
-	.cvsTable th, .cvsTable td {ldelim} padding:.7em .9em; border-bottom:1px solid #e3e9ef; text-align:left; vertical-align:top; {rdelim}
-	.cvsTable thead th {ldelim} background:#f4f7fb; color:#33414e; font-size:.92em; {rdelim}
-	.cvsTable tbody tr:hover {ldelim} background:#fafbfc; {rdelim}
-	.cvsTable td.cvsCheck, .cvsTable th.cvsCheck {ldelim} text-align:center; width:6em; {rdelim}
-	.cvsTable input[type="checkbox"] {ldelim} width:16px; height:16px; margin:0; cursor:pointer; {rdelim}
-	.cvsName {ldelim} font-weight:700; color:#16232f; {rdelim}
-	.cvsExample {ldelim} display:block; font-size:.85em; color:#61707e; margin-top:.25em; {rdelim}
-	.cvsExample code {ldelim} background:#f2f5f8; padding:.1em .35em; border-radius:3px; {rdelim}
-	.cvsHeading {ldelim} margin:1.4em 0 .3em; font-size:1.05em; font-weight:700; color:#16232f; {rdelim}
-	.cvsNotice {ldelim}
-		margin:1em 0; padding:.9em 1.1em; border:1px solid #e6cf6a; border-left:4px solid #d8b520;
-		background:#fffbe9; border-radius:6px; line-height:1.5;
-	{rdelim}
-	.cvsNotice strong {ldelim} color:#6b5600; {rdelim}
-	.cvsNotice--info {ldelim} border-color:#b9d3e6; border-left-color:#3a6ea5; background:#f2f7fb; {rdelim}
-	.cvsNotice--info strong {ldelim} color:#20486e; {rdelim}
-	.cvsHint {ldelim} color:#61707e; margin:.6em 0 0; font-size:.93em; line-height:1.5; {rdelim}
-</style>
+<link rel="stylesheet" href="{$cvsStyleUrl|escape}">
 
 <form
 	class="pkp_form"
