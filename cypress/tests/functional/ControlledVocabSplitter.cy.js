@@ -34,13 +34,23 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 		});
 	};
 
-	const openSettings = () => {
+	const openPluginsTab = () => {
 		// A new query string forces a page load; the hash opens the Plugins tab.
 		cy.visit('/index.php/' + contextPath + '/management/settings/website?reload=' + Date.now() + '#plugins');
 		cy.get('button[id="plugins-button"]', {timeout: 60000}).should('have.attr', 'aria-selected', 'true');
 		cy.waitJQuery();
-		cy.get('tr[id*="controlledvocabsplitterplugin"] a.show_extras', {timeout: 30000}).should('be.visible').click();
-		cy.get('a[id*="controlledvocabsplitterplugin-settings"]', {timeout: 30000}).click();
+	};
+
+	// Opens the settings modal from the plugins grid. The form is fetched from the
+	// server each time, so reopening it without reloading the page still proves
+	// what was stored (a full reload right after saving can stall CI's web server).
+	const openSettings = () => {
+		cy.get('a[id*="controlledvocabsplitterplugin-settings"]', {timeout: 30000}).then(($link) => {
+			if (!$link.is(':visible')) {
+				cy.get('tr[id*="controlledvocabsplitterplugin"] a.show_extras').click();
+			}
+		});
+		cy.get('a[id*="controlledvocabsplitterplugin-settings"]').should('be.visible').click();
 		cy.waitJQuery();
 		cy.window().should((win) => {
 			expect(win.jQuery(settingsForm).data('pkp.handler')).to.exist;
@@ -69,6 +79,7 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 
 	it('Turns a separator off, keeps it off, and puts it back', function() {
 		login();
+		openPluginsTab();
 		openSettings();
 		cy.get('link[href*="/controlledVocabSplitter/css/settings.css"]').should('have.length', 1);
 		cy.get(settingsForm + ' input[id="cvsField-keywords"]').should('be.checked');
