@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Վերահսկվող բառապաշարի բաժանիչ"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Բաժանում է մեկ տողով տեղադրված բանալի բառերը, թեմաները, ոլորտներն ու աջակցող կազմակերպությունները այն առանձին եզրույթների, որոնք հեղինակը նկատի ուներ՝ հենց դաշտում և ամեն պահպանման ժամանակ։"
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Կետը բաժանում է միայն այն դեպքում, երբ դ
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Արդեն պահված գրառումները մնում են անփոփոխ, մինչև նորից չպահվեն։ Առկա արխիվը մեկ անցումով ուղղելու համար գործարկեք այս հավելման հետ եկող tools/fixExistingVocabs.php սկրիպտը. այն փորձնական գործարկում է, եթե գրելը հատուկ չպահանջեք։"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Մեկ տողում տեղադրված բանալի բառերը, թեմաները, առարկաները և աջակցող կազմակերպությունները բաժանում է հեղինակի նկատի ունեցած առանձին տերմինների՝ հրապարակումը պահպանելիս կամ ներմուտքագրելիս։"

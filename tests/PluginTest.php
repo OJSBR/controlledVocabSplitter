@@ -15,10 +15,11 @@
 
 namespace APP\plugins\generic\controlledVocabSplitter\tests;
 
+use PKP\tests\PKPTestCase;
 use ReflectionClass;
 use ReflectionNamedType;
 
-class PluginTest extends TestCase
+class PluginTest extends PKPTestCase
 {
     /** @return string[] */
     protected function classes(): array
@@ -26,7 +27,6 @@ class PluginTest extends TestCase
         return [
             \APP\plugins\generic\controlledVocabSplitter\ControlledVocabSplitterPlugin::class,
             \APP\plugins\generic\controlledVocabSplitter\ControlledVocabSplitterSettingsForm::class,
-            \APP\plugins\generic\controlledVocabSplitter\SplittingControlledVocabRepository::class,
         ];
     }
 

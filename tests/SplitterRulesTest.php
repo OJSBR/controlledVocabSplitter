@@ -16,8 +16,12 @@ namespace APP\plugins\generic\controlledVocabSplitter\tests;
 
 use APP\plugins\generic\controlledVocabSplitter\ControlledVocabSplitter as Rules;
 use APP\plugins\generic\controlledVocabSplitter\ControlledVocabSplitterPlugin;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PKP\tests\PKPTestCase;
 
-class SplitterRulesTest extends TestCase
+#[CoversClass(Rules::class)]
+#[CoversClass(ControlledVocabSplitterPlugin::class)]
+class SplitterRulesTest extends PKPTestCase
 {
     public function testTermsAreCleanedOfSpacingAndLeftoverPunctuation(): void
     {
@@ -55,11 +59,68 @@ class SplitterRulesTest extends TestCase
         $this->assertSame(['Alpha', 'Beta', 'Gamma'], Rules::splitList(['Alpha; Beta', 'Gamma', 'Alpha'], Rules::SEPARATORS));
     }
 
-    public function testTheRepositoryIsOnlyReplacedWhenTheCoreSignatureMatches(): void
+    public function testTheServerSideWorksThroughCoreHooksOnly(): void
     {
-        // The subclass is loaded only after this check; on the installed PKP it must pass.
-        $this->assertTrue((new ControlledVocabSplitterPlugin())->isCoreSignatureKnown());
         $source = (string) file_get_contents(dirname(__DIR__) . '/ControlledVocabSplitterPlugin.php');
-        $this->assertTrue(strpos($source, "(string) \$method->getReturnType() === 'void'") !== false, 'The guard ignores the return type.');
+        foreach (['Publication::edit', 'Publication::add', 'nativexmlpublicationfilter::execute'] as $hook) {
+            $this->assertTrue(strpos($source, "Hook::add('{$hook}', \$this->") !== false, "The {$hook} hook is not registered.");
+        }
+        foreach (['app()->bind', 'app()->instance', 'app()->singleton', 'addJavaScript'] as $forbidden) {
+            $this->assertFalse(strpos($source, $forbidden) !== false, "The plugin uses {$forbidden}.");
+        }
+    }
+
+    public function testAPublicationEditIsSplitBeforeItIsSaved(): void
+    {
+        $plugin = new class () extends ControlledVocabSplitterPlugin {
+            public function getEnabled($contextId = null)
+            {
+                return true;
+            }
+
+            public function getSetting($contextId, $name)
+            {
+                return null;
+            }
+        };
+        $publication = new \APP\publication\Publication();
+        $publication->setData('keywords', ['en' => ['Palatal Expansion. Clinical Protocol.']]);
+        $publication->setData('subjects', ['en' => ['Left; alone']]);
+
+        $plugin->splitOnEdit('Publication::edit', [&$publication, null, ['keywords' => []], null]);
+
+        $this->assertSame(['en' => ['Palatal Expansion', 'Clinical Protocol']], $publication->getData('keywords'));
+        $this->assertSame(['en' => ['Left; alone']], $publication->getData('subjects'), 'A vocabulary that was not edited was touched.');
+    }
+
+    public function testTheSiteLevelHasNoSettingsToOpen(): void
+    {
+        $request = new class () {
+            public function getContext()
+            {
+                return null;
+            }
+
+            public function getUserVar($name)
+            {
+                return $name === 'verb' ? 'settings' : null;
+            }
+
+            public function getRouter()
+            {
+                throw new \RuntimeException('The site level must not build a settings URL.');
+            }
+        };
+        $plugin = new class () extends ControlledVocabSplitterPlugin {
+            public function getEnabled($contextId = null)
+            {
+                return true;
+            }
+        };
+
+        $this->assertSame([], array_filter($plugin->getActions($request, []), fn ($action) => $action->getId() === 'settings'));
+        // Like any action the plugin does not handle, it is left to the core, which refuses it.
+        $this->expectExceptionMessage('Unhandled management action!');
+        $plugin->manage([], $request);
     }
 }

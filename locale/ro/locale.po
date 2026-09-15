@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Separator de vocabulare controlate"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Împarte cuvintele-cheie, subiectele, disciplinele și agențiile de sprijin lipite ca o singură linie în termenii separați pe care autorul i-a avut în vedere — chiar în câmp și la fiecare salvare."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Punctul separă doar când este urmat de un spațiu, ceea ce păstrează
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Înregistrările deja stocate rămân neatinse până la o nouă salvare. Pentru a repara o arhivă existentă dintr-o singură trecere, rulați scriptul tools/fixExistingVocabs.php livrat cu acest modul; este o rulare de probă dacă nu îi cereți să scrie."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Separă cuvintele-cheie, subiectele, disciplinele și agențiile de finanțare lipite pe un singur rând în termenii separați pe care i-a avut în vedere autorul, la salvarea sau importul publicației."

@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Denetimli Sözlük Ayırıcı"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Tek satır olarak yapıştırılan anahtar sözcükleri, konuları, disiplinleri ve destekleyen kurumları, yazarın kastettiği ayrı terimlere böler — alanın kendisinde ve her kaydedişte."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Nokta yalnızca ardından boşluk geldiğinde ayırır; bu sayede \"Lei 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Zaten kayıtlı olan veriler yeniden kaydedilene kadar değişmeden kalır. Mevcut arşivi tek seferde onarmak için bu eklentiyle gelen tools/fixExistingVocabs.php betiğini çalıştırın; yazmasını istemedikçe yalnızca deneme çalıştırması yapar."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Tek satıra yapıştırılmış anahtar kelimeleri, konuları, disiplinleri ve destekleyen kurumları, yayın kaydedildiğinde veya içe aktarıldığında yazarın kastettiği ayrı terimlere böler."

@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Bộ tách từ vựng có kiểm soát"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Tách các từ khóa, chủ đề, ngành và cơ quan tài trợ được dán thành một dòng thành những thuật ngữ riêng mà tác giả muốn — ngay trong ô nhập và ở mỗi lần lưu."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Dấu chấm chỉ tách khi có dấu cách theo sau, nhờ đó các t
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Các bản ghi đã lưu vẫn giữ nguyên cho tới khi được lưu lại. Để sửa toàn bộ kho hiện có trong một lần, hãy chạy tập lệnh tools/fixExistingVocabs.php đi kèm trình cắm này; mặc định chỉ chạy thử trừ khi bạn yêu cầu ghi."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Tách từ khóa, chủ đề, lĩnh vực và tổ chức tài trợ được dán trên một dòng thành các thuật ngữ riêng mà tác giả muốn, mỗi khi ấn phẩm được lưu hoặc nhập."

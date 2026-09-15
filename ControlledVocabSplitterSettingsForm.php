@@ -37,7 +37,7 @@ class ControlledVocabSplitterSettingsForm extends Form
     }
 
     /**
-     * @copydoc Form::initData()
+     * Load the current settings of the journal.
      */
     public function initData(): void
     {
@@ -48,7 +48,7 @@ class ControlledVocabSplitterSettingsForm extends Form
     }
 
     /**
-     * @copydoc Form::readInputData()
+     * Read the vocabularies and separators that were ticked.
      */
     public function readInputData(): void
     {
@@ -57,7 +57,7 @@ class ControlledVocabSplitterSettingsForm extends Form
     }
 
     /**
-     * @copydoc Form::fetch()
+     * Render the form with one row per vocabulary and per separator.
      *
      * @param null|mixed $template
      */
@@ -99,7 +99,7 @@ class ControlledVocabSplitterSettingsForm extends Form
     }
 
     /**
-     * @copydoc Form::execute()
+     * Store the settings of the journal.
      */
     public function execute(...$functionArgs)
     {
@@ -126,7 +126,6 @@ class ControlledVocabSplitterSettingsForm extends Form
      * Only ever store values the plugin itself defines, in the plugin's own
      * order, so a hand-crafted POST cannot put anything else in the settings.
      *
-     * @param mixed $submitted
      * @param string[] $allowed
      *
      * @return string[]

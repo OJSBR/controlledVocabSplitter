@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Rozdzielacz słowników kontrolowanych"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Dzieli słowa kluczowe, tematy, dyscypliny i instytucje wspierające wklejone jako jeden wiersz na osobne terminy, o które autorowi chodziło — w samym polu i przy każdym zapisie."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Kropka dzieli tylko wtedy, gdy następuje po niej spacja, dzięki czemu 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Już zapisane rekordy pozostają nietknięte, dopóki nie zostaną zapisane ponownie. Aby naprawić istniejące archiwum za jednym razem, uruchom skrypt tools/fixExistingVocabs.php dołączony do tej wtyczki; domyślnie działa na sucho, chyba że poprosisz o zapis."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Dzieli słowa kluczowe, tematy, dyscypliny i instytucje wspierające wklejone w jednym wierszu na osobne terminy, które miał na myśli autor, przy zapisie lub imporcie publikacji."

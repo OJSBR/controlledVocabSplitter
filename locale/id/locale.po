@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Pemisah Kosakata Terkendali"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Memisahkan kata kunci, subjek, disiplin, dan lembaga pendukung yang ditempel sebagai satu baris menjadi istilah-istilah terpisah yang dimaksud penulis — di dalam bidangnya sendiri dan pada setiap penyimpanan."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Titik hanya memisahkan bila diikuti spasi, sehingga rujukan hukum sepert
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Rekaman yang sudah tersimpan dibiarkan apa adanya sampai disimpan ulang. Untuk memperbaiki arsip yang ada dalam sekali jalan, jalankan skrip tools/fixExistingVocabs.php yang disertakan plugin ini; secara bawaan hanya uji coba kecuali Anda memintanya menulis."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Memisahkan kata kunci, subjek, disiplin, dan lembaga pendukung yang ditempel dalam satu baris menjadi istilah terpisah yang dimaksud penulis, setiap kali publikasi disimpan atau diimpor."

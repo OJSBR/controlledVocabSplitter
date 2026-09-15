@@ -11,8 +11,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Splitser van gecontroleerde woordenlijsten"
 
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Splitst trefwoorden, onderwerpen, disciplines en ondersteunende instanties die als één regel zijn geplakt in de afzonderlijke termen die de auteur bedoelde — in het veld zelf en bij elke opslag."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
 msgstr "Auteurs selecteren vaak de trefwoordenregel in hun manuscript, kopiëren die en plakken het geheel in het veld, waardoor één lange term wordt opgeslagen in plaats van meerdere. Kies hieronder welke woordenlijsten worden gesplitst en welke scheidingstekens gelden."
@@ -73,3 +71,6 @@ msgstr "De punt splitst alleen wanneer er een spatie op volgt, waardoor juridisc
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Reeds opgeslagen records blijven onaangeroerd tot ze opnieuw worden opgeslagen. Voer het script tools/fixExistingVocabs.php uit dat bij deze plug-in wordt geleverd om een bestaand archief in één keer te herstellen; het is een proefrun tenzij u het vraagt te schrijven."
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Splitst trefwoorden, onderwerpen, disciplines en financiers die als één regel zijn geplakt in de afzonderlijke termen die de auteur bedoelde, telkens wanneer een publicatie wordt opgeslagen of geïmporteerd."

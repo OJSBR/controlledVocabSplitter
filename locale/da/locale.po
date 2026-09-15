@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Opdeler af kontrollerede vokabularer"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Opdeler nøgleord, emner, discipliner og støttende institutioner, der er indsat som én linje, i de separate termer, forfatteren mente — i selve feltet og ved hver lagring."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Punktummet adskiller kun, når det efterfølges af et mellemrum, hvilket
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Allerede gemte poster røres ikke, før de gemmes igen. Kør scriptet tools/fixExistingVocabs.php, der følger med dette plugin, for at reparere et eksisterende arkiv i én omgang; det er en prøvekørsel, medmindre du beder det skrive."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Opdeler nøgleord, emner, discipliner og støttende organisationer, der er indsat på én linje, i de separate termer, forfatteren mente, når en publikation gemmes eller importeres."

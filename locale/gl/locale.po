@@ -11,8 +11,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Divisor de vocabularios controlados"
 
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Divide as palabras clave, materias, disciplinas e axencias de apoio pegadas nunha soa liña nos termos separados que a autoría pretendía — no propio campo e en cada gardado."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
 msgstr "A autoría adoita seleccionar a liña de palabras clave do manuscrito, copiala e pegala enteira no campo, o que garda un único termo longo no canto de varios. Escolla a continuación que vocabularios se dividen e que separadores se teñen en conta."
@@ -73,3 +71,6 @@ msgstr "O punto só separa cando o segue un espazo, o que mantén enteiras refer
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Os rexistros xa gardados non se tocan ata que se garden de novo. Para reparar un arquivo existente nunha soa pasada, execute o script tools/fixExistingVocabs.php que acompaña este complemento; é unha execución de proba agás que lle pida escribir."
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Separa as palabras clave, temas, disciplinas e axencias de financiamento pegadas nunha soa liña nos termos que o autor quería, cando a publicación se garda ou se importa."

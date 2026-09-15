@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Razdvajač kontrolisanih rečnika"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Deli ključne reči, teme, discipline i institucije podrške nalepljene kao jedan red na pojedinačne termine koje je autor imao u vidu — u samom polju i pri svakom čuvanju."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Tačka razdvaja samo kada je prati razmak, što čuva celim pravne refer
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Već sačuvani zapisi ostaju netaknuti dok se ponovo ne sačuvaju. Da biste popravili postojeću arhivu iz jednog prolaza, pokrenite skriptu tools/fixExistingVocabs.php koja dolazi uz ovaj dodatak; to je probni prolaz osim ako mu ne zatražite upis."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Razdvaja ključne reči, teme, discipline i finansijere nalepljene u jednom redu na zasebne pojmove koje je autor imao na umu, pri čuvanju ili uvozu publikacije."

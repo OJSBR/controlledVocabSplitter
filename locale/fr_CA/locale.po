@@ -11,8 +11,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Séparateur de vocabulaires contrôlés"
 
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Divise les mots-clés, sujets, disciplines et organismes de soutien collés en une seule ligne en les termes distincts que l'auteur voulait, dans le champ lui-même et à chaque enregistrement."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
 msgstr "Les auteurs sélectionnent souvent la ligne de mots-clés de leur manuscrit, la copient et la collent en entier dans le champ, ce qui enregistre un seul long terme au lieu de plusieurs. Choisissez ci-dessous quels vocabulaires sont divisés et quels séparateurs sont pris en compte."
@@ -73,3 +71,6 @@ msgstr "Le point ne sépare que s'il est suivi d'une espace, ce qui garde intact
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Les enregistrements déjà stockés ne sont pas modifiés tant qu'ils ne sont pas enregistrés de nouveau. Pour réparer une archive existante en une passe, exécutez le script tools/fixExistingVocabs.php fourni avec ce module; il s'agit d'un essai à blanc à moins que vous ne lui demandiez d'écrire."
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Sépare les mots-clés, sujets, disciplines et organismes de financement collés sur une seule ligne en autant de termes que l'auteur avait en tête, dès qu'une publication est enregistrée ou importée."

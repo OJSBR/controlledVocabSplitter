@@ -11,13 +11,17 @@
  *        Blocks A to D exercise the rules on their own; E to I write for real,
  *        through the same paths as the metadata form, the REST API and the
  *        native XML import; J replays the real archive that motivated the
- *        plugin; K is a property test over generated lists.
+ *        plugin.
  *
  *        Everything the script touches is restored at the end, including the
  *        submissions it creates. See tests/CASES.md.
  *
- * Usage: php plugins/generic/controlledVocabSplitter/tests/regression.php [--keep]
+ * Usage: [CVS_TEST_JOURNAL=path] php plugins/generic/controlledVocabSplitter/tests/regression.php [--keep]
  */
+
+if (PHP_SAPI !== 'cli') {
+    exit('This script can only be run from the command line.');
+}
 
 use APP\core\Application;
 use APP\core\PageRouter;
@@ -25,17 +29,26 @@ use APP\facades\Repo;
 use APP\plugins\generic\controlledVocabSplitter\ControlledVocabSplitter as Rules;
 use APP\publication\Publication;
 use PKP\controlledVocab\ControlledVocab;
+use PKP\plugins\Hook;
 use PKP\plugins\PluginRegistry;
-use PKP\user\interest\UserInterest;
 
 $root = dirname(__DIR__, 4);
 chdir($root);
 define('INDEX_FILE_LOCATION', $root . '/index.php');
 require $root . '/lib/pkp/includes/bootstrap.php';
 
-const CONTEXT_ID = 1;
-const SECTION_ID = 1;
-const UG_AUTHOR = 14;
+// The journal under test: CVS_TEST_JOURNAL, or the first journal of the site.
+$journalPath = getenv('CVS_TEST_JOURNAL') ?: null;
+$testContext = $journalPath
+    ? Application::getContextDAO()->getByPath($journalPath)
+    : Application::getContextDAO()->getAll(true)->next();
+if (!$testContext) {
+    exit("FATAL: no journal found (set CVS_TEST_JOURNAL to a journal path).\n");
+}
+define('CONTEXT_ID', (int) $testContext->getId());
+define('SECTION_ID', (int) Repo::section()->getCollector()->filterByContextIds([CONTEXT_ID])->getMany()->first()?->getId());
+define('UG_AUTHOR', (int) \PKP\userGroup\UserGroup::withContextIds([CONTEXT_ID])->withRoleIds([\PKP\security\Role::ROLE_ID_AUTHOR])->first()?->id);
+
 const PLUGIN = 'controlledvocabsplitterplugin';
 
 const ALL_SEPARATORS = ['semicolon', 'comma', 'period'];
@@ -49,8 +62,14 @@ $keep = in_array('--keep', $argv, true);
 class RouterWithContext extends PageRouter
 {
     private $pinned;
-    public function pinContext($context) { $this->pinned = $context; }
-    public function getContext(\PKP\core\PKPRequest $request, bool $forceReload = false): ?\PKP\context\Context { return $this->pinned; }
+    public function pinContext($context)
+    {
+        $this->pinned = $context;
+    }
+    public function getContext(\PKP\core\PKPRequest $request, bool $forceReload = false): ?\PKP\context\Context
+    {
+        return $this->pinned;
+    }
 }
 
 $request = Application::get()->getRequest();
@@ -521,86 +540,73 @@ try {
     //
     // BLOCK F — the other write paths
     //
-    block('BLOCK F — native XML import and other vocabularies');
+    block('BLOCK F — native XML import hook and other vocabularies');
 
-    testCase('F01', 'insertBySymbolic directly (the native import path) splits as well', function () use ($publication) {
+    testCase('F01', 'the native import hook splits what the import stored directly', function () use ($publication) {
+        // The import stores vocabulary straight through insertBySymbolic() and then
+        // Filter::execute() fires nativexmlpublicationfilter::execute.
         Repo::controlledVocab()->insertBySymbolic(
             ControlledVocab::CONTROLLED_VOCAB_SUBMISSION_KEYWORD,
             ['pt_BR' => ['Importado. Do XML. Nativo']],
             Application::ASSOC_TYPE_PUBLICATION,
             $publication->getId()
         );
+        $imported = [Repo::publication()->get($publication->getId())];
+        Hook::call('nativexmlpublicationfilter::execute', [&$imported]);
         assertEquals(
             ['pt_BR' => ['Importado', 'Do XML', 'Nativo']],
             terms(Repo::publication()->get($publication->getId()), 'keywords')
         );
     });
 
-    testCase('F02', 'incremental import (deleteFirst=false) keeps what was already there', function () use ($publication) {
+    testCase('F02', 'the import hook keeps every locale and the terms that were already right', function () use ($publication) {
         Repo::controlledVocab()->insertBySymbolic(
             ControlledVocab::CONTROLLED_VOCAB_SUBMISSION_KEYWORD,
-            ['pt_BR' => ['Base']],
+            ['pt_BR' => ['Base', 'Novo; Outro'], 'en' => ['Already right']],
             Application::ASSOC_TYPE_PUBLICATION,
             $publication->getId()
         );
-        Repo::controlledVocab()->insertBySymbolic(
-            ControlledVocab::CONTROLLED_VOCAB_SUBMISSION_KEYWORD,
-            ['pt_BR' => ['Novo; Outro']],
-            Application::ASSOC_TYPE_PUBLICATION,
-            $publication->getId(),
-            false
-        );
+        $imported = [Repo::publication()->get($publication->getId())];
+        Hook::call('nativexmlpublicationfilter::execute', [&$imported]);
         assertEquals(
-            ['pt_BR' => ['Base', 'Novo', 'Outro']],
+            ['en' => ['Already right'], 'pt_BR' => ['Base', 'Novo', 'Outro']],
             terms(Repo::publication()->get($publication->getId()), 'keywords')
         );
     });
 
-    testCase('F03', 'a vocabulary that is not a publication one passes through untouched', function () use ($plugin) {
-        $input = ['pt_BR' => ['Metodologia; Estatística']];
-        assertEquals($input, $plugin->splitVocabs(
-            UserInterest::CONTROLLED_VOCAB_INTEREST,
-            $input,
-            Application::ASSOC_TYPE_PUBLICATION,
-            1
-        ));
-    });
-
-    testCase('F04', 'another assoc type passes through untouched', function () use ($plugin) {
-        $input = ['pt_BR' => ['Metodologia; Estatística']];
-        assertEquals($input, $plugin->splitVocabs(
+    testCase('F03', 'a direct repository write is not intercepted (no core class is replaced)', function () use ($publication) {
+        Repo::controlledVocab()->insertBySymbolic(
             ControlledVocab::CONTROLLED_VOCAB_SUBMISSION_KEYWORD,
-            $input,
-            Application::ASSOC_TYPE_USER,
-            1
-        ));
-    });
-
-    testCase('F05', 'an unknown publication is left alone (the journal cannot be told)', function () use ($plugin) {
-        $input = ['pt_BR' => ['A; B']];
-        assertEquals($input, $plugin->splitVocabs(
-            ControlledVocab::CONTROLLED_VOCAB_SUBMISSION_KEYWORD,
-            $input,
+            ['pt_BR' => ['Direto; Sem hook']],
             Application::ASSOC_TYPE_PUBLICATION,
-            999999
-        ));
-    });
-
-    testCase('F06', 'a bare string (not an array) is accepted', function () use ($plugin, $publication) {
-        assertEquals(
-            ['pt_BR' => ['A', 'B']],
-            $plugin->splitVocabs(
-                ControlledVocab::CONTROLLED_VOCAB_SUBMISSION_KEYWORD,
-                ['pt_BR' => 'A; B'],
-                Application::ASSOC_TYPE_PUBLICATION,
-                $publication->getId()
-            )
+            $publication->getId()
         );
+        assertEquals(['pt_BR' => ['Direto; Sem hook']], terms(Repo::publication()->get($publication->getId()), 'keywords'));
+        assertTrue(get_class(Repo::controlledVocab()) === \PKP\controlledVocab\Repository::class, 'the core repository was replaced');
+    });
+
+    testCase('F04', 'splitStoredVocabs() on a clean vocabulary changes nothing', function () use ($publication, $plugin) {
+        Repo::controlledVocab()->insertBySymbolic(
+            ControlledVocab::CONTROLLED_VOCAB_SUBMISSION_KEYWORD,
+            ['pt_BR' => ['Um', 'Dois']],
+            Application::ASSOC_TYPE_PUBLICATION,
+            $publication->getId()
+        );
+        assertEquals([], $plugin->splitStoredVocabs(Repo::publication()->get($publication->getId())));
+    });
+
+    testCase('F05', 'the import hook ignores anything that is not a publication', function () use ($plugin) {
+        $imported = ['not a publication', null, 42];
+        assertTrue($plugin->splitOnImport('nativexmlpublicationfilter::execute', [&$imported]) === Hook::CONTINUE, 'the hook did not continue');
+    });
+
+    testCase('F06', 'a bare string (not an array) is accepted by splitByLocale()', function () use ($plugin) {
+        assertEquals(['pt_BR' => ['A', 'B']], $plugin->splitByLocale(['pt_BR' => 'A; B'], CONTEXT_ID));
     });
 
     testCase('F07', 'reviewing interests stored for real stay in one piece', function () {
-        $user = Repo::user()->get(2);
-        assertTrue((bool) $user, 'user 2 does not exist in this installation');
+        $user = Repo::user()->getAdminUsers()->first();
+        assertTrue((bool) $user, 'no site administrator in this installation');
 
         $before = Repo::userInterest()->getInterestsForUser($user);
         Repo::userInterest()->setInterestsForUser($user, ['Metodologia; Estatística']);
@@ -794,31 +800,6 @@ try {
         assertEquals($first, terms(Repo::publication()->get($publication->getId()), 'keywords'));
     });
 
-    //
-    // BLOCK K — the fixture the browser suite is checked against
-    //
-    block('BLOCK K — parity fixture for the JavaScript rules');
-
-    testCase('K01', 'writes tests/cases.json with the input and output of every case', function () use ($normalizeCases, $splitCases, $matrix) {
-        $fixture = ['normalize' => [], 'split' => []];
-
-        foreach ($normalizeCases as [$id, $input]) {
-            $fixture['normalize'][] = ['id' => $id, 'in' => $input, 'out' => Rules::normalize($input)];
-        }
-        foreach ($splitCases as [$id, $input]) {
-            $fixture['split'][] = ['id' => $id, 'in' => $input, 'separators' => ALL_SEPARATORS, 'out' => Rules::split($input, ALL_SEPARATORS)];
-        }
-        foreach ($matrix as [$id, $input, $separators]) {
-            $fixture['split'][] = ['id' => $id, 'in' => $input, 'separators' => $separators, 'out' => Rules::split($input, $separators)];
-        }
-
-        $bytes = file_put_contents(
-            __DIR__ . '/cases.json',
-            json_encode($fixture, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
-        );
-        assertTrue($bytes > 0, 'cases.json was not written');
-        assertTrue(count($fixture['split']) >= 60, 'fixture is too small');
-    });
 } catch (Throwable $e) {
     $fatalFailure = $e;
 }

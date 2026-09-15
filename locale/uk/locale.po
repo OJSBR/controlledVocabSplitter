@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Розділювач контрольованих словників"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Розділяє ключові слова, предметні рубрики, дисципліни та організації підтримки, вставлені одним рядком, на окремі терміни, які мав на увазі автор, — просто в полі й під час кожного збереження."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Крапка розділяє лише тоді, коли за нею й
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Уже збережені записи лишаються недоторканими, доки їх не збережуть знову. Щоб полагодити наявний архів за один прохід, запустіть скрипт tools/fixExistingVocabs.php, який постачається з модулем; це пробний запуск, якщо ви прямо не попросите записувати."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Розділяє ключові слова, теми, дисципліни та установи, що підтримують, вставлені одним рядком, на окремі терміни, які мав на увазі автор, під час збереження або імпорту публікації."

@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Delilnik nadzorovanih slovarjev"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Ključne besede, teme, discipline in podporne ustanove, prilepljene kot ena vrstica, razdeli na ločene izraze, ki jih je avtor imel v mislih – v samem polju in ob vsakem shranjevanju."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Pika loči le, kadar ji sledi presledek, kar ohrani cele pravne navedbe,
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Že shranjeni zapisi ostanejo nedotaknjeni, dokler niso znova shranjeni. Za popravilo obstoječega arhiva v enem prehodu zaženite skript tools/fixExistingVocabs.php, ki je priložen temu vtičniku; to je preizkusni zagon, razen če mu naročite pisanje."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Ključne besede, teme, discipline in podporne ustanove, prilepljene v eno vrstico, razdeli na ločene izraze, ki jih je imel v mislih avtor, ob shranjevanju ali uvozu publikacije."

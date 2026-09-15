@@ -14,7 +14,9 @@
 
 namespace APP\plugins\generic\controlledVocabSplitter\tests;
 
-class LocaleFilesTest extends TestCase
+use PKP\tests\PKPTestCase;
+
+class LocaleFilesTest extends PKPTestCase
 {
     /** Locale codes shipped by the plugin, as OJS 3.5 names them. */
     public const LOCALES = [

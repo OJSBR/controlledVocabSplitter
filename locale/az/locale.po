@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Nəzarətli lüğət ayırıcısı"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Bir sətir kimi yapışdırılmış açar sözləri, mövzuları, fənləri və dəstəkləyən qurumları müəllifin nəzərdə tutduğu ayrı terminlərə bölür — həm sahənin özündə, həm də hər saxlamada."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Nöqtə yalnız ondan sonra boşluq gəldikdə ayırır — bu, \"Lei 13
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Artıq saxlanmış qeydlər yenidən yadda saxlanana qədər toxunulmaz qalır. Mövcud arxivi bir dəfəyə düzəltmək üçün bu plaginlə gələn tools/fixExistingVocabs.php skriptini işə salın; yazmağı tələb etməsəniz, o yalnız sınaq rejimində işləyir."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Tək sətirdə yapışdırılmış açar sözləri, mövzuları, fənləri və dəstəkçi təşkilatları nəşr saxlanılanda və ya idxal ediləndə müəllifin nəzərdə tutduğu ayrı terminlərə bölür."

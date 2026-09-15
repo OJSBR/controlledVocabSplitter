@@ -6,202 +6,126 @@
  * Copyright (c) 2026 OJSBR (https://ojsbr.com)
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
- * @brief Applies the splitting rules to vocabulary that is already stored.
+ * @class FixExistingVocabsTool
  *
- * The plugin only acts when something is saved, so an archive that was built
- * before it was installed keeps its concatenated terms. This script repairs
- * that archive in one pass. It prints what it would do and changes nothing
- * unless --write is given.
- *
- * Usage (run as the account that owns the files, never as root):
- *
- *   php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php
- *   php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php --write
- *   ... --context=1            only one journal (default: every journal)
- *   ... --publication=13       only one publication, useful for a first test
- *   ... --field=keywords       only one vocabulary (repeatable, comma separated)
- *   ... --separators=semicolon,period
- *
- * After writing, clear the OJS caches (cache/t_cache, cache/t_compile) and any
- * cache kept by keyword-cloud blocks, or the old terms keep being displayed.
+ * @brief CLI tool that applies the splitting rules to vocabulary stored before
+ *        the plugin was enabled. Each journal's settings are used, and nothing
+ *        is written without --write.
  */
 
+if (PHP_SAPI !== 'cli') {
+    exit('This script can only be run from the command line.');
+}
+
+require dirname(__FILE__, 5) . '/tools/bootstrap.php';
+
 use APP\core\Application;
-use APP\core\PageRouter;
 use APP\facades\Repo;
-use APP\plugins\generic\controlledVocabSplitter\ControlledVocabSplitter;
 use APP\plugins\generic\controlledVocabSplitter\ControlledVocabSplitterPlugin;
-use Illuminate\Support\Facades\DB;
+use PKP\cliTool\CommandLineTool;
+use PKP\plugins\PluginRegistry;
 
-$root = dirname(__DIR__, 4);
-chdir($root);
-define('INDEX_FILE_LOCATION', $root . '/index.php');
-require $root . '/lib/pkp/includes/bootstrap.php';
+class FixExistingVocabsTool extends CommandLineTool
+{
+    private bool $write = false;
 
-require_once dirname(__DIR__) . '/ControlledVocabSplitter.php';
-require_once dirname(__DIR__) . '/ControlledVocabSplitterPlugin.php';
+    private ?string $contextPath = null;
 
-$options = getopt('', ['write', 'context::', 'publication::', 'field::', 'separators::', 'help']);
+    private ?int $submissionId = null;
 
-if (isset($options['help'])) {
-    echo file_get_contents(__FILE__, false, null, 0, 1600);
-    exit(0);
-}
-
-$write = isset($options['write']);
-$onlyContext = isset($options['context']) ? (int) $options['context'] : null;
-$onlyPublication = isset($options['publication']) ? (int) $options['publication'] : null;
-
-$fields = ControlledVocabSplitterPlugin::FIELDS;
-if (isset($options['field']) && $options['field'] !== '') {
-    $wanted = array_map('trim', explode(',', (string) $options['field']));
-    $fields = array_filter($fields, fn (string $field): bool => in_array($field, $wanted, true));
-    if (!$fields) {
-        exit("Unknown vocabulary. Use: " . implode(', ', ControlledVocabSplitterPlugin::FIELDS) . "\n");
-    }
-}
-
-$separators = ControlledVocabSplitter::SEPARATORS;
-if (isset($options['separators']) && $options['separators'] !== '') {
-    $separators = array_values(array_intersect(
-        ControlledVocabSplitter::SEPARATORS,
-        array_map('trim', explode(',', (string) $options['separators']))
-    ));
-    if (!$separators) {
-        exit("Unknown separator. Use: " . implode(', ', ControlledVocabSplitter::SEPARATORS) . "\n");
-    }
-}
-
-// Without a context the router hands back null, and anything that asks for the
-// current journal blows up half way through the run.
-$contextDao = Application::getContextDAO();
-$contexts = $onlyContext
-    ? array_filter([$contextDao->getById($onlyContext)])
-    : $contextDao->getAll()->toArray();
-
-if (!$contexts) {
-    exit("No journal found.\n");
-}
-
-$router = new class () extends PageRouter {
-    private $context;
-
-    public function setFixedContext($context): void
+    /**
+     * Read the command-line options.
+     */
+    public function __construct($argv = [])
     {
-        $this->context = $context;
+        parent::__construct($argv);
+
+        foreach ($this->argv as $argument) {
+            if ($argument === '--write') {
+                $this->write = true;
+            } elseif (str_starts_with($argument, '--journal=')) {
+                $this->contextPath = substr($argument, strlen('--journal='));
+            } elseif (str_starts_with($argument, '--submission=')) {
+                $this->submissionId = (int) substr($argument, strlen('--submission='));
+            } else {
+                $this->usage();
+                exit(1);
+            }
+        }
     }
 
-    public function getContext(\PKP\core\PKPRequest $request, bool $forceReload = false): ?\PKP\context\Context
+    /**
+     * Print how to use the tool.
+     */
+    public function usage()
     {
-        return $this->context;
-    }
-};
-$router->setApplication(Application::get());
-$router->setFixedContext(reset($contexts));
-Application::get()->getRequest()->setRouter($router);
-
-$searchIndex = Application::getSubmissionSearchIndex();
-$contextIds = array_map(fn ($context): int => (int) $context->getId(), $contexts);
-
-$totalPublications = 0;
-$totalTouched = 0;
-$totalBefore = 0;
-$totalAfter = 0;
-
-foreach ($fields as $symbolic => $field) {
-    // Everything stored for this vocabulary, by publication and locale, in the
-    // order the entries were sequenced.
-    $rows = DB::table('controlled_vocabs as cv')
-        ->join('controlled_vocab_entries as e', 'e.controlled_vocab_id', '=', 'cv.controlled_vocab_id')
-        ->join('controlled_vocab_entry_settings as s', 's.controlled_vocab_entry_id', '=', 'e.controlled_vocab_entry_id')
-        ->join('publications as p', 'p.publication_id', '=', 'cv.assoc_id')
-        ->join('submissions as sub', 'sub.submission_id', '=', 'p.submission_id')
-        ->where('cv.symbolic', $symbolic)
-        ->where('cv.assoc_type', Application::ASSOC_TYPE_PUBLICATION)
-        ->where('s.setting_name', 'name')
-        ->whereIn('sub.context_id', $contextIds)
-        ->when($onlyPublication, fn ($query) => $query->where('cv.assoc_id', $onlyPublication))
-        ->orderBy('cv.assoc_id')
-        ->orderBy('s.locale')
-        ->orderBy('e.seq')
-        ->get(['cv.assoc_id as publication_id', 's.locale', 's.setting_value as value']);
-
-    $byPublication = [];
-    foreach ($rows as $row) {
-        $byPublication[(int) $row->publication_id][$row->locale][] = (string) $row->value;
+        echo "Splits controlled vocabularies stored before the Controlled Vocabulary Splitter was enabled.\n"
+            . "Each journal's plugin settings are applied; journals where the plugin is off are skipped.\n\n"
+            . "Usage: {$this->scriptName} [--journal=path] [--submission=id] [--write]\n"
+            . "  Without --write, only prints what would change.\n";
     }
 
-    foreach ($byPublication as $publicationId => $byLocale) {
-        $totalPublications++;
+    /**
+     * Split the stored vocabularies of the selected journals and submissions.
+     */
+    public function execute()
+    {
+        $contextDao = Application::getContextDAO();
+        $contexts = $this->contextPath !== null
+            ? array_filter([$contextDao->getByPath($this->contextPath)])
+            : iterator_to_array($contextDao->getAll(true));
+        if (!$contexts) {
+            echo "No journal found.\n";
+            return false;
+        }
 
-        $new = [];
-        $before = 0;
-        $after = 0;
-        $changed = false;
+        $searchIndex = Application::getSubmissionSearchIndex();
+        $changedSubmissions = 0;
 
-        foreach ($byLocale as $locale => $values) {
-            $before += count($values);
-            $split = ControlledVocabSplitter::splitList($values, $separators);
-            $after += count($split);
-            $new[$locale] = $split;
+        foreach ($contexts as $context) {
+            $plugins = PluginRegistry::loadCategory('generic', true, $context->getId());
+            /** @var ControlledVocabSplitterPlugin|null $plugin */
+            $plugin = $plugins['controlledvocabsplitterplugin'] ?? null;
+            if (!$plugin || !$plugin->getEnabled($context->getId())) {
+                echo "{$context->getPath()}: plugin not enabled, skipped.\n";
+                continue;
+            }
 
-            if ($split !== $values) {
-                $changed = true;
+            if ($this->submissionId) {
+                $submission = Repo::submission()->get($this->submissionId, $context->getId());
+                $submissions = $submission ? [$submission] : [];
+            } else {
+                $submissions = Repo::submission()->getCollector()->filterByContextIds([$context->getId()])->getMany();
+            }
+
+            foreach ($submissions as $submission) {
+                $changed = false;
+                foreach ($submission->getData('publications') as $publication) {
+                    foreach ($plugin->splitStoredVocabs($publication, $this->write) as $field => $change) {
+                        $changed = true;
+                        printf("%s / submission %d / publication %d / %s\n", $context->getPath(), $submission->getId(), $publication->getId(), $field);
+                        foreach ($change['after'] as $locale => $terms) {
+                            printf("  [%s] %s\n", $locale, implode(' | ', array_map(fn ($term) => is_array($term) ? $term['name'] : $term, $terms)));
+                        }
+                    }
+                }
+                if ($changed) {
+                    $changedSubmissions++;
+                    if ($this->write) {
+                        $searchIndex->submissionMetadataChanged($submission);
+                    }
+                }
             }
         }
 
-        if (!$changed) {
-            continue;
+        if ($this->write && $changedSubmissions) {
+            $searchIndex->submissionChangesFinished();
         }
 
-        $totalTouched++;
-        $totalBefore += $before;
-        $totalAfter += $after;
-
-        printf("\n%s / publication %d: %d record(s) -> %d term(s)\n", $field, $publicationId, $before, $after);
-        foreach ($new as $locale => $terms) {
-            printf("  [%s] %s\n", $locale, implode(' | ', $terms));
-        }
-
-        if (!$write) {
-            continue;
-        }
-
-        // The whole publication is rewritten on purpose: insertBySymbolic deletes
-        // every locale of the vocabulary before inserting, so a partial array
-        // would wipe the locales left out of it.
-        Repo::controlledVocab()->insertBySymbolic(
-            $symbolic,
-            $new,
-            Application::ASSOC_TYPE_PUBLICATION,
-            $publicationId
-        );
-
-        $publication = Repo::publication()->get($publicationId);
-        $submission = $publication ? Repo::submission()->get((int) $publication->getData('submissionId')) : null;
-        if ($submission) {
-            $searchIndex->submissionMetadataChanged($submission);
-        }
-
-        echo "  -> written\n";
+        printf("\n%d submission(s) %s.\n", $changedSubmissions, $this->write ? 'changed' : 'would change (dry run, add --write to store)');
+        return true;
     }
 }
 
-if ($write && $totalTouched) {
-    $searchIndex->submissionChangesFinished();
-}
-
-echo "\n" . str_repeat('=', 70) . "\n";
-printf("mode ...................... %s\n", $write ? 'WRITTEN' : 'DRY RUN (nothing changed)');
-printf("vocabularies .............. %s\n", implode(', ', $fields));
-printf("separators ................ %s\n", implode(', ', $separators));
-printf("publications inspected .... %d\n", $totalPublications);
-printf("publications changed ...... %d\n", $totalTouched);
-printf("records before ............ %d\n", $totalBefore);
-printf("terms after ............... %d\n", $totalAfter);
-
-if (!$write) {
-    echo "\nAdd --write to store these changes.\n";
-} else {
-    echo "\nRemember to clear cache/t_cache, cache/t_compile and any keyword-cloud cache.\n";
-}
+$tool = new FixExistingVocabsTool($argv ?? []);
+$tool->execute();

@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Разделител на контролирани речници"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Разделя ключовите думи, темите, дисциплините и подкрепящите организации, поставени като един ред, на отделните термини, които авторът е имал предвид — в самото поле и при всяко записване."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Точката разделя само когато след нея им
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Вече съхранените записи остават непроменени, докато не бъдат записани отново. За да поправите съществуващия архив наведнъж, изпълнете скрипта tools/fixExistingVocabs.php, който идва с приставката; той е пробен пуск, освен ако не поискате да записва."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Разделя ключови думи, теми, дисциплини и финансиращи организации, поставени на един ред, на отделните термини, които авторът е имал предвид, при запазване или импортиране на публикацията."

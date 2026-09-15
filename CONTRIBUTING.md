@@ -34,24 +34,13 @@ the PKP version you are targeting.**
 5. When your change is user-visible, bump `<release>` and `<date>` in `version.xml`.
 6. Describe **what** and **why** in the PR, and mention which PKP version you tested on.
 
-### A note on the two core seams this plugin sits on
+### Where the plugin plugs in
 
-Both are checked at runtime, so an OJS release that moves them makes the plugin do less rather
-than break — but please say so in an issue or PR if you hit either.
-
-1. **The container binding.** The splitting repository extends
-   `PKP\controlledVocab\Repository`. `isCoreSignatureKnown()` inspects
-   `insertBySymbolic()` before the subclass is ever loaded, because an incompatible override
-   is a fatal error PHP raises while compiling the class, which no `try`/`catch` can recover
-   from. If the signature changes, the binding is skipped.
-2. **The field component.** The browser side wraps `FieldControlledVocab`, which the compiled
-   bundle `js/build.js` keeps in FormGroup's own `components` map — not only in the global
-   registry. The wrapper is applied by walking that tree, and any component that does not look
-   like the one it knows is left untouched.
-
-Every change to the rules must land in **both** `ControlledVocabSplitter.php` and
-`js/controlledVocabSplitter.js`, and the parity between them must be re-checked as described
-in `tests/CASES.md`.
+Only core hooks are used — `Publication::edit`, `Publication::add` and
+`nativexmlpublicationfilter::execute` — and everything is written back through the public
+`Repo::controlledVocab()` API. Please keep it that way: no replaced core classes, no container
+bindings and no changes to the compiled UI. The rules live in `ControlledVocabSplitter.php` only;
+cover any change to them in `tests/SplitterRulesTest.php` and `tests/regression.php`.
 
 By submitting a contribution you agree to license it under the **GNU GPL v3**, consistent
 with this project.
@@ -89,24 +78,13 @@ corresponde à versão do PKP que você está mirando.**
 5. Em mudanças visíveis ao usuário, incremente `<release>` e `<date>` no `version.xml`.
 6. Explique **o quê** e **por quê** no PR, e diga em qual versão do PKP testou.
 
-### Sobre os dois pontos do núcleo em que o plugin se apoia
+### Onde o plugin se liga ao OJS
 
-Os dois são conferidos em tempo de execução, então uma versão nova do OJS que os mude faz o
-plugin fazer menos, não quebrar — mas avise na issue ou no PR se esbarrar em algum.
-
-1. **A ligação do container.** O repositório que separa estende
-   `PKP\controlledVocab\Repository`. O `isCoreSignatureKnown()` inspeciona o
-   `insertBySymbolic()` antes de a subclasse ser carregada, porque sobrescrever com assinatura
-   incompatível é erro fatal levantado na compilação da classe, que nenhum `try`/`catch`
-   recupera. Se a assinatura mudar, a ligação não é feita.
-2. **O componente do campo.** No navegador o plugin embrulha o `FieldControlledVocab`, que o
-   bundle compilado `js/build.js` guarda no `components` do próprio FormGroup — não só no
-   registro global. O embrulho é aplicado percorrendo essa árvore, e qualquer componente que
-   não se pareça com o esperado fica intocado.
-
-Toda mudança nas regras precisa entrar **nos dois** — `ControlledVocabSplitter.php` e
-`js/controlledVocabSplitter.js` — e a paridade entre eles tem de ser reconferida como descrito
-em `tests/CASES.md`.
+Só hooks do núcleo — `Publication::edit`, `Publication::add` e
+`nativexmlpublicationfilter::execute` — e toda gravação passa pela API pública
+`Repo::controlledVocab()`. Mantenha assim: nada de substituir classe do núcleo, ligação no
+container ou alteração na interface compilada. As regras ficam só em `ControlledVocabSplitter.php`;
+cubra qualquer mudança nelas em `tests/SplitterRulesTest.php` e `tests/regression.php`.
 
 Ao enviar uma contribuição, você concorda em licenciá-la sob a **GNU GPL v3**, coerente com
 este projeto.

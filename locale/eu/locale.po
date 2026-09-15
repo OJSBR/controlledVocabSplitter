@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Hiztegi kontrolatuen zatitzailea"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Lerro bakar gisa itsatsitako gako-hitzak, gaiak, diziplinak eta laguntza-erakundeak egileak esan nahi zituen termino bereizietan zatitzen ditu — eremuan bertan eta gordetzen den bakoitzean."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Puntuak zuriune bat duenean bakarrik banatzen du, eta horrek osorik gord
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Dagoeneko gordetako erregistroak ez dira ukitzen berriro gorde arte. Dagoen artxiboa pasaldi bakarrean konpontzeko, exekutatu plugin honekin datorren tools/fixExistingVocabs.php script-a; proba-exekuzioa da, idazteko eskatzen ez badiozu."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Lerro bakarrean itsatsitako gako-hitzak, gaiak, diziplinak eta laguntza-agentziak egileak nahi zituen termino bereizietan banatzen ditu, argitalpena gordetzean edo inportatzean."

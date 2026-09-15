@@ -14,8 +14,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Separador de Vocabulario Controlado"
 
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Separa palabras clave, temas, disciplinas y agencias de apoyo pegadas en una sola línea en los términos que el autor quiso decir — en el propio campo y en cada guardado."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
 msgstr "Es habitual que el autor seleccione la línea de palabras clave del manuscrito, la copie y la pegue entera en el campo, lo que guarda un término largo en lugar de varios. Elija abajo qué vocabularios se separan y qué separadores valen."
@@ -76,3 +74,6 @@ msgstr "El punto solo separa cuando le sigue un espacio, lo que mantiene enteras
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Los registros ya guardados no se tocan hasta que se vuelvan a guardar. Para reparar un archivo completo de una vez, ejecute el script tools/fixExistingVocabs.php que acompaña al plugin; solo simula, salvo que le pida escribir."
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Separa palabras clave, temas, disciplinas y agencias de apoyo pegadas en una sola línea en los términos que el autor quiso decir, cada vez que una publicación se guarda o se importa."

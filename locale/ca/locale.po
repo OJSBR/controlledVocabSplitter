@@ -11,8 +11,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Divisor de vocabularis controlats"
 
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Divideix les paraules clau, matèries, disciplines i agències de suport que s'han enganxat en una sola línia en els termes separats que l'autor volia dir, al mateix camp i en cada desada."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
 msgstr "Sovint els autors seleccionen la línia de paraules clau del manuscrit, la copien i l'enganxen sencera al camp, cosa que desa un sol terme llarg en comptes de diversos. Trieu a continuació quins vocabularis es divideixen i quins separadors es tenen en compte."
@@ -73,3 +71,6 @@ msgstr "El punt només separa quan va seguit d'un espai, cosa que manté sencere
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Els registres ja emmagatzemats no es toquen fins que es tornin a desar. Per reparar un arxiu existent d'una sola passada, executeu l'script tools/fixExistingVocabs.php que acompanya aquest connector; és una execució de prova tret que li demaneu que escrigui."
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Separa les paraules clau, temes, disciplines i agències de finançament enganxades en una sola línia en els termes que l'autor volia, quan la publicació es desa o s'importa."

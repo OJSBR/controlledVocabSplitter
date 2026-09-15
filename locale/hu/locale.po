@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Kontrollált szótár szétválasztó"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Szétválasztja az egy sorként beillesztett kulcsszavakat, tárgyszavakat, tudományterületeket és támogató szervezeteket azokra a külön kifejezésekre, amelyeket a szerző szánt – magában a mezőben és minden mentéskor."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "A pont csak akkor választ el, ha szóköz követi – így maradnak egy
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "A már tárolt rekordok érintetlenek maradnak, amíg újra nem mentik őket. A meglévő archívum egy menetben történő javításához futtassa a bővítménnyel érkező tools/fixExistingVocabs.php szkriptet; alapból csak próbafuttatás, hacsak nem kéri az írást."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Az egy sorba beillesztett kulcsszavakat, témákat, tudományterületeket és támogatókat a szerző által szánt külön kifejezésekre bontja, amikor a publikációt mentik vagy importálják."

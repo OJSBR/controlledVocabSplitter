@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "جداکنندهٔ واژگان کنترل‌شده"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "کلیدواژه‌ها، موضوع‌ها، رشته‌ها و نهادهای پشتیبان را که به‌صورت یک سطر چسبانده شده‌اند به همان اصطلاح‌های جدا که نویسنده در نظر داشته تفکیک می‌کند — در خود فیلد و در هر بار ذخیره."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "نقطه تنها زمانی جدا می‌کند که پس از آن ف
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "رکوردهای ذخیره‌شده تا زمانی که دوباره ذخیره نشوند دست‌نخورده می‌مانند. برای اصلاح یک‌بارهٔ آرشیو موجود، اسکریپت tools/fixExistingVocabs.php را که همراه این افزونه است اجرا کنید؛ مگر آنکه نوشتن را بخواهید، فقط اجرای آزمایشی است."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "کلیدواژه‌ها، موضوعات، رشته‌ها و نهادهای حامی را که در یک خط چسبانده شده‌اند، هنگام ذخیره یا وارد کردن انتشار به اصطلاحات جداگانه‌ای که نویسنده در نظر داشت تفکیک می‌کند."

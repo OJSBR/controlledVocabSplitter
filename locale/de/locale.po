@@ -14,8 +14,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Trenner für kontrolliertes Vokabular"
 
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Trennt Schlagwörter, Themen, Fachgebiete und fördernde Einrichtungen, die als eine einzige Zeile eingefügt wurden, in die vom Autor gemeinten Einzelbegriffe — im Feld selbst und bei jedem Speichern."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
 msgstr "Autorinnen und Autoren markieren häufig die Schlagwortzeile im Manuskript, kopieren sie und fügen sie komplett in das Feld ein; gespeichert wird dann ein einziger langer Begriff statt mehrerer. Wählen Sie unten, welche Vokabulare getrennt werden und welche Trennzeichen gelten."
@@ -76,3 +74,6 @@ msgstr "Ein Punkt trennt nur, wenn ein Leerzeichen folgt — das hält Rechtsver
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Bereits gespeicherte Datensätze bleiben unangetastet, bis sie erneut gespeichert werden. Um einen vorhandenen Bestand in einem Durchgang zu reparieren, führen Sie das mitgelieferte Skript tools/fixExistingVocabs.php aus; es simuliert nur, sofern Sie es nicht zum Schreiben auffordern."
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Trennt Schlagwörter, Themen, Fachgebiete und fördernde Einrichtungen, die als eine einzige Zeile eingefügt wurden, in die vom Autor gemeinten Einzelbegriffe, sobald eine Publikation gespeichert oder importiert wird."

@@ -1,14 +1,15 @@
 # Controlled Vocabulary Splitter — OJS plugin
 
 [![OJS](https://img.shields.io/badge/OJS-3.5-brightgreen)](https://pkp.sfu.ca/ojs/)
-[![Version](https://img.shields.io/badge/version-1.0.0.2-blue)](version.xml)
+[![Version](https://img.shields.io/badge/version-1.0.1.0-blue)](version.xml)
 [![License](https://img.shields.io/badge/license-GPL--3.0-lightgrey)](LICENSE)
 
-**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.0.2/controlledVocabSplitter-1.0.0.2.tar.gz) — or browse all [Releases](../../releases).
+**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.1.0/controlledVocabSplitter-1.0.1.0.tar.gz) — or browse all [Releases](../../releases).
 
 A generic plugin for **Open Journal Systems (OJS)** that splits **keywords, subjects,
 disciplines and supporting agencies pasted as a single line** into the separate terms the
-author meant — in the field itself and on every save — **without patching OJS core**.
+author meant, whenever a publication is saved or imported — through core hooks only, **without
+patching or replacing anything in OJS core**.
 
 > **Developed and maintained by [OJSBR](https://ojsbr.com).** See the
 > [Credits & authorship](#credits--authorship) section below.
@@ -17,7 +18,14 @@ author meant — in the field itself and on every save — **without patching OJ
 
 | OJS version | Branch | Plugin release |
 |-------------|--------|----------------|
-| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.0.2 |
+| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.1.0 |
+
+> **Upgrade from 1.0.0.x.** Earlier versions replaced a core class (the controlled-vocabulary
+> repository) and changed the compiled vocabulary field so a pasted list was split while it was
+> being typed. Neither is an extension point PKP supports, so 1.0.1.0 does the same work through
+> core hooks: the terms are split when the publication is **saved** (or imported), and the form
+> shows them separated as soon as it is saved. A command-line native XML import is now split too,
+> which the earlier versions missed.
 
 ## The problem
 
@@ -28,24 +36,20 @@ the keyword field:
 Palatal Expansion Technique. Clinical Protocol. Orthopedic appliance.
 ```
 
-One keystroke later that is **one** term in `controlled_vocab_entries`. The reader sees a
-sentence where a tag should be, the keyword cloud shows the whole phrase, and
-`citation_keywords` goes out as a single meta tag — which is exactly what Google Scholar and
-the indexers read.
+That becomes **one** term in `controlled_vocab_entries`. The reader sees a sentence where a tag
+should be, the keyword cloud shows the whole phrase, and `citation_keywords` goes out as a single
+meta tag — which is exactly what Google Scholar and the indexers read.
 
 It is not rare. In one journal we found it in **every published article, in all three
 languages**: 24 records that should have been 107 terms.
 
 ## What it does
 
-Two levels, one rule set:
-
-- **In the browser.** The vocabulary field splits what is pasted into it, on the spot, so the
-  author sees separate tags and can fix any term that was cut in the wrong place. Pressing
-  Enter on a typed list does the same. This is a courtesy, not the guarantee.
-- **On the server.** The controlled-vocabulary repository is replaced by one that applies the
-  same rules on **every** write: metadata form, submission wizard, REST API and native XML
-  import — including the browsers where the script never ran.
+- Splits the vocabularies of a publication whenever it is **saved** — metadata form, submission
+  wizard and REST API — or **created**.
+- Splits what the **native XML import** stores, from the web or from the command line.
+- Applies the per-journal settings: which vocabularies and which separators.
+- Ships a command-line tool that repairs an **existing archive** in one pass.
 
 ### The splitting rules
 
@@ -78,8 +82,7 @@ in two. Journals that index with MeSH or DeCS should turn the comma off.
 
 1. Download the package from the link at the top of this README.
 2. In OJS, go to **Settings → Website → Plugins → Upload a new plugin** and upload the
-   `.tar.gz`, or unpack it into `plugins/generic/` and clear `cache/t_cache` and
-   `cache/t_compile`.
+   `.tar.gz`, or unpack it into `plugins/generic/`.
 3. Enable **Controlled Vocabulary Splitter** in the plugin list.
 
 ## Configuration
@@ -90,79 +93,58 @@ in two. Journals that index with MeSH or DeCS should turn the comma off.
   unticked is stored exactly as it was typed.
 - **Separators** — which of the three are honoured. All are on by default.
 
-Settings are per journal.
+Settings are per journal; there is nothing to configure at site level.
 
 ### Repairing an existing archive
 
-The plugin only acts when something is saved, so an archive built before it was installed
-keeps its concatenated terms. The bundled script repairs it in one pass, and prints what it
-would do without changing anything unless you ask:
+The plugin acts when something is saved or imported, so an archive built before it was enabled
+keeps its concatenated terms. The bundled command-line tool repairs it, applying each journal's
+settings, and only prints what would change unless you ask it to write:
 
 ```bash
 php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php
 php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php --write
 ```
 
-`--context=1`, `--publication=13`, `--field=keywords` and `--separators=semicolon,period`
-narrow it down. Run it as the account that owns the files, never as root, and clear
-`cache/t_cache`, `cache/t_compile` and any keyword-cloud cache afterwards.
+`--journal=path` limits it to one journal and `--submission=id` to one submission. Run it as the
+account that owns the files, never as root. Journals where the plugin is off are skipped.
 
 ## How it works (technical)
 
-**Server side.** Every write of these vocabularies goes through
-`Repo::controlledVocab()->insertBySymbolic()` — the publication DAO (metadata form, wizard and
-REST API), the native XML import filter, and any plugin that stores vocabulary. The facade
-resolves that repository from the container on every call, so the plugin binds a subclass
-instead of chasing each entry point with its own hook. Nothing else is overridden: reads,
-sequencing and deletion stay as core wrote them, and vocabularies that are not a publication's
-own (user interests, for one) are passed through untouched.
+Only core hooks are used, and every write goes through the public `Repo::controlledVocab()` API:
 
-Overriding a method whose signature the parent no longer has is a fatal error PHP raises while
-compiling the class, which no `try`/`catch` can recover from. So `isCoreSignatureKnown()`
-inspects the parent by reflection **before** the subclass is ever loaded; on an OJS release
-that changed it, the plugin falls back to the browser-side split instead of taking the site
-down.
+| Hook | What the plugin does |
+|------|----------------------|
+| `Publication::edit` | Splits the vocabularies sent in the edit before the publication is saved. |
+| `Publication::add` | Splits what a new publication was created with (the hook runs after it is stored). |
+| `nativexmlpublicationfilter::execute` | Splits what the native XML import has just stored. |
 
-**Browser side.** The plugin wraps the `FieldControlledVocab` component, adding a `paste`
-handler and an override of `selectSuggestion` — a suggestion picked from the list is never
-touched, only free text. Form fields are **not** resolved from the global registry: FormGroup
-keeps its own `components` map inside the compiled `js/build.js`, and that is the copy Vue
-renders, so the plugin walks the component tree and replaces every occurrence. The script is
-published with `STYLE_SEQUENCE_LAST`, which lands it after `js/build.js` and before the inline
-`pkp.registry.init()` call.
+The hooks are registered unconditionally and each one checks whether the plugin is enabled in
+the journal of the publication, as PKP asks of plugins that must also act in command-line runs
+and jobs ([pkp/pkp-lib#11793](https://github.com/pkp/pkp-lib/issues/11793)). The settings form is
+the standard plugin settings modal, with POST and CSRF validation. Nothing is added to the
+reader-facing site or to the backend pages.
 
 ## Tests
 
-- **PHP suite** (`tests/`, 19 tests, standalone runner or PKP's PHPUnit): the plugin classes
-  against the installed PKP (including the guard that compares the core repository signature,
-  types included, before replacing it), a sample of the splitting rules, the templates and the 38
-  translations.
+- **PHPUnit** (`tests/*Test.php`, on `PKP\tests\PKPTestCase`): the plugin classes against the
+  installed PKP, the splitting rules, the edit hook, the site level without a journal, the
+  templates and the 38 translations. From the OJS root:
 
   ```bash
-  php plugins/generic/controlledVocabSplitter/tests/run.php
   lib/pkp/lib/vendor/bin/phpunit --configuration lib/pkp/tests/phpunit.xml --no-coverage "$PWD/plugins/generic/controlledVocabSplitter/tests"
   ```
 
-- **Regression suites** (test sites only — they create and delete submissions and a temporary
-  manager, and restore everything they touch):
+- **Cypress** (`cypress/tests/functional/ControlledVocabSplitter.cy.js`, run by
+  [pkp-github-actions](https://github.com/pkp/pkp-github-actions) on every push): enables the
+  plugin, turns a separator off and puts it back, and saves a keyword line entered as one term to
+  see it come back as separate terms (it fails with the plugin off).
+- **Regression suites** for test installations (`tests/regression.php`, 359 cases, and
+  `tests/regression_http.php`, 29 cases with a real login): the rules and real writes through the
+  form, the REST API, the import hook and the settings screen. See [`tests/CASES.md`](tests/CASES.md).
+- Verified on OJS 3.5.0.3, including a command-line native XML import.
 
-  ```bash
-  php plugins/generic/controlledVocabSplitter/tests/regression.php
-  php plugins/generic/controlledVocabSplitter/tests/regression_http.php
-  ```
-
-  The first (360 cases) covers the rules and real writes through every server-side path; the
-  second (33 cases) logs into the site and drives the REST API, the settings screen and the
-  backend pages. It needs the login form without a captcha during the run
-  (`[captcha] altcha_on_login = off`) and never tries to solve one.
-
-- **Cypress** (`cypress/tests/functional/ControlledVocabSplitter.cy.js`): the settings persist
-  and are put back; a keyword line pasted into the metadata form becomes separate terms (it fails
-  without the plugin's script); and the browser rules give the same result as PHP for every case
-  in `tests/cases.json`. Parameters: `contextPath`, `adminUser`, `adminPassword`, `submissionId`.
-
-Verified on OJS 3.5.0.3, with the core signature also checked against 3.5.0.5. `tests/CASES.md`
-documents the blocks and the parity check.
+Tests are kept in the repository and are not part of the release package.
 
 ## Credits & authorship
 
@@ -184,7 +166,8 @@ Distributed under the **GNU GPL v3**. See [`LICENSE`](LICENSE) and `docs/COPYING
 
 Plugin genérico para o **Open Journal Systems (OJS)** que separa **palavras-chave, assuntos,
 áreas do conhecimento e agências de fomento coladas em uma linha só** nos termos que o autor
-quis dizer — no próprio campo e em toda gravação — **sem alterar o núcleo do OJS**.
+quis dizer, sempre que uma publicação é salva ou importada — só com hooks do núcleo, **sem
+alterar nem substituir nada do OJS**.
 
 > **Desenvolvido e mantido pela [OJSBR](https://ojsbr.com).** Veja a seção
 > [Créditos e autoria](#créditos-e-autoria) abaixo.
@@ -193,7 +176,15 @@ quis dizer — no próprio campo e em toda gravação — **sem alterar o núcle
 
 | Versão do OJS | Branch | Release do plugin |
 |---------------|--------|-------------------|
-| OJS 3.5.x     | `stable-3_5_0` *(padrão)* | 1.0.0.0 |
+| OJS 3.5.x     | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.1.0 |
+
+> **Atualização a partir da 1.0.0.x.** As versões anteriores substituíam uma classe do núcleo (o
+> repositório de vocabulário controlado) e alteravam o campo compilado para separar a lista
+> enquanto era digitada. Nenhum dos dois é ponto de extensão aceito pela PKP, então a 1.0.1.0 faz
+> o mesmo trabalho com hooks do núcleo: os termos são separados quando a publicação é **salva**
+> (ou importada), e o formulário já os mostra separados logo depois de salvar. A importação XML
+> nativa pela linha de comando agora também é separada, o que as versões anteriores deixavam
+> passar.
 
 ### O problema
 
@@ -204,24 +195,20 @@ campo:
 Técnica de Expansão Palatina. Protocolo Clínico. Aparelho Ortopédico.
 ```
 
-Um Enter depois, isso é **um** registro em `controlled_vocab_entries`. O leitor vê uma frase
-onde deveria haver etiquetas, a nuvem de palavras-chave mostra a frase inteira e o
-`citation_keywords` sai como uma meta tag só — justamente o que o Google Scholar e os
-indexadores leem.
+Isso vira **um** registro em `controlled_vocab_entries`. O leitor vê uma frase onde deveria haver
+etiquetas, a nuvem de palavras-chave mostra a frase inteira e o `citation_keywords` sai como uma
+meta tag só — justamente o que o Google Scholar e os indexadores leem.
 
 Não é raro. Em uma revista o problema estava em **todos os artigos publicados, nos três
 idiomas**: 24 registros que deveriam ser 107 termos.
 
 ### O que faz
 
-Duas camadas, uma regra só:
-
-- **No navegador.** O campo separa o que é colado, na hora, para o autor ver as etiquetas e
-  corrigir qualquer termo cortado no lugar errado. Digitar a lista e apertar Enter faz o
-  mesmo. Isso é cortesia, não é a garantia.
-- **No servidor.** O repositório de vocabulário controlado é trocado por um que aplica as
-  mesmas regras em **toda** gravação: formulário de metadados, assistente de submissão, API
-  REST e importação XML nativa — inclusive nos navegadores em que o script não rodou.
+- Separa os vocabulários da publicação sempre que ela é **salva** — formulário de metadados,
+  assistente de submissão e API REST — ou **criada**.
+- Separa o que a **importação XML nativa** grava, pela web ou pela linha de comando.
+- Respeita a configuração de cada revista: quais vocabulários e quais separadores.
+- Traz uma ferramenta de linha de comando que corrige um **acervo já gravado** de uma vez.
 
 #### As regras de separação
 
@@ -254,8 +241,7 @@ Revista que indexa com MeSH ou DeCS deve desligar a vírgula.
 
 1. Baixe o pacote pelo link no topo deste README.
 2. No OJS, vá em **Configurações → Website → Plugins → Enviar um novo plugin** e envie o
-   `.tar.gz`, ou descompacte em `plugins/generic/` e limpe `cache/t_cache` e
-   `cache/t_compile`.
+   `.tar.gz`, ou descompacte em `plugins/generic/`.
 3. Habilite o **Separador de Vocabulário Controlado** na lista de plugins.
 
 ### Configuração
@@ -266,37 +252,52 @@ Revista que indexa com MeSH ou DeCS deve desligar a vírgula.
   é gravado exatamente como foi digitado.
 - **Separadores** — quais dos três valem. Por padrão, todos.
 
-A configuração é por revista.
+A configuração é por revista; não há nada a configurar no nível do site.
 
 #### Corrigir um acervo já gravado
 
-O plugin só age na gravação, então um acervo montado antes da instalação continua com os
-termos colados. O script que acompanha o plugin corrige tudo de uma vez, e só simula até você
-mandar gravar:
+O plugin age quando algo é salvo ou importado, então um acervo montado antes de ele ser ligado
+continua com os termos colados. A ferramenta de linha de comando que acompanha o plugin corrige
+tudo, com a configuração de cada revista, e só mostra o que mudaria até você mandar gravar:
 
 ```bash
 php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php
 php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php --write
 ```
 
-`--context=1`, `--publication=13`, `--field=keywords` e `--separators=semicolon,period`
-restringem o alcance. Rode como o dono dos arquivos, nunca como root, e depois limpe
-`cache/t_cache`, `cache/t_compile` e o cache de qualquer bloco de nuvem de palavras-chave.
+`--journal=caminho` limita a uma revista e `--submission=id` a uma submissão. Rode como o dono
+dos arquivos, nunca como root. Revistas com o plugin desligado são puladas.
+
+### Como funciona (técnico)
+
+Só hooks do núcleo, e toda gravação passa pela API pública `Repo::controlledVocab()`:
+
+| Hook | O que o plugin faz |
+|------|--------------------|
+| `Publication::edit` | Separa os vocabulários enviados na edição antes de a publicação ser salva. |
+| `Publication::add` | Separa o que a publicação nova trouxe (o hook roda depois de ela ser gravada). |
+| `nativexmlpublicationfilter::execute` | Separa o que a importação XML nativa acabou de gravar. |
+
+Os hooks são registrados sempre e cada um confere se o plugin está ligado na revista da
+publicação, como a PKP pede para plugins que também precisam agir em execuções pela linha de
+comando e em jobs ([pkp/pkp-lib#11793](https://github.com/pkp/pkp-lib/issues/11793)). A
+configuração usa o modal padrão de plugins, com validação de POST e CSRF. Nada é acrescentado ao
+site público nem às páginas do painel.
 
 ### Testes
 
-- **Suíte PHP** (`tests/`, 19 testes, pelo `tests/run.php` ou pelo PHPUnit do PKP): classes do
-  plugin contra o PKP instalado (inclusive a guarda que confere a assinatura do repositório do
-  núcleo, com tipos, antes de substituí-lo), amostra das regras, templates e as 38 traduções.
-- **Baterias de regressão** (só em site de teste): `tests/regression.php` (360 casos, regras e
-  gravações reais por todos os caminhos do servidor) e `tests/regression_http.php` (33 casos, com
-  login real, API REST, tela de configuração e páginas do painel). A segunda exige o login sem
-  captcha durante a rodada (`altcha_on_login = off`) e nunca tenta resolver um.
-- **Cypress**: configurações persistem e voltam ao original; lista de palavras-chave colada no
-  formulário de metadados vira termos separados (reprova sem o script do plugin); e as regras do
-  navegador dão o mesmo resultado do PHP em todos os casos de `tests/cases.json`.
+- **PHPUnit** (`tests/*Test.php`, sobre `PKP\tests\PKPTestCase`): classes do plugin contra o PKP
+  instalado, regras de separação, hook de edição, nível do site sem revista, templates e as 38
+  traduções.
+- **Cypress** (`cypress/tests/functional/`, rodado pelo
+  [pkp-github-actions](https://github.com/pkp/pkp-github-actions) a cada push): liga o plugin,
+  desliga e religa um separador, e salva uma linha de palavras-chave digitada como um termo só
+  para vê-la voltar em termos separados (reprova com o plugin desligado).
+- **Baterias de regressão** para instalações de teste (`tests/regression.php`, 359 casos, e
+  `tests/regression_http.php`, 29 casos com login real). Veja [`tests/CASES.md`](tests/CASES.md).
+- Verificado no OJS 3.5.0.3, inclusive com importação XML nativa pela linha de comando.
 
-Verificado no OJS 3.5.0.3, com a assinatura do núcleo conferida também no 3.5.0.5.
+Os testes ficam no repositório e não vão no pacote de release.
 
 ### Créditos e autoria
 

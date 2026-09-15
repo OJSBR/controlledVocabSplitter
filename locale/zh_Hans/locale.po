@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "受控词表拆分器"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "把以整行粘贴的关键词、主题、学科和资助机构，拆分成作者本意的独立词条——在字段内即时进行，且每次保存都会执行。"
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "句点只有在其后跟空格时才作为分隔符，这样“Lei 13.96
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "已保存的记录在再次保存之前不会被改动。若要一次性修复既有数据，请运行本插件自带的 tools/fixExistingVocabs.php 脚本；除非明确要求写入，否则它只做试运行。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "在保存或导入出版物时，将粘贴成一行的关键词、主题、学科和资助机构拆分为作者原本想要的独立术语。"

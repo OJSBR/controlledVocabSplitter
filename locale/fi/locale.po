@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Kontrolloitujen sanastojen jakaja"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Jakaa yhtenä rivinä liitetyt avainsanat, aiheet, tieteenalat ja tukevat organisaatiot erillisiksi termeiksi, jotka kirjoittaja tarkoitti — itse kentässä ja joka tallennuksella."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Piste erottaa vain, kun sitä seuraa välilyönti, mikä säilyttää ju
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Jo tallennettuihin tietueisiin ei kosketa ennen kuin ne tallennetaan uudelleen. Korjaa olemassa oleva arkisto yhdellä ajolla suorittamalla lisäosan mukana tuleva tools/fixExistingVocabs.php -skripti; se on koeajo, ellet pyydä sitä kirjoittamaan."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Jakaa yhdelle riville liitetyt avainsanat, aiheet, tieteenalat ja tukijat kirjoittajan tarkoittamiksi erillisiksi termeiksi, kun julkaisu tallennetaan tai tuodaan."

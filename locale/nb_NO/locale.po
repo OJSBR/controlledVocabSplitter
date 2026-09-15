@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Deler av kontrollerte vokabularer"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Deler nøkkelord, emner, fagfelt og støtteinstitusjoner som er limt inn som én linje, i de enkeltstående termene forfatteren mente – i selve feltet og ved hver lagring."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Punktumet skiller bare når det følges av et mellomrom, noe som holder 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Allerede lagrede poster røres ikke før de lagres på nytt. Kjør skriptet tools/fixExistingVocabs.php som følger med dette tillegget, for å reparere et eksisterende arkiv i én omgang; det er en prøvekjøring med mindre du ber det skrive."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Deler nøkkelord, emner, fagområder og støttende organisasjoner som er limt inn på én linje, i de separate begrepene forfatteren mente, når en publikasjon lagres eller importeres."

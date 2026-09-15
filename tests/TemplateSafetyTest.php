@@ -13,7 +13,9 @@
 
 namespace APP\plugins\generic\controlledVocabSplitter\tests;
 
-class TemplateSafetyTest extends TestCase
+use PKP\tests\PKPTestCase;
+
+class TemplateSafetyTest extends PKPTestCase
 {
     /** @return string[] */
     protected function templates(): array

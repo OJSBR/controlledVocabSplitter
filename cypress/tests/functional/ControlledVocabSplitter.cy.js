@@ -4,16 +4,16 @@
  * Copyright (c) 2026 OJSBR (https://ojsbr.com)
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
- * Functional tests: the settings persist, and a keyword list pasted into the
- * metadata form becomes separate terms.
+ * Functional tests: the settings persist, and a keyword line entered as one
+ * term in the metadata form is saved as separate terms.
  *
  * Parameters (--env): contextPath, adminUser, adminPassword (a journal manager)
- * and submissionId (a submission whose metadata can be edited; the paste and
- * parity tests are skipped without it). The parity test also needs
- * tests/cases.json, written by tests/regression.php on the same site. Captcha on login must be off for the run. The plugin
- * must be enabled. Selectors use ids and names, so the spec runs against a
- * journal in any language. The settings touched are put back; the pasted terms
- * are never saved.
+ * and submissionId (a submission whose metadata can be edited; the metadata test
+ * is skipped without it). Captcha on login must be off for the run. The defaults
+ * match the data set of PKP's continuous integration, and the first test enables
+ * the plugin when it is off. Selectors use ids and names, so the spec runs against a
+ * journal in any language. The settings touched are put back; the metadata test
+ * saves keywords to submissionId, so point it at a test submission.
  */
 
 describe('Controlled Vocabulary Splitter plugin', function() {
@@ -53,6 +53,20 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 		cy.get(settingsForm).should('not.exist');
 	};
 
+	it('Enables the plugin', function() {
+		login();
+		cy.visit('/index.php/' + contextPath + '/management/settings/website?reload=' + Date.now() + '#plugins');
+		cy.get('button[id="plugins-button"]', {timeout: 60000}).should('have.attr', 'aria-selected', 'true');
+		cy.waitJQuery();
+		cy.get('input[id^="select-cell-controlledvocabsplitterplugin-enabled"]', {timeout: 30000}).then(($checkbox) => {
+			if (!$checkbox.is(':checked')) {
+				cy.wrap($checkbox).click();
+				cy.waitJQuery();
+			}
+		});
+		cy.get('input[id^="select-cell-controlledvocabsplitterplugin-enabled"]').should('be.checked');
+	});
+
 	it('Turns a separator off, keeps it off, and puts it back', function() {
 		login();
 		openSettings();
@@ -71,47 +85,37 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 		cy.get(settingsForm + ' input[id="cvsSeparator-comma"]').should('be.checked');
 	});
 
-	it('Splits a keyword line pasted into the metadata form', function() {
+	it('Saves a keyword line entered as one term as separate terms', function() {
 		if (!submissionId) {
 			this.skip();
 		}
-		login();
-		cy.visit('/index.php/' + contextPath + '/dashboard/editorial?workflowSubmissionId=' + submissionId + '&workflowMenuKey=publication_metadata');
-		cy.get('input[id^="metadata-keywords-control"]', {timeout: 60000}).first().scrollIntoView().should('be.visible').then(($input) => {
-			const data = new DataTransfer();
-			data.setData('text', 'Palatal Expansion. Clinical Protocol. Orthopedic appliance.');
-			$input[0].focus();
-			$input[0].dispatchEvent(new ClipboardEvent('paste', {clipboardData: data, bubbles: true, cancelable: true}));
-		});
-		['Palatal Expansion', 'Clinical Protocol', 'Orthopedic appliance'].forEach((term) => {
-			cy.get('input[id^="metadata-keywords-control"]').first().closest('.pkpFormField')
-				.contains(term).should('exist');
-		});
-		cy.get('input[id^="metadata-keywords-control"]').first().closest('.pkpFormField')
-			.contains('Palatal Expansion. Clinical Protocol').should('not.exist');
-	});
+		const line = 'Palatal Expansion. Clinical Protocol. Orthopedic appliance.';
+		const keywords = 'input[id^="metadata-keywords-control"]';
+		const field = () => cy.get(keywords).first().closest('.pkpFormField');
+		const openMetadata = () => {
+			cy.visit('/index.php/' + contextPath + '/dashboard/editorial?workflowSubmissionId=' + submissionId + '&workflowMenuKey=publication_metadata&reload=' + Date.now());
+			cy.get(keywords, {timeout: 60000}).first().scrollIntoView().should('be.visible');
+		};
+		const save = () => {
+			cy.intercept('**/api/v1/submissions/*/publications/*').as('savePublication');
+			cy.get(keywords).first().closest('form').find('button[type="submit"], .pkpFormPage__footer button').last().click();
+			cy.wait('@savePublication').its('response.statusCode').should('eq', 200);
+		};
 
-	it('Applies in the browser exactly the rules the server applies', function() {
-		if (!submissionId) {
-			this.skip();
-		}
-		cy.request({url: '/plugins/generic/controlledVocabSplitter/tests/cases.json', failOnStatusCode: false}).then((response) => {
-			if (response.status !== 200) {
-				this.skip();
-			}
-			login();
-			cy.visit('/index.php/' + contextPath + '/dashboard/editorial?workflowSubmissionId=' + submissionId + '&workflowMenuKey=publication_metadata');
-			cy.window({timeout: 60000}).its('ojsbrControlledVocabSplitterRules').then((rules) => {
-				const all = ['semicolon', 'comma', 'period'];
-				const cases = response.body;
-				const normalize = cases.normalize.filter((c) => rules.normalize(c.in) !== c.out).map((c) => c.id);
-				const split = cases.split
-					.filter((c) => JSON.stringify(c.separators) === JSON.stringify(all))
-					.filter((c) => JSON.stringify(rules.split(c.in)) !== JSON.stringify(c.out)).map((c) => c.id);
-				expect(cases.normalize.length).to.be.greaterThan(0);
-				expect(normalize, 'normalize cases that differ from PHP').to.deep.equal([]);
-				expect(split, 'split cases that differ from PHP').to.deep.equal([]);
-			});
+		login();
+		openMetadata();
+		// The custom term can only be added once the suggestions for it are back.
+		cy.intercept('**/api/v1/vocabs*').as('suggestions');
+		cy.get(keywords).first().type(line, {delay: 0});
+		cy.wait('@suggestions');
+		cy.get(keywords).first().type('{enter}');
+		field().contains(line).should('exist');
+		save();
+
+		openMetadata();
+		['Palatal Expansion', 'Clinical Protocol', 'Orthopedic appliance'].forEach((term) => {
+			field().contains(term).should('exist');
 		});
+		field().contains('Palatal Expansion. Clinical Protocol').should('not.exist');
 	});
 });

@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "مُقسِّم المفردات المضبوطة"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "يفصل الكلمات المفتاحية والموضوعات والتخصصات والجهات الداعمة التي لُصقت في سطر واحد إلى المصطلحات المنفصلة التي قصدها المؤلف — في الحقل نفسه ومع كل عملية حفظ."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "لا تفصل النقطة إلا إذا تبعتها مسافة، وه�
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "لا تُمسّ السجلات المخزَّنة من قبل حتى تُحفَظ من جديد. ولإصلاح أرشيف قائم دفعة واحدة، شغّل السكربت tools/fixExistingVocabs.php المرفق بهذا الملحق؛ فهو تشغيل تجريبي ما لم تطلب منه الكتابة."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "يفصل الكلمات المفتاحية والموضوعات والتخصصات وجهات الدعم الملصقة في سطر واحد إلى المصطلحات المنفصلة التي قصدها المؤلف، عند حفظ المنشور أو استيراده."

@@ -14,8 +14,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Separatore di vocabolario controllato"
 
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Separa parole chiave, soggetti, discipline e agenzie di finanziamento incollate su una sola riga nei termini che l'autore intendeva — nel campo stesso e a ogni salvataggio."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
 msgstr "Gli autori spesso selezionano la riga delle parole chiave nel manoscritto, la copiano e la incollano tutta nel campo, salvando un unico termine lunghissimo invece di molti. Scegli qui sotto quali vocabolari vengono separati e quali separatori valgono."
@@ -76,3 +74,6 @@ msgstr "Il punto separa solo quando è seguito da uno spazio, il che tiene intat
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "I record già salvati restano come sono fino al salvataggio successivo. Per sistemare un archivio esistente in una sola passata, esegui lo script tools/fixExistingVocabs.php fornito con il plugin; è una simulazione, a meno che non gli si chieda di scrivere."
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Separa parole chiave, soggetti, discipline ed enti finanziatori incollati su una sola riga nei termini che l'autore intendeva, ogni volta che una pubblicazione viene salvata o importata."

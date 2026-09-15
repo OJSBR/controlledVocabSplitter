@@ -17,18 +17,16 @@
  * where a tag should be, the keyword cloud shows the whole phrase and
  * citation_keywords goes out as a single meta tag, which hurts indexing.
  *
- * The plugin works on two levels:
+ * The rules (ControlledVocabSplitter) are applied through core hooks only:
  *
- * - In the browser, the vocabulary field itself splits what is pasted, so the
- *   author immediately sees separate tags and can fix any term that was cut in
- *   the wrong place. This is a courtesy, not the guarantee.
- * - On the server, the controlled-vocabulary repository is replaced by one that
- *   applies the same rules on every write. That covers the metadata form, the
- *   submission wizard, the REST API and the native XML import — including the
- *   browsers where the script never ran.
+ * - Publication::edit splits the vocabularies about to be saved, which covers
+ *   the metadata form, the submission wizard and the REST API;
+ * - Publication::add splits what a new publication was created with;
+ * - nativexmlpublicationfilter::execute splits what the native XML import has
+ *   just stored.
  *
- * Both levels share one rule set (ControlledVocabSplitter), mirrored in
- * js/controlledVocabSplitter.js and pinned by the regression suite in tests/.
+ * Everything is written back through the core repository's public API; no core
+ * class is replaced.
  */
 
 namespace APP\plugins\generic\controlledVocabSplitter;
@@ -36,6 +34,7 @@ namespace APP\plugins\generic\controlledVocabSplitter;
 use APP\core\Application;
 use APP\facades\Repo;
 use APP\notification\NotificationManager;
+use APP\publication\Publication;
 use Illuminate\Support\Arr;
 use PKP\controlledVocab\ControlledVocab;
 use PKP\controlledVocab\Repository as ControlledVocabRepository;
@@ -44,7 +43,6 @@ use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\AjaxModal;
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
-use PKP\template\PKPTemplateManager;
 
 class ControlledVocabSplitterPlugin extends GenericPlugin
 {
@@ -60,65 +58,28 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
         ControlledVocab::CONTROLLED_VOCAB_SUBMISSION_AGENCY => 'supportingAgencies',
     ];
 
-    /** Templates that render a controlled-vocabulary field. */
-    public const TEMPLATES = ['dashboard/editors.tpl', 'submission/wizard.tpl'];
-
-    /** Publication id => context id, for the length of one request. */
-    private array $contextIdCache = [];
-
     /**
-     * @copydoc Plugin::register()
+     * Register the hooks that split the vocabularies when a publication is saved or imported.
      *
      * @param null|mixed $mainContextId
      */
     public function register($category, $path, $mainContextId = null): bool
     {
-        if (!parent::register($category, $path, $mainContextId)) {
-            return false;
-        }
-        if (Application::isUnderMaintenance() || !$this->getEnabled($mainContextId)) {
-            return true;
+        $success = parent::register($category, $path, $mainContextId);
+        if (!$success || Application::isUnderMaintenance()) {
+            return $success;
         }
 
-        if ($this->isCoreSignatureKnown()) {
-            app()->bind(
-                ControlledVocabRepository::class,
-                fn (): SplittingControlledVocabRepository => new SplittingControlledVocabRepository($this)
-            );
-        }
+        // The hooks are always registered and each one checks whether the plugin
+        // is enabled in the journal of the publication (pkp/pkp-lib#11793): a
+        // command-line import has no journal in the request, so checking here
+        // would leave its publications untouched.
 
-        Hook::add('TemplateManager::display', $this->addFieldScript(...));
+        Hook::add('Publication::edit', $this->splitOnEdit(...));
+        Hook::add('Publication::add', $this->splitOnAdd(...));
+        Hook::add('nativexmlpublicationfilter::execute', $this->splitOnImport(...));
 
-        return true;
-    }
-
-    /**
-     * Is the core repository still the one this plugin knows how to extend?
-     *
-     * Overriding a method with a signature the parent no longer has is a fatal
-     * error that PHP raises while compiling the class, which no try/catch can
-     * recover from. So the parent is inspected first, and the subclass is only
-     * ever loaded when it matches. On an OJS release that changed it, the plugin
-     * silently falls back to the browser-side split instead of taking the site
-     * down.
-     */
-    public function isCoreSignatureKnown(): bool
-    {
-        try {
-            $method = new \ReflectionMethod(ControlledVocabRepository::class, 'insertBySymbolic');
-        } catch (\ReflectionException) {
-            return false;
-        }
-
-        // Names and types both: a parameter or return type changed by the core
-        // is as fatal to the subclass as a renamed one.
-        $expected = ['string $symbolic', 'array $vocabs', 'int $assocType', '?int $assocId', 'bool $deleteFirst'];
-
-        return (string) $method->getReturnType() === 'void'
-            && array_map(
-                fn (\ReflectionParameter $parameter): string => $parameter->getType() . ' $' . $parameter->getName(),
-                $method->getParameters()
-            ) === $expected;
+        return $success;
     }
 
     //
@@ -157,125 +118,160 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
     }
 
     //
+    // Hooks
+    //
+
+    /**
+     * Hook Publication::edit — split the vocabularies sent in this edit before
+     * the publication is saved.
+     *
+     * @param array $args [&$newPublication, $publication, $params, $request]
+     */
+    public function splitOnEdit(string $hookName, array $args): bool
+    {
+        $newPublication = &$args[0];
+        $params = $args[2];
+
+        $contextId = $this->getContextId($newPublication);
+        if (!$this->getEnabled($contextId)) {
+            return Hook::CONTINUE;
+        }
+        foreach ($this->getActiveFields($contextId) as $field) {
+            if (!array_key_exists($field, $params) || !is_array($newPublication->getData($field))) {
+                continue;
+            }
+            $newPublication->setData($field, $this->splitByLocale($newPublication->getData($field), $contextId));
+        }
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Hook Publication::add — the publication and its vocabularies are already
+     * stored when the hook runs, so whatever needs splitting is written again.
+     *
+     * @param array $args [&$publication]
+     */
+    public function splitOnAdd(string $hookName, array $args): bool
+    {
+        $this->splitStoredVocabs($args[0]);
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Hook nativexmlpublicationfilter::execute — the native import stores the
+     * vocabularies straight into the repository, after the publication exists.
+     *
+     * @param array $args [&$importedPublications]
+     */
+    public function splitOnImport(string $hookName, array $args): bool
+    {
+        foreach (Arr::wrap($args[0]) as $publication) {
+            if ($publication instanceof Publication) {
+                $this->splitStoredVocabs($publication);
+            }
+        }
+
+        return Hook::CONTINUE;
+    }
+
+    //
     // The rule, on the server
     //
 
     /**
-     * Apply the splitting rules to one controlled-vocabulary write.
+     * Apply the rules of the journal to terms keyed by locale.
      *
-     * Called by SplittingControlledVocabRepository for every vocabulary the core
-     * stores, including the ones this plugin has no business touching (user
-     * interests, for one), which is why the symbolic name is checked first.
+     * @param array<string, array|string> $vocabs
      *
-     * @param array<string, array|string> $vocabs Terms keyed by locale
-     *
-     * @return array<string, array|string>
+     * @return array<string, array>
      */
-    public function splitVocabs(string $symbolic, array $vocabs, int $assocType, ?int $assocId): array
+    public function splitByLocale(array $vocabs, ?int $contextId): array
     {
-        $field = self::FIELDS[$symbolic] ?? null;
-        if ($field === null || $assocType !== Application::ASSOC_TYPE_PUBLICATION || !$assocId) {
-            return $vocabs;
-        }
-
-        $contextId = $this->getContextId($assocId);
-        if ($contextId === null || !$this->getEnabled($contextId)) {
-            return $vocabs;
-        }
-
-        if (!in_array($field, $this->getActiveFields($contextId), true)) {
-            return $vocabs;
-        }
-
         $separators = $this->getActiveSeparators($contextId);
-        if (!$separators) {
-            return $vocabs;
-        }
-
         foreach ($vocabs as $locale => $values) {
             $values = Arr::wrap($values);
-            if (!$values) {
-                continue;
+            if ($separators && $values) {
+                $vocabs[$locale] = ControlledVocabSplitter::splitList($values, $separators);
             }
-            $vocabs[$locale] = ControlledVocabSplitter::splitList($values, $separators);
         }
 
         return $vocabs;
     }
 
     /**
-     * Which journal does this publication belong to? Settings are per journal,
-     * and a write can reach the repository from a context-less place such as a
-     * command-line import.
+     * Split, in the database, the vocabularies of a publication that are
+     * already stored. Nothing is written when there is nothing to split.
+     *
+     * @return array<string, array{before: array, after: array}> What was split, by property name
      */
-    private function getContextId(int $publicationId): ?int
+    public function splitStoredVocabs(Publication $publication, bool $write = true): array
     {
-        if (array_key_exists($publicationId, $this->contextIdCache)) {
-            return $this->contextIdCache[$publicationId];
+        $publicationId = (int) $publication->getId();
+        $contextId = $this->getContextId($publication);
+        if (!$publicationId || !$this->getEnabled($contextId) || !$this->getActiveSeparators($contextId)) {
+            return [];
         }
 
-        $contextId = null;
-        $publication = Repo::publication()->get($publicationId);
-        if ($publication) {
-            $submission = Repo::submission()->get((int) $publication->getData('submissionId'));
-            $contextId = $submission ? (int) $submission->getData('contextId') : null;
+        $changes = [];
+        $symbolics = array_flip(self::FIELDS);
+        foreach ($this->getActiveFields($contextId) as $field) {
+            $stored = Repo::controlledVocab()->getBySymbolic(
+                $symbolics[$field],
+                Application::ASSOC_TYPE_PUBLICATION,
+                $publicationId,
+                [],
+                ControlledVocabRepository::AS_ENTRY_DATA
+            );
+            $split = $this->splitByLocale($stored, $contextId);
+            if ($this->names($split) === $this->names($stored)) {
+                continue;
+            }
+
+            $changes[$field] = ['before' => $stored, 'after' => $split];
+            if ($write) {
+                // Every locale is written at once: insertBySymbolic() deletes the
+                // whole vocabulary of the publication before inserting.
+                Repo::controlledVocab()->insertBySymbolic(
+                    $symbolics[$field],
+                    $split,
+                    Application::ASSOC_TYPE_PUBLICATION,
+                    $publicationId
+                );
+            }
         }
 
-        return $this->contextIdCache[$publicationId] = $contextId;
+        return $changes;
     }
 
-    //
-    // The courtesy, in the browser
-    //
+    /**
+     * The term names by locale, to compare two versions of a vocabulary.
+     *
+     * @param array<string, array> $vocabs
+     *
+     * @return array<string, string[]>
+     */
+    private function names(array $vocabs): array
+    {
+        return array_map(
+            fn ($values): array => array_map(
+                fn ($value): string => is_array($value) ? (string) ($value['name'] ?? '') : (string) $value,
+                array_values(Arr::wrap($values))
+            ),
+            $vocabs
+        );
+    }
 
     /**
-     * Hook TemplateManager::display — publishes the script that makes the
-     * vocabulary field split what is pasted into it.
-     *
-     * It has to load after js/build.js (registered by the core with
-     * STYLE_SEQUENCE_LATE) and before the inline pkp.registry.init() call at the
-     * end of the page, so that the component is replaced before the Vue app is
-     * created. STYLE_SEQUENCE_LAST is that slot.
-     *
-     * @param array $args [$templateMgr, &$template, &$output]
+     * Settings are per journal, and a write can come from a context-less place
+     * such as a command-line import.
      */
-    public function addFieldScript(string $hookName, array $args): bool
+    private function getContextId(Publication $publication): ?int
     {
-        $templateMgr = $args[0];
-        $template = $args[1];
+        $submission = Repo::submission()->get((int) $publication->getData('submissionId'));
 
-        if (!in_array($template, self::TEMPLATES, true)) {
-            return Hook::CONTINUE;
-        }
-
-        $request = Application::get()->getRequest();
-        $contextId = $request->getContext()?->getId();
-
-        $config = [
-            'fields' => $this->getActiveFields($contextId),
-            'separators' => $this->getActiveSeparators($contextId),
-        ];
-
-        $templateMgr->addJavaScript(
-            'controlledVocabSplitterConfig',
-            'window.ojsbrControlledVocabSplitter = ' . json_encode($config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . ';',
-            [
-                'inline' => true,
-                'priority' => PKPTemplateManager::STYLE_SEQUENCE_LAST,
-                'contexts' => ['backend'],
-            ]
-        );
-
-        $templateMgr->addJavaScript(
-            'controlledVocabSplitter',
-            $request->getBaseUrl() . '/' . $this->getPluginPath() . '/js/controlledVocabSplitter.js',
-            [
-                'priority' => PKPTemplateManager::STYLE_SEQUENCE_LAST,
-                'contexts' => ['backend'],
-            ]
-        );
-
-        return Hook::CONTINUE;
+        return $submission ? (int) $submission->getData('contextId') : null;
     }
 
     //
@@ -283,7 +279,7 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
     //
 
     /**
-     * @copydoc Plugin::getContextSpecificPluginSettingsFile()
+     * Default settings installed for each new journal.
      */
     public function getContextSpecificPluginSettingsFile(): string
     {
@@ -291,12 +287,12 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
     }
 
     /**
-     * @copydoc Plugin::getActions()
+     * Add the settings action to the plugin entry in the plugins list.
      */
     public function getActions($request, $verb): array
     {
         $actions = parent::getActions($request, $verb);
-        if (!$this->getEnabled()) {
+        if (!$request->getContext() || !$this->getEnabled()) {
             return $actions;
         }
 
@@ -311,11 +307,12 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
     }
 
     /**
-     * @copydoc Plugin::manage()
+     * Show and save the settings form.
      */
     public function manage($args, $request): JSONMessage
     {
-        if ($request->getUserVar('verb') !== 'settings') {
+        // The settings belong to a journal; there is nothing to configure site-wide.
+        if ($request->getUserVar('verb') !== 'settings' || !$request->getContext()) {
             return parent::manage($args, $request);
         }
 
@@ -337,7 +334,7 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
     }
 
     /**
-     * @copydoc Plugin::getDisplayName()
+     * Name shown in the plugins list.
      */
     public function getDisplayName(): string
     {
@@ -345,7 +342,7 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
     }
 
     /**
-     * @copydoc Plugin::getDescription()
+     * Description shown in the plugins list.
      */
     public function getDescription(): string
     {
@@ -354,5 +351,5 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
 }
 
 if (!PKP_STRICT_MODE) {
-    class_alias('\APP\plugins\generic\controlledVocabSplitter\ControlledVocabSplitterPlugin', '\ControlledVocabSplitterPlugin');
+    class_alias('\\APP\\plugins\\generic\\controlledVocabSplitter\\ControlledVocabSplitterPlugin', '\\ControlledVocabSplitterPlugin');
 }

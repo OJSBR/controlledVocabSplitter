@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "統制語彙スプリッター"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "1 行として貼り付けられたキーワード・主題・分野・支援機関を、著者が意図した個々の語に分割します。項目内で、また保存のたびに実行されます。"
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "ピリオドは、後ろに空白が続くときだけ区切りとして
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "すでに保存済みのレコードは、再度保存されるまで変更されません。既存のデータを一括で直すには、本プラグイン付属の tools/fixExistingVocabs.php を実行してください。書き込みを明示しない限り、動作は試行のみです。"
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "1 行に貼り付けられたキーワード、主題、分野、助成機関を、出版物の保存時またはインポート時に、著者が意図した個別の用語に分割します。"

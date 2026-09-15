@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Dělič řízených slovníků"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Rozdělí klíčová slova, předmětová hesla, obory a podporující instituce vložené jako jeden řádek na jednotlivé termíny, které autor zamýšlel — přímo v poli a při každém uložení."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Tečka odděluje jen tehdy, když po ní následuje mezera, což zachov�
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Již uložené záznamy zůstávají beze změny, dokud nejsou znovu uloženy. Chcete-li opravit stávající archiv jedním průchodem, spusťte skript tools/fixExistingVocabs.php, který je součástí tohoto modulu; bez výslovného pokynu k zápisu jde jen o zkušební běh."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Rozdělí klíčová slova, témata, obory a podpůrné agentury vložené na jeden řádek na samostatné pojmy, které autor myslel, při uložení nebo importu publikace."

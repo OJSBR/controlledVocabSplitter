@@ -19,8 +19,12 @@
  *        ([captcha] altcha_on_login = off on a test site): the suite never
  *        tries to solve one.
  *
- * Usage: php plugins/generic/controlledVocabSplitter/tests/regression_http.php [--keep]
+ * Usage: [CVS_TEST_JOURNAL=path] php plugins/generic/controlledVocabSplitter/tests/regression_http.php [--keep]
  */
+
+if (PHP_SAPI !== 'cli') {
+    exit('This script can only be run from the command line.');
+}
 
 use APP\core\Application;
 use APP\core\PageRouter;
@@ -36,9 +40,18 @@ chdir($root);
 define('INDEX_FILE_LOCATION', $root . '/index.php');
 require $root . '/lib/pkp/includes/bootstrap.php';
 
-const CONTEXT_ID = 1;
-const SECTION_ID = 1;
-const UG_MANAGER = 2;
+// The journal under test: CVS_TEST_JOURNAL, or the first journal of the site.
+$journalPath = getenv('CVS_TEST_JOURNAL') ?: null;
+$testContext = $journalPath
+    ? Application::getContextDAO()->getByPath($journalPath)
+    : Application::getContextDAO()->getAll(true)->next();
+if (!$testContext) {
+    exit("FATAL: no journal found (set CVS_TEST_JOURNAL to a journal path).\n");
+}
+define('CONTEXT_ID', (int) $testContext->getId());
+define('SECTION_ID', (int) Repo::section()->getCollector()->filterByContextIds([CONTEXT_ID])->getMany()->first()?->getId());
+define('UG_MANAGER', (int) \PKP\userGroup\UserGroup::withContextIds([CONTEXT_ID])->withRoleIds([\PKP\security\Role::ROLE_ID_MANAGER])->first()?->id);
+
 const PLUGIN = 'controlledvocabsplitterplugin';
 const MANAGER = 'cvstest_manager';
 const ALL_SEPARATORS = ['semicolon', 'comma', 'period'];
@@ -50,8 +63,14 @@ $keep = in_array('--keep', $argv, true);
 class RouterWithContext extends PageRouter
 {
     private $pinned;
-    public function pinContext($context) { $this->pinned = $context; }
-    public function getContext(\PKP\core\PKPRequest $request, bool $forceReload = false): ?\PKP\context\Context { return $this->pinned; }
+    public function pinContext($context)
+    {
+        $this->pinned = $context;
+    }
+    public function getContext(\PKP\core\PKPRequest $request, bool $forceReload = false): ?\PKP\context\Context
+    {
+        return $this->pinned;
+    }
 }
 
 $request = Application::get()->getRequest();
@@ -468,54 +487,19 @@ try {
     //
     // ------------------------------------------------------------- BLOCK HC
     //
-    block('BLOCK HC — the script reaches the browser');
+    block('BLOCK HC — nothing is published to the browser');
 
-    testCase('HC01', 'the backend publishes the plugin script', function () use ($session, $PAGE) {
+    testCase('HC01', 'the backend loads no script or configuration from the plugin', function () use ($session, $PAGE) {
         $response = $session->get("{$PAGE}/en/dashboard");
         assertTrue($response['code'] === 200, 'http ' . $response['code']);
-        assertTrue(str_contains($response['body'], 'controlledVocabSplitter/js/controlledVocabSplitter.js'), 'plugin script not found in the backend');
+        assertTrue(!str_contains($response['body'], 'controlledVocabSplitter/js/'), 'a plugin script is still published');
+        assertTrue(!str_contains($response['body'], 'ojsbrControlledVocabSplitter'), 'an inline configuration is still published');
     });
 
-    testCase('HC02', 'and the inline configuration comes with it', function () use ($session, $PAGE) {
-        $response = $session->get("{$PAGE}/en/dashboard");
-        assertTrue(preg_match('/window\.ojsbrControlledVocabSplitter = (\{.*?\});/', $response['body'], $matches) === 1, 'inline configuration not found');
-        $config = json_decode($matches[1], true);
-        assertEquals(['semicolon', 'comma', 'period'], $config['separators']);
-        assertEquals(['keywords', 'subjects', 'disciplines', 'supportingAgencies'], $config['fields']);
-    });
-
-    testCase('HC03', 'the inline configuration follows what the journal chose', function () use ($session, $PAGE) {
-        configure(['keywords'], ['period']);
-        try {
-            $response = $session->get("{$PAGE}/en/dashboard");
-            assertTrue(preg_match('/window\.ojsbrControlledVocabSplitter = (\{.*?\});/', $response['body'], $matches) === 1, 'inline configuration not found');
-            $config = json_decode($matches[1], true);
-            assertEquals(['period'], $config['separators']);
-            assertEquals(['keywords'], $config['fields']);
-        } finally {
-            configure(array_values($GLOBALS['plugin']::FIELDS), ALL_SEPARATORS);
-        }
-    });
-
-    testCase('HC04', 'the submission wizard gets the script too', function () use ($session, $PAGE, $submissionId) {
+    testCase('HC02', 'the submission wizard loads nothing from the plugin either', function () use ($session, $PAGE, $submissionId) {
         $response = $session->get("{$PAGE}/en/submission?id={$submissionId}");
         assertTrue($response['code'] === 200, 'http ' . $response['code']);
-        assertTrue(str_contains($response['body'], 'controlledVocabSplitter/js/controlledVocabSplitter.js'), 'plugin script not found in the wizard');
-    });
-
-    testCase('HC05', 'a disabled plugin publishes no script at all', function () use ($session, $PAGE, $plugin) {
-        $plugin->updateSetting(CONTEXT_ID, 'enabled', false, 'bool');
-        try {
-            $response = $session->get("{$PAGE}/en/dashboard");
-            assertTrue(!str_contains($response['body'], 'controlledVocabSplitter/js/'), 'script published while the plugin is off');
-        } finally {
-            $plugin->updateSetting(CONTEXT_ID, 'enabled', true, 'bool');
-        }
-    });
-
-    testCase('HC06', 'the reader-facing site does not load the script (backend only)', function () use ($session, $PAGE) {
-        $response = $session->get("{$PAGE}/en");
-        assertTrue(!str_contains($response['body'], 'controlledVocabSplitter/js/'), 'script leaked into the public site');
+        assertTrue(!str_contains($response['body'], 'controlledVocabSplitter/js/'), 'a plugin script is still published');
     });
 
     //

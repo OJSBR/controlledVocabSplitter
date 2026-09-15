@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Delare av kontrollerade vokabulärer"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Delar nyckelord, ämnen, discipliner och stödjande organisationer som klistrats in som en enda rad i de separata termer som författaren avsåg – i själva fältet och vid varje sparning."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Punkten delar bara när den följs av ett blanksteg, vilket håller juri
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Redan lagrade poster lämnas orörda tills de sparas igen. Kör skriptet tools/fixExistingVocabs.php som följer med tillägget för att reparera ett befintligt arkiv i ett svep; det är en provkörning om du inte ber det skriva."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Delar upp nyckelord, ämnen, discipliner och finansiärer som klistrats in på en rad i de separata termer som författaren avsåg, när en publikation sparas eller importeras."

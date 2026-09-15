@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "კონტროლირებადი ლექსიკონის გამყოფი"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "ერთ სტრიქონად ჩასმულ საკვანძო სიტყვებს, თემებს, დისციპლინებსა და დამხმარე ორგანიზაციებს ჰყოფს იმ ცალკეულ ტერმინებად, რომლებსაც ავტორი გულისხმობდა — თავად ველში და ყოველი შენახვისას."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "წერტილი მხოლოდ მაშინ ჰყოფს
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "უკვე შენახული ჩანაწერები ხელუხლებელი რჩება, სანამ ხელახლა არ შეინახება. არსებული არქივის ერთ ჯერზე გასასწორებლად გაუშვით ამ დანამატთან მოსული სკრიპტი tools/fixExistingVocabs.php; ის მხოლოდ საცდელად მუშაობს, თუ ჩაწერას პირდაპირ არ მოსთხოვთ."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "ერთ ხაზზე ჩასმულ საკვანძო სიტყვებს, თემებს, დისციპლინებსა და მხარდამჭერ ორგანიზაციებს ყოფს ავტორის ჩაფიქრებულ ცალკე ტერმინებად, პუბლიკაციის შენახვის ან იმპორტის დროს."

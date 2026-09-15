@@ -14,8 +14,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Controlled Vocabulary Splitter"
 
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Splits keywords, subjects, disciplines and supporting agencies that were pasted as a single line into the separate terms the author meant — in the field itself and on every save."
 
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
 msgstr "Authors often select the keyword line in their manuscript, copy it and paste the whole thing into the field, which stores one long term instead of several. Choose below which vocabularies are split and which separators are honoured."
@@ -76,3 +74,6 @@ msgstr "A period only separates when a space follows it, which keeps legal refer
 
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Records already stored are left alone until they are saved again. To repair an existing archive in one pass, run the tools/fixExistingVocabs.php script that ships with this plugin; it is a dry run unless you ask it to write."
+
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Splits keywords, subjects, disciplines and supporting agencies that were pasted as a single line into the separate terms the author meant, whenever a publication is saved or imported."

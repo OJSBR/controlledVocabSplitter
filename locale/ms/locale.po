@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Pemisah Kosa Kata Terkawal"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Memisahkan kata kunci, subjek, disiplin dan agensi penyokong yang ditampal sebagai satu baris kepada istilah berasingan yang dimaksudkan penulis — dalam medan itu sendiri dan pada setiap simpanan."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Noktah hanya memisahkan apabila diikuti ruang, sekali gus mengekalkan ru
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Rekod yang sudah tersimpan dibiarkan sehingga disimpan semula. Untuk membaiki arkib sedia ada dalam satu langkah, jalankan skrip tools/fixExistingVocabs.php yang disertakan bersama pemalam ini; ia larian ujian melainkan anda memintanya menulis."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Memisahkan kata kunci, subjek, disiplin dan agensi penyokong yang ditampal dalam satu baris kepada istilah berasingan yang dimaksudkan oleh pengarang, setiap kali penerbitan disimpan atau diimport."

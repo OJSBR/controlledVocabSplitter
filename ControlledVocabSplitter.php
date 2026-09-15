@@ -10,8 +10,7 @@
  *
  * @brief The splitting rules, and nothing else. No database, no request, no
  *        plugin API: everything here is a pure function of its arguments, so
- *        the same rules can be exercised by the regression suite and mirrored
- *        byte for byte by js/controlledVocabSplitter.js.
+ *        the rules can be exercised on their own by the test suites.
  *
  * Authors routinely select the whole keyword line in their manuscript, copy it
  * and paste it into the keyword field, which stores one giant term instead of

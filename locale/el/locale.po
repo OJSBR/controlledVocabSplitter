@@ -12,9 +12,6 @@ msgstr ""
 msgid "plugins.generic.controlledVocabSplitter.displayName"
 msgstr "Διαχωριστής ελεγχόμενου λεξιλογίου"
 
-#, fuzzy
-msgid "plugins.generic.controlledVocabSplitter.description"
-msgstr "Διαχωρίζει λέξεις-κλειδιά, θέματα, γνωστικά πεδία και φορείς υποστήριξης που επικολλήθηκαν ως μία γραμμή στους επιμέρους όρους που εννοούσε ο συγγραφέας — στο ίδιο το πεδίο και σε κάθε αποθήκευση."
 
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.description"
@@ -95,3 +92,7 @@ msgstr "Η τελεία διαχωρίζει μόνο όταν ακολουθε�
 #, fuzzy
 msgid "plugins.generic.controlledVocabSplitter.settings.hint"
 msgstr "Οι ήδη αποθηκευμένες εγγραφές δεν θίγονται μέχρι να αποθηκευτούν ξανά. Για να διορθώσετε το υπάρχον αρχείο με μία κίνηση, εκτελέστε το σενάριο tools/fixExistingVocabs.php που συνοδεύει το πρόσθετο· εκτελείται δοκιμαστικά, εκτός αν του ζητήσετε να γράψει."
+
+#, fuzzy
+msgid "plugins.generic.controlledVocabSplitter.description"
+msgstr "Διαχωρίζει λέξεις-κλειδιά, θέματα, κλάδους και φορείς χρηματοδότησης που επικολλήθηκαν σε μία γραμμή στους ξεχωριστούς όρους που εννοούσε ο συγγραφέας, όταν η δημοσίευση αποθηκεύεται ή εισάγεται."
