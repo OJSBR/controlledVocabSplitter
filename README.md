@@ -1,10 +1,10 @@
 # Controlled Vocabulary Splitter — OJS plugin
 
 [![OJS](https://img.shields.io/badge/OJS-3.5-brightgreen)](https://pkp.sfu.ca/ojs/)
-[![Version](https://img.shields.io/badge/version-1.0.1.0-blue)](version.xml)
+[![Version](https://img.shields.io/badge/version-1.0.1.1-blue)](version.xml)
 [![License](https://img.shields.io/badge/license-GPL--3.0-lightgrey)](LICENSE)
 
-**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.1.0/controlledVocabSplitter-1.0.1.0.tar.gz) — or browse all [Releases](../../releases).
+**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.1.1/controlledVocabSplitter-1.0.1.1.tar.gz) — or browse all [Releases](../../releases).
 
 A generic plugin for **Open Journal Systems (OJS)** that splits **keywords, subjects,
 disciplines and supporting agencies pasted as a single line** into the separate terms the
@@ -18,11 +18,11 @@ patching or replacing anything in OJS core**.
 
 | OJS version | Branch | Plugin release |
 |-------------|--------|----------------|
-| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.1.0 |
+| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.1.1 |
 
 > **Upgrade from 1.0.0.x.** Earlier versions replaced a core class (the controlled-vocabulary
 > repository) and changed the compiled vocabulary field so a pasted list was split while it was
-> being typed. Neither is an extension point PKP supports, so 1.0.1.0 does the same work through
+> being typed. Neither is an extension point PKP supports, so 1.0.1.x does the same work through
 > core hooks: the terms are split when the publication is **saved** (or imported), and the form
 > shows them separated as soon as it is saved. A command-line native XML import is now split too,
 > which the earlier versions missed.
@@ -182,11 +182,11 @@ alterar nem substituir nada do OJS**.
 
 | Versão do OJS | Branch | Release do plugin |
 |---------------|--------|-------------------|
-| OJS 3.5.x     | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.1.0 |
+| OJS 3.5.x     | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.1.1 |
 
 > **Atualização a partir da 1.0.0.x.** As versões anteriores substituíam uma classe do núcleo (o
 > repositório de vocabulário controlado) e alteravam o campo compilado para separar a lista
-> enquanto era digitada. Nenhum dos dois é ponto de extensão aceito pela PKP, então a 1.0.1.0 faz
+> enquanto era digitada. Nenhum dos dois é ponto de extensão aceito pela PKP, então a 1.0.1.x faz
 > o mesmo trabalho com hooks do núcleo: os termos são separados quando a publicação é **salva**
 > (ou importada), e o formulário já os mostra separados logo depois de salvar. A importação XML
 > nativa pela linha de comando agora também é separada, o que as versões anteriores deixavam
