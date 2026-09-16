@@ -1,10 +1,10 @@
 # Controlled Vocabulary Splitter — OJS plugin
 
 [![OJS](https://img.shields.io/badge/OJS-3.5-brightgreen)](https://pkp.sfu.ca/ojs/)
-[![Version](https://img.shields.io/badge/version-1.0.1.1-blue)](version.xml)
+[![Version](https://img.shields.io/badge/version-1.0.2.0-blue)](version.xml)
 [![License](https://img.shields.io/badge/license-GPL--3.0-lightgrey)](LICENSE)
 
-**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.1.1/controlledVocabSplitter-1.0.1.1.tar.gz) — or browse all [Releases](../../releases).
+**⬇️ Install package:** [OJS / OMP 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.2.0/controlledVocabSplitter-1.0.2.0.tar.gz) — or browse all [Releases](../../releases).
 
 A generic plugin for **Open Journal Systems (OJS)** that splits **keywords, subjects,
 disciplines and supporting agencies pasted as a single line** into the separate terms the
@@ -16,9 +16,12 @@ patching or replacing anything in OJS core**.
 
 ## Compatibility & branches
 
-| OJS version | Branch | Plugin release |
+| Application | Branch | Plugin release |
 |-------------|--------|----------------|
-| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.1.1 |
+| OJS 3.5.x and OMP 3.5.x | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.2.0 |
+
+> Since 1.0.2.0 the same package serves OJS and OMP. The former `controlledVocabSplitterOmp`
+> repository is archived; its releases stay available there.
 
 > **Upgrade from 1.0.0.x.** Earlier versions replaced a core class (the controlled-vocabulary
 > repository) and changed the compiled vocabulary field so a pasted list was split while it was
@@ -180,9 +183,12 @@ alterar nem substituir nada do OJS**.
 
 ### Compatibilidade e branches
 
-| Versão do OJS | Branch | Release do plugin |
-|---------------|--------|-------------------|
-| OJS 3.5.x     | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.1.1 |
+| Aplicação | Branch | Release do plugin |
+|-----------|--------|-------------------|
+| OJS 3.5.x e OMP 3.5.x | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.2.0 |
+
+> A partir da 1.0.2.0 o mesmo pacote serve OJS e OMP. O antigo `controlledVocabSplitterOmp` está
+> arquivado; as releases dele continuam lá.
 
 > **Atualização a partir da 1.0.0.x.** As versões anteriores substituíam uma classe do núcleo (o
 > repositório de vocabulário controlado) e alteravam o campo compilado para separar a lista
