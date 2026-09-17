@@ -38,7 +38,7 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 		// A new query string forces a page load; the hash opens the Plugins tab.
 		cy.visit('/index.php/' + contextPath + '/management/settings/website?reload=' + Date.now() + '#plugins');
 		cy.get('button[id="plugins-button"]', {timeout: 60000}).should('have.attr', 'aria-selected', 'true');
-		cy.waitJQuery();
+		waitJQuery();
 	};
 
 	// Opens the settings modal from the plugins grid. The form is fetched from the
@@ -51,7 +51,7 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 			}
 		});
 		cy.get('a[id*="controlledvocabsplitterplugin-settings"]').should('be.visible').click();
-		cy.waitJQuery();
+		waitJQuery();
 		cy.window().should((win) => {
 			expect(win.jQuery(settingsForm).data('pkp.handler')).to.exist;
 		});
@@ -59,19 +59,73 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 
 	const save = () => {
 		cy.get(settingsForm + ' button[id^="submitFormButton-"]').click({force: true});
-		cy.waitJQuery();
+		waitJQuery();
 		cy.get(settingsForm).should('not.exist');
 	};
+
+	// ---- OJSBR spec helpers (padrão v2) ----
+
+	const pageUrl = (path) => '/index.php/' + contextPath + (path ? '/' + path : '');
+
+	// Same as PKP's cy.waitJQuery(), which a run without their support file lacks.
+	const waitJQuery = () => cy.window().its('jQuery.active', {timeout: 60000}).should('eq', 0);
+
+	// Requests carry the browser's User-Agent: a session whose agent changes is dropped.
+	const request = (options) => cy.window({log: false}).then((win) => cy.request(Object.assign(
+		typeof options === 'string' ? {url: options} : options,
+		{headers: Object.assign({'User-Agent': win.navigator.userAgent}, (typeof options === 'string' ? {} : options.headers) || {})}
+	)));
+
+	// REST calls made from the page itself, so they carry its session and token.
+	const api = (path) => cy.window({log: false}).then((win) => cy.wrap(
+		win.fetch(path, {credentials: 'same-origin'}).then((response) => response.json()),
+		{log: false, timeout: 30000}
+	));
+
+	const send = (path, method, body) => cy.window({log: false}).then((win) => cy.wrap(
+		win.fetch(path, {
+			method: method,
+			credentials: 'same-origin',
+			headers: {'Content-Type': 'application/json', 'X-Csrf-Token': win.pkp.currentUser.csrfToken},
+			body: body === undefined ? undefined : JSON.stringify(body),
+		}).then((response) => response.json().then((answer) => ({status: response.status, body: answer}))),
+		{log: false, timeout: 60000}
+	));
+
+	// Submissions made by the tests, deleted in after() even when one fails.
+	const madeHere = [];
+
+	// Creates a submission of its own, so the test depends on no data set.
+	const aSubmission = (locale) => request({url: pageUrl('api/v1/sections?count=1'), failOnStatusCode: false})
+		.then((response) => {
+			let body = response.body;
+			if (typeof body === 'string') {
+				try {
+					body = JSON.parse(body);
+				} catch (error) {
+					body = {};
+				}
+			}
+
+			return (body && body.items && body.items.length) ? body.items[0].id : null;
+		})
+		.then((sectionId) => send(pageUrl('api/v1/submissions'), 'POST', sectionId ? {locale: locale, sectionId: sectionId} : {locale: locale}))
+		.then((created) => {
+			expect(created.status, 'the submission of the test was created: ' + JSON.stringify(created.body)).to.be.within(200, 201);
+			madeHere.push(created.body.id);
+
+			return cy.wrap(created.body, {log: false});
+		});
 
 	it('Enables the plugin', function() {
 		login();
 		cy.visit('/index.php/' + contextPath + '/management/settings/website?reload=' + Date.now() + '#plugins');
 		cy.get('button[id="plugins-button"]', {timeout: 60000}).should('have.attr', 'aria-selected', 'true');
-		cy.waitJQuery();
+		waitJQuery();
 		cy.get('input[id^="select-cell-controlledvocabsplitterplugin-enabled"]', {timeout: 30000}).then(($checkbox) => {
 			if (!$checkbox.is(':checked')) {
 				cy.wrap($checkbox).click();
-				cy.waitJQuery();
+				waitJQuery();
 			}
 		});
 		cy.get('input[id^="select-cell-controlledvocabsplitterplugin-enabled"]').should('be.checked');
@@ -127,5 +181,45 @@ describe('Controlled Vocabulary Splitter plugin', function() {
 			field().contains(term).should('exist');
 		});
 		field().contains('Palatal Expansion. Clinical Protocol').should('not.exist');
+	});
+
+	// The promise of the plugin: a line of terms typed as one is stored as several.
+	// The submission is made by the test, the line is written through the endpoint
+	// the metadata form uses, and the terms are then read back from the server.
+	it('Splits a line of keywords saved through the API and keeps them split', function() {
+		const line = 'Palatal Expansion. Clinical Protocol. Orthopedic appliance.';
+		const terms = ['Palatal Expansion', 'Clinical Protocol', 'Orthopedic appliance'];
+
+		login();
+		cy.visit(pageUrl('submissions') + '?reload=' + Date.now());
+		cy.window({log: false}).its('pkp.context.primaryLocale').then((locale) => {
+			aSubmission(locale).then((submission) => {
+				const publication = pageUrl('api/v1/submissions/' + submission.id + '/publications/' + submission.currentPublicationId);
+
+				send(publication, 'PUT', {keywords: {[locale]: [line]}}).then((saved) => {
+					expect(saved.status, 'the keywords were saved: ' + JSON.stringify(saved.body)).to.eq(200);
+
+					return api(publication);
+				}).then((stored) => {
+					// A term comes back as a string or as an object with its name,
+					// depending on the line of the application.
+					const kept = ((stored.keywords || {})[locale] || [])
+						.map((term) => (term && typeof term === 'object' ? term.name : term));
+					terms.forEach((term) => {
+						expect(kept, 'the term "' + term + '" was not stored on its own: ' + JSON.stringify(kept)).to.include(term);
+					});
+					expect(kept, 'the line was kept whole as well').to.not.include(line);
+				});
+			});
+		});
+	});
+
+	after(function() {
+		if (!madeHere.length) {
+			return;
+		}
+		login();
+		cy.visit(pageUrl('submissions') + '?reload=' + Date.now());
+		madeHere.forEach((id) => send(pageUrl('api/v1/submissions/' + id), 'DELETE'));
 	});
 });
