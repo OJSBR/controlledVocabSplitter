@@ -36,6 +36,7 @@ use APP\facades\Repo;
 use APP\notification\NotificationManager;
 use APP\publication\Publication;
 use Illuminate\Support\Arr;
+use PKP\context\Context;
 use PKP\controlledVocab\ControlledVocab;
 use PKP\controlledVocab\Repository as ControlledVocabRepository;
 use PKP\core\JSONMessage;
@@ -261,6 +262,25 @@ class ControlledVocabSplitterPlugin extends GenericPlugin
             ),
             $vocabs
         );
+    }
+
+    /**
+     * The journals (or presses) the archive repair goes through: the one at
+     * $path, or every enabled one of the site.
+     *
+     * ContextDAO::getAll() returns a DAOResultFactory, which is not Traversable
+     * in OJS and OMP 3.5, so it is read with toArray().
+     *
+     * @return Context[]
+     */
+    public static function getContextsToRepair(?string $path = null): array
+    {
+        $contextDao = Application::getContextDAO();
+        if ($path !== null) {
+            return array_values(array_filter([$contextDao->getByPath($path)]));
+        }
+
+        return $contextDao->getAll(true)->toArray();
     }
 
     /**

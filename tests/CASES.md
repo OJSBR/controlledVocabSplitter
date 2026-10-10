@@ -15,7 +15,8 @@ lib/pkp/lib/vendor/bin/phpunit --configuration lib/pkp/tests/phpunit.xml --no-co
 | File | Subject |
 | --- | --- |
 | `PluginTest.php` | Every plugin class compiles against the installed PKP; overridden methods keep compatible return types |
-| `SplitterRulesTest.php` | Splitting rules, hooks registered and nothing else touched, the edit hook, the site level without a journal |
+| `SplitterRulesTest.php` | Splitting rules (abbreviations included), hooks registered and nothing else touched, the edit hook, the site level without a journal |
+| `RepairToolTest.php` | The journals `tools/fixExistingVocabs.php` goes through, with and without `--journal`, on the `DAOResultFactory` of the installed OJS or OMP |
 | `TemplateSafetyTest.php` | Forms post with a CSRF token, translations in attributes are escaped, no core template is replaced |
 | `LocaleFilesTest.php` | The 38 locales: codes of this OJS line, same keys, headers, fuzzy state, placeholders |
 
@@ -58,7 +59,9 @@ Each prints PASS/FAIL per case and exits non-zero on failure; the outcome is als
 | G | Per-journal configuration: vocabulary unticked, separator off, plugin off, invalid values in the database |
 | H | The real archive that motivated the plugin, including the guarantee that no letter or digit is lost |
 | I | Property test: lists generated from a fixed seed (`mt_srand(20260807)`) — joining N terms and splitting must give the same N back |
-| J | Repairing an archive that is already stored |
+| J | Repairing an archive that is already stored, a term ending in an abbreviation left alone, and `tools/fixExistingVocabs.php` run without `--journal` (dry run) |
+| K | Abbreviations whose period belongs to the term (`nov. spec.`, `sp. nov.`, `cf.`, `var.`, `et al.`, `s.str.`), with every separator and with the period off |
+| L | The journals the repair tool goes through: all enabled ones, one by path, an unknown path |
 | HA–HE | End to end: session, REST API writes, nothing published to the browser, settings screen, permissions |
 
 ## What was checked by hand

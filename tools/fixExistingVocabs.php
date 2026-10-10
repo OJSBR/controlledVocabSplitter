@@ -70,10 +70,7 @@ class FixExistingVocabsTool extends CommandLineTool
      */
     public function execute()
     {
-        $contextDao = Application::getContextDAO();
-        $contexts = $this->contextPath !== null
-            ? array_filter([$contextDao->getByPath($this->contextPath)])
-            : iterator_to_array($contextDao->getAll(true));
+        $contexts = ControlledVocabSplitterPlugin::getContextsToRepair($this->contextPath);
         if (!$contexts) {
             echo "No journal found.\n";
             return false;

@@ -52,6 +52,45 @@ class SplitterRulesTest extends PKPTestCase
         }
     }
 
+    public function testTheFinalPeriodOfAnAbbreviationIsKept(): void
+    {
+        foreach ([
+            ['Hirtudiscus hirsutissimus nov. spec.', 'Hirtudiscus hirsutissimus nov. spec.'],
+            ['Helix pomatia sp. nov.', 'Helix pomatia sp. nov.'],
+            ['Helix gen. nov.', 'Helix gen. nov.'],
+            ['Helix pomatia comb. nov.;', 'Helix pomatia comb. nov.'],
+            ['Helix sp.', 'Helix sp.'],
+            ['Smith et al.', 'Smith et al.'],
+            ['Helix s.str.', 'Helix s.str.'],
+            // A plain word, an epithet after "cf." or a common word still lose it.
+            ['Orthopedic appliance.', 'Orthopedic appliance'],
+            ['Helix cf. pomatia.', 'Helix cf. pomatia'],
+            ['Honey comb.', 'Honey comb'],
+            ['E. coli.', 'E. coli'],
+        ] as [$input, $expected]) {
+            $this->assertSame($expected, Rules::normalize($input), 'normalize(' . json_encode($input) . ')');
+        }
+
+        // A stored term that only ends in an abbreviation is not rewritten, whatever the separators.
+        foreach ([[Rules::SEPARATOR_SEMICOLON, Rules::SEPARATOR_COMMA], Rules::SEPARATORS] as $separators) {
+            $this->assertFalse(Rules::changes(['Hirtudiscus hirsutissimus nov. spec.'], $separators));
+        }
+    }
+
+    public function testThePeriodOfAnAbbreviationDoesNotSeparate(): void
+    {
+        foreach ([
+            ['Hirtudiscus hirsutissimus nov. spec.', ['Hirtudiscus hirsutissimus nov. spec.']],
+            ['Gastropoda. Hirtudiscus hirsutissimus nov. spec. Taxonomy.', ['Gastropoda', 'Hirtudiscus hirsutissimus nov. spec.', 'Taxonomy']],
+            ['Helix cf. pomatia. Brazil', ['Helix cf. pomatia', 'Brazil']],
+            ['Helix aff. Pomatia', ['Helix aff. Pomatia']],
+            ['Smith et al. Brazil', ['Smith et al.', 'Brazil']],
+            ['Honey comb. Bees', ['Honey comb', 'Bees']],
+        ] as [$input, $expected]) {
+            $this->assertSame($expected, Rules::split($input), 'split(' . json_encode($input) . ')');
+        }
+    }
+
     public function testOnlyTheSeparatorsTheJournalAcceptsAreUsed(): void
     {
         $this->assertSame(['Alpha, Beta', 'Gamma'], Rules::split('Alpha, Beta. Gamma', [Rules::SEPARATOR_PERIOD]));

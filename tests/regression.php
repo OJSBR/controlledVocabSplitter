@@ -6,12 +6,14 @@
  * Copyright (c) 2026 OJSBR (https://ojsbr.com)
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
- * @brief Regression suite for controlledVocabSplitter (blocks A to K).
+ * @brief Regression suite for controlledVocabSplitter (blocks A to L).
  *
- *        Blocks A to D exercise the rules on their own; E to I write for real,
+ *        Blocks A to D exercise the rules on their own; E to G write for real,
  *        through the same paths as the metadata form, the REST API and the
- *        native XML import; J replays the real archive that motivated the
- *        plugin.
+ *        native XML import; H replays the real archive that motivated the
+ *        plugin and I is a property test; J repairs a stored archive, through
+ *        the bundled tool too; K covers abbreviations whose period belongs to
+ *        the term; L the journals the repair tool goes through.
  *
  *        Everything the script touches is restored at the end, including the
  *        submissions it creates. See tests/CASES.md.
@@ -798,6 +800,112 @@ try {
             $publication->getId()
         );
         assertEquals($first, terms(Repo::publication()->get($publication->getId()), 'keywords'));
+    });
+
+    testCase('J03', 'a stored term ending in an abbreviation is left as it is', function () use ($publication, $plugin) {
+        $term = 'Hirtudiscus hirsutissimus nov. spec.';
+        try {
+            foreach ([['semicolon', 'comma'], ALL_SEPARATORS] as $separators) {
+                configure(array_values($plugin::FIELDS), $separators);
+                assertEquals(['pt_BR' => [$term]], save($publication, 'keywords', ['pt_BR' => [$term]]), 'saved with ' . implode(',', $separators));
+                assertEquals([], $plugin->splitStoredVocabs(Repo::publication()->get($publication->getId()), false), 'repair with ' . implode(',', $separators));
+            }
+        } finally {
+            configure(array_values($plugin::FIELDS), ALL_SEPARATORS);
+        }
+    });
+
+    testCase('J04', 'the repair tool runs over every journal (no --journal), dry run', function () use ($publication, $plugin) {
+        $plugin->updateSetting(CONTEXT_ID, 'enabled', false, 'bool');
+        try {
+            save($publication, 'keywords', ['pt_BR' => ['Ferramenta. Sem revista.']]);
+        } finally {
+            $plugin->updateSetting(CONTEXT_ID, 'enabled', true, 'bool');
+        }
+
+        $command = escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(dirname(__DIR__) . '/tools/fixExistingVocabs.php')
+            . ' --submission=' . (int) $publication->getData('submissionId') . ' 2>&1';
+        exec($command, $output, $status);
+        $output = implode("\n", $output);
+
+        assertEquals(0, $status, "exit status\n{$output}");
+        assertTrue(str_contains($output, '[pt_BR] Ferramenta | Sem revista'), "the change is not listed\n{$output}");
+        assertTrue(str_contains($output, '1 submission(s) would change'), "summary\n{$output}");
+        assertEquals(['pt_BR' => ['Ferramenta. Sem revista.']], terms(Repo::publication()->get($publication->getId()), 'keywords'), 'the dry run wrote');
+    });
+
+    //
+    // BLOCK K — abbreviations whose period belongs to the term
+    //
+    block('BLOCK K — abbreviations (taxonomy, et al.)');
+
+    $abbreviationCases = [
+        // [id, input, separators, expected terms]
+        ['K01', 'Hirtudiscus hirsutissimus nov. spec.', ['semicolon', 'comma'], ['Hirtudiscus hirsutissimus nov. spec.']],
+        ['K02', 'Hirtudiscus hirsutissimus nov. spec.', ALL_SEPARATORS, ['Hirtudiscus hirsutissimus nov. spec.']],
+        ['K03', 'Helix pomatia sp. nov.', ALL_SEPARATORS, ['Helix pomatia sp. nov.']],
+        ['K04', 'Helix gen. nov.', ALL_SEPARATORS, ['Helix gen. nov.']],
+        ['K05', 'Helix pomatia comb. nov.', ALL_SEPARATORS, ['Helix pomatia comb. nov.']],
+        ['K06', 'Helix pomatia stat. rev.', ALL_SEPARATORS, ['Helix pomatia stat. rev.']],
+        ['K07', 'Helix sp.', ALL_SEPARATORS, ['Helix sp.']],
+        ['K08', 'Helix spp.', ALL_SEPARATORS, ['Helix spp.']],
+        ['K09', 'Rosa canina var. alba', ALL_SEPARATORS, ['Rosa canina var. alba']],
+        ['K10', 'Helix cf. pomatia', ALL_SEPARATORS, ['Helix cf. pomatia']],
+        ['K11', 'Helix aff. pomatia', ALL_SEPARATORS, ['Helix aff. pomatia']],
+        ['K12', 'Rosa canina subsp. dumalis', ALL_SEPARATORS, ['Rosa canina subsp. dumalis']],
+        ['K13', 'Smith et al.', ALL_SEPARATORS, ['Smith et al.']],
+        ['K14', 'Helix s.str.', ALL_SEPARATORS, ['Helix s.str.']],
+        ['K15', 'Gastropoda. Hirtudiscus hirsutissimus nov. spec. Taxonomy.', ALL_SEPARATORS, ['Gastropoda', 'Hirtudiscus hirsutissimus nov. spec.', 'Taxonomy']],
+        ['K16', 'Mollusca; Hirtudiscus hirsutissimus nov. spec.; Brazil', ALL_SEPARATORS, ['Mollusca', 'Hirtudiscus hirsutissimus nov. spec.', 'Brazil']],
+        ['K17', 'Mollusca, Helix sp. nov., Brazil', ALL_SEPARATORS, ['Mollusca', 'Helix sp. nov.', 'Brazil']],
+        ['K18', 'Helix cf. pomatia. Brazil', ALL_SEPARATORS, ['Helix cf. pomatia', 'Brazil']],
+        ['K19', 'cf. Helix pomatia. Brazil', ALL_SEPARATORS, ['cf. Helix pomatia', 'Brazil']],
+        ['K20', 'Smith et al. Brazil', ALL_SEPARATORS, ['Smith et al.', 'Brazil']],
+        ['K21', 'Helix sp. 1. Brazil', ALL_SEPARATORS, ['Helix sp. 1', 'Brazil']],
+        // what still loses the final period: plain words, epithets, common words
+        ['K22', 'Helix cf. pomatia.', ALL_SEPARATORS, ['Helix cf. pomatia']],
+        ['K23', 'Rosa canina var. alba.', ALL_SEPARATORS, ['Rosa canina var. alba']],
+        ['K24', 'Honey comb.', ALL_SEPARATORS, ['Honey comb']],
+        ['K25', 'Honey comb. Bees', ALL_SEPARATORS, ['Honey comb', 'Bees']],
+        ['K26', 'E. coli.', ALL_SEPARATORS, ['E. coli']],
+        ['K27', 'Orthopedic appliance.', ['semicolon'], ['Orthopedic appliance']],
+    ];
+
+    foreach ($abbreviationCases as [$id, $input, $separators, $expected]) {
+        testCase($id, 'split(' . summarize($input, 34) . ') [' . implode(',', $separators) . ']', function () use ($input, $separators, $expected) {
+            assertEquals($expected, Rules::split($input, $separators));
+        });
+    }
+
+    testCase('K28', 'a term that only ends in an abbreviation does not count as a change', function () {
+        foreach ([['semicolon', 'comma'], ALL_SEPARATORS] as $separators) {
+            assertTrue(!Rules::changes(['Hirtudiscus hirsutissimus nov. spec.', 'Helix sp. nov.', 'Smith et al.'], $separators), implode(',', $separators));
+        }
+    });
+
+    testCase('K29', 'idempotent: splitting again keeps the abbreviations', function () {
+        $once = Rules::splitList(['Gastropoda. Hirtudiscus hirsutissimus nov. spec. Taxonomy.'], ALL_SEPARATORS);
+        assertEquals($once, Rules::splitList($once, ALL_SEPARATORS));
+    });
+
+    //
+    // BLOCK L — the journals the repair tool goes through
+    //
+    block('BLOCK L — journals of the repair tool');
+
+    testCase('L01', 'without a path, every enabled journal of the site', function () use ($plugin) {
+        $expected = [];
+        $all = Application::getContextDAO()->getAll(true);
+        while ($context = $all->next()) {
+            $expected[] = (int) $context->getId();
+        }
+        $actual = array_map(fn ($context) => (int) $context->getId(), $plugin::getContextsToRepair());
+        assertEquals($expected, $actual);
+    });
+
+    testCase('L02', 'with a path, only that journal; an unknown path, none', function () use ($context, $plugin) {
+        assertEquals([CONTEXT_ID], array_map(fn ($found) => (int) $found->getId(), $plugin::getContextsToRepair($context->getPath())));
+        assertEquals([], $plugin::getContextsToRepair('cvs-no-such-journal-' . time()));
     });
 
 } catch (Throwable $e) {

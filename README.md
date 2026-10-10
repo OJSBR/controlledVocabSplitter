@@ -1,10 +1,10 @@
 # Controlled Vocabulary Splitter — OJS plugin
 
 [![OJS](https://img.shields.io/badge/OJS-3.5-brightgreen)](https://pkp.sfu.ca/ojs/)
-[![Version](https://img.shields.io/badge/version-1.0.2.0-blue)](version.xml)
+[![Version](https://img.shields.io/badge/version-1.0.2.1-blue)](version.xml)
 [![License](https://img.shields.io/badge/license-GPL--3.0-lightgrey)](LICENSE)
 
-**⬇️ Install package:** [OJS / OMP 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.2.0/controlledVocabSplitter-1.0.2.0.tar.gz) — or browse all [Releases](../../releases).
+**⬇️ Install package:** [OJS / OMP 3.5](https://github.com/OJSBR/controlledVocabSplitter/releases/download/1.0.2.1/controlledVocabSplitter-1.0.2.1.tar.gz) — or browse all [Releases](../../releases).
 
 A generic plugin for **Open Journal Systems (OJS)** that splits **keywords, subjects,
 disciplines and supporting agencies pasted as a single line** into the separate terms the
@@ -18,7 +18,12 @@ patching or replacing anything in OJS core**.
 
 | Application | Branch | Plugin release |
 |-------------|--------|----------------|
-| OJS 3.5.x and OMP 3.5.x | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.2.0 |
+| OJS 3.5.x and OMP 3.5.x | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.2.1 |
+
+> **1.0.2.1** keeps the period of abbreviations such as `nov. spec.`, `sp. nov.` and `et al.`
+> (it was dropped from the end of the term, and the period separator cut them), and fixes
+> `tools/fixExistingVocabs.php`, which stopped with a `TypeError` on OJS and OMP 3.5 unless
+> `--journal` was given.
 
 > Since 1.0.2.0 the same package serves OJS and OMP. The former `controlledVocabSplitterOmp`
 > repository is archived; its releases stay available there.
@@ -73,10 +78,16 @@ What is **never** cut:
 - A period that closes a single letter, because that is an initial: `S. aureus`, `E. coli`
   and `C. albicans` stay whole.
 - A comma with no space after it, so `1,5 mm` stays whole.
+- A period that closes a known abbreviation, mostly from zoological and botanical nomenclature:
+  `Hirtudiscus hirsutissimus nov. spec.`, `Helix cf. pomatia`, `Rosa canina var. alba` and
+  `Smith et al.` stay whole. After `nov.`, `sp.`, `et al.` and the like, a capital letter still
+  starts a new term (`Helix sp. nov. Taxonomy` gives `Helix sp. nov.` and `Taxonomy`); after an
+  abbreviation that introduces a name (`cf.`, `aff.`, `var.`, `subsp.`) nothing is cut.
 
 Terms are also cleaned: exotic spaces (no-break, en, thin, ideographic) and zero-width
 characters become plain spaces, Unicode is normalised to NFC, and punctuation left dangling
-at the edges is dropped. Duplicates within the same language are removed, case-insensitively.
+at the edges is dropped. The final period is kept when it belongs to an abbreviation (`sp. nov.`,
+`nov. spec.`, `et al.`, `s.str.`), so a term like that is never rewritten. Duplicates within the same language are removed, case-insensitively.
 
 **The comma is the risky one.** An inverted subject heading is a single term and would be cut
 in two. Journals that index with MeSH or DeCS should turn the comma off.
@@ -109,7 +120,8 @@ php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php
 php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php --write
 ```
 
-`--journal=path` limits it to one journal and `--submission=id` to one submission. Run it as the
+`--journal=path` limits it to one journal and `--submission=id` to one submission; without
+`--journal` every enabled journal (or press) of the site is checked. Run it as the
 account that owns the files, never as root. Journals where the plugin is off are skipped.
 
 ## How it works (technical)
@@ -131,8 +143,9 @@ reader-facing site or to the backend pages.
 ## Tests
 
 - **PHPUnit** (`tests/*Test.php`, on `PKP\tests\PKPTestCase`): the plugin classes against the
-  installed PKP, the splitting rules, the edit hook, the site level without a journal, the
-  templates and the 38 translations. From the OJS root:
+  installed PKP, the splitting rules (abbreviations included), the edit hook, the site level
+  without a journal, the journals the repair tool goes through, the templates and the 38
+  translations. From the OJS root:
 
   ```bash
   lib/pkp/lib/vendor/bin/phpunit --configuration lib/pkp/tests/phpunit.xml --no-coverage "$PWD/plugins/generic/controlledVocabSplitter/tests"
@@ -142,9 +155,9 @@ reader-facing site or to the backend pages.
   [pkp-github-actions](https://github.com/pkp/pkp-github-actions) on every push): enables the
   plugin, turns a separator off and puts it back, and saves a keyword line entered as one term to
   see it come back as separate terms (it fails with the plugin off).
-- **Regression suites** for test installations (`tests/regression.php`, 359 cases, and
+- **Regression suites** for test installations (`tests/regression.php`, 392 cases, and
   `tests/regression_http.php`, 29 cases with a real login): the rules and real writes through the
-  form, the REST API, the import hook and the settings screen. See [`tests/CASES.md`](tests/CASES.md).
+  form, the REST API, the import hook, the repair tool and the settings screen. See [`tests/CASES.md`](tests/CASES.md).
 - Verified on OJS 3.5.0.3, including a command-line native XML import.
 
 Tests are kept in the repository and are not part of the release package.
@@ -185,7 +198,12 @@ alterar nem substituir nada do OJS**.
 
 | Aplicação | Branch | Release do plugin |
 |-----------|--------|-------------------|
-| OJS 3.5.x e OMP 3.5.x | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.2.0 |
+| OJS 3.5.x e OMP 3.5.x | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.2.1 |
+
+> A **1.0.2.1** preserva o ponto de abreviações como `nov. spec.`, `sp. nov.` e `et al.` (ele
+> caía do fim do termo, e o separador de ponto cortava essas abreviações) e corrige o
+> `tools/fixExistingVocabs.php`, que parava com `TypeError` no OJS e no OMP 3.5 quando rodado sem
+> `--journal`.
 
 > A partir da 1.0.2.0 o mesmo pacote serve OJS e OMP. O antigo `controlledVocabSplitterOmp` está
 > arquivado; as releases dele continuam lá.
@@ -241,10 +259,17 @@ O que **nunca** é cortado:
 - Ponto que fecha uma letra sozinha, porque ali é inicial: `S. aureus`, `E. coli` e
   `C. albicans` ficam inteiros.
 - Vírgula sem espaço depois, o que mantém inteiro `1,5 mm`.
+- Ponto que fecha uma abreviação conhecida, sobretudo da nomenclatura zoológica e botânica:
+  `Hirtudiscus hirsutissimus nov. spec.`, `Helix cf. pomatia`, `Rosa canina var. alba` e
+  `Smith et al.` ficam inteiros. Depois de `nov.`, `sp.`, `et al.` e similares, uma letra
+  maiúscula ainda começa um termo novo (`Helix sp. nov. Taxonomia` vira `Helix sp. nov.` e
+  `Taxonomia`); depois de abreviação que introduz um nome (`cf.`, `aff.`, `var.`, `subsp.`) nada
+  é cortado.
 
 Os termos também são limpos: espaços exóticos (NBSP, EN SPACE, THIN SPACE, ideográfico) e
 caracteres de largura zero viram espaço comum, o Unicode é normalizado para NFC e a pontuação
-solta nas bordas cai. Duplicatas no mesmo idioma são removidas, sem diferenciar maiúsculas.
+solta nas bordas cai. O ponto final fica quando pertence a uma abreviação (`sp. nov.`,
+`nov. spec.`, `et al.`, `s.str.`), então um termo assim nunca é regravado. Duplicatas no mesmo idioma são removidas, sem diferenciar maiúsculas.
 
 **A vírgula é a arriscada.** Um descritor invertido é um termo só e seria cortado em dois.
 Revista que indexa com MeSH ou DeCS deve desligar a vírgula.
@@ -277,7 +302,8 @@ php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php
 php plugins/generic/controlledVocabSplitter/tools/fixExistingVocabs.php --write
 ```
 
-`--journal=caminho` limita a uma revista e `--submission=id` a uma submissão. Rode como o dono
+`--journal=caminho` limita a uma revista e `--submission=id` a uma submissão; sem `--journal`,
+todas as revistas (ou editoras) habilitadas do site são verificadas. Rode como o dono
 dos arquivos, nunca como root. Revistas com o plugin desligado são puladas.
 
 ### Como funciona (técnico)
@@ -299,13 +325,13 @@ site público nem às páginas do painel.
 ### Testes
 
 - **PHPUnit** (`tests/*Test.php`, sobre `PKP\tests\PKPTestCase`): classes do plugin contra o PKP
-  instalado, regras de separação, hook de edição, nível do site sem revista, templates e as 38
-  traduções.
+  instalado, regras de separação (inclusive abreviações), hook de edição, nível do site sem
+  revista, revistas que a ferramenta de correção percorre, templates e as 38 traduções.
 - **Cypress** (`cypress/tests/functional/`, rodado pelo
   [pkp-github-actions](https://github.com/pkp/pkp-github-actions) a cada push): liga o plugin,
   desliga e religa um separador, e salva uma linha de palavras-chave digitada como um termo só
   para vê-la voltar em termos separados (reprova com o plugin desligado).
-- **Baterias de regressão** para instalações de teste (`tests/regression.php`, 359 casos, e
+- **Baterias de regressão** para instalações de teste (`tests/regression.php`, 392 casos, e
   `tests/regression_http.php`, 29 casos com login real). Veja [`tests/CASES.md`](tests/CASES.md).
 - Verificado no OJS 3.5.0.3, inclusive com importação XML nativa pela linha de comando.
 

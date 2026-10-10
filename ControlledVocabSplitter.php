@@ -56,6 +56,32 @@ class ControlledVocabSplitter
     private const TRAILING_JUNK = '/[\s;,.]+$/u';
 
     /**
+     * Abbreviations whose period is part of the term, mostly from zoological and
+     * botanical nomenclature ("nov. spec.", "sp. nov.", "comb. nov.", "et al.").
+     * A period after one of them never ends the term, and the final period of a
+     * term that ends in one is kept. Lower case; "al" counts only after "et".
+     */
+    private const ABBREVIATIONS = [
+        'nov', 'sp', 'spp', 'spec', 'gen', 'comb', 'stat', 'nom', 'nud', 'indet',
+        'inquir', 'emend', 'cf', 'aff', 'var', 'subsp', 'ssp', 'subvar', 'sect',
+        'subg', 'subgen', 'al', 'etc',
+    ];
+
+    /**
+     * The abbreviations above that are also ordinary words ("Honey comb."), so
+     * on their own at the end of a term they do not keep the final period. They
+     * still do inside a chain: "nov. spec.", "stat. nov.".
+     */
+    private const COMMON_WORDS = ['spec', 'gen', 'comb', 'stat', 'nom'];
+
+    /**
+     * Abbreviations that introduce a name: what follows them is an epithet or a
+     * genus ("Helix cf. pomatia", "cf. Helix"), never a new term and never part
+     * of the abbreviation.
+     */
+    private const NAME_PREFIXES = ['cf', 'aff', 'var', 'subsp', 'ssp', 'subvar', 'sect', 'subg', 'subgen'];
+
+    /**
      * Clean one term: normalise spacing and Unicode, then drop punctuation that
      * is left over from the separator itself. Never changes the words.
      */
@@ -71,9 +97,77 @@ class ControlledVocabSplitter
         $value = (string) preg_replace('/\s+/u', ' ', $value);
         $value = trim($value);
         $value = (string) preg_replace(self::LEADING_JUNK, '', $value);
-        $value = (string) preg_replace(self::TRAILING_JUNK, '', $value);
 
-        return trim($value);
+        $trimmed = trim((string) preg_replace(self::TRAILING_JUNK, '', $value));
+        $junk = substr($value, strlen($trimmed));
+        if (str_contains($junk, '.') && self::keepsFinalPeriod($trimmed)) {
+            // "Hirtudiscus hirsutissimus nov. spec.": the period closes an abbreviation.
+            $trimmed .= '.';
+        }
+
+        return $trimmed;
+    }
+
+    /**
+     * Does the period at the end of this term (already stripped) belong to it?
+     *
+     * Yes when the last word is an abbreviation ("sp. nov.", "et al."), when it
+     * continues a chain of abbreviations ("nov. spec.", "sp. inq."), or when it
+     * is dotted itself ("s.str.", "U.S.A."). A plain word keeps the old rule and
+     * loses the period: "Orthopedic appliance." becomes "Orthopedic appliance".
+     */
+    private static function keepsFinalPeriod(string $term): bool
+    {
+        $words = self::words($term);
+        $count = count($words);
+        if ($count === 0) {
+            return false;
+        }
+
+        $last = $words[$count - 1];
+        $previous = $count > 1 ? $words[$count - 2] : '';
+
+        if (preg_match('/^(\p{L}{1,4}\.)+\p{L}{1,4}$/u', $last)) {
+            return true;
+        }
+
+        if (self::isAbbreviation($last, $previous) && !in_array(mb_strtolower($last, 'UTF-8'), self::COMMON_WORDS, true)) {
+            return true;
+        }
+
+        if (str_ends_with($previous, '.') && preg_match('/^\p{Ll}/u', $last)) {
+            $beforePrevious = $count > 2 ? $words[$count - 3] : '';
+            $previousWord = substr($previous, 0, -1);
+
+            return self::isAbbreviation($previousWord, $beforePrevious)
+                && !in_array(mb_strtolower($previousWord, 'UTF-8'), self::NAME_PREFIXES, true);
+        }
+
+        return false;
+    }
+
+    /**
+     * Is this word, with the word before it, one of the known abbreviations?
+     * Surrounding brackets are ignored: "(sp. nov.)".
+     */
+    private static function isAbbreviation(string $word, string $previous = ''): bool
+    {
+        $word = mb_strtolower(trim($word, '([{'), 'UTF-8');
+        if ($word === 'al') {
+            return mb_strtolower(trim($previous, '([{'), 'UTF-8') === 'et';
+        }
+
+        return in_array($word, self::ABBREVIATIONS, true);
+    }
+
+    /**
+     * The words of a term, split on spaces.
+     *
+     * @return string[]
+     */
+    private static function words(string $text): array
+    {
+        return preg_split('/\s+/u', trim($text), -1, PREG_SPLIT_NO_EMPTY) ?: [];
     }
 
     /**
@@ -134,6 +228,11 @@ class ControlledVocabSplitter
      *    reference is a single keyword and cutting it destroys the citation.
      * 2. A period that closes a single letter is an initial, not an end of term:
      *    "S. aureus", "E. coli" and "C. albicans" stay whole.
+     * 3. A period that closes a known abbreviation is part of the term:
+     *    "Hirtudiscus hirsutissimus nov. spec.", "Helix cf. pomatia" and
+     *    "Smith et al." stay whole. Only a capital letter right after an
+     *    abbreviation that does not introduce a name starts a new term, as in
+     *    "Helix sp. nov. Taxonomy".
      *
      * @return string[]
      */
@@ -162,7 +261,15 @@ class ControlledVocabSplitter
                 continue;
             }
 
-            $parts[] = $current;
+            // Known abbreviation => part of the term, unless a new term clearly starts.
+            if (self::closesAbbreviation($current, $chars, $i + 1)) {
+                $current .= $char;
+                continue;
+            }
+
+            // The period goes along: normalize() keeps it only where it closes
+            // an abbreviation ("Helix sp. nov. Taxonomy").
+            $parts[] = $current . $char;
             $current = '';
             $i++; // the space that follows belongs to the separator
         }
@@ -170,6 +277,38 @@ class ControlledVocabSplitter
         $parts[] = $current;
 
         return $parts;
+    }
+
+    /**
+     * Does the period after $before close an abbreviation that keeps the next
+     * word in the same term? $chars from $next on is what follows the period.
+     *
+     * @param string[] $chars
+     */
+    private static function closesAbbreviation(string $before, array $chars, int $next): bool
+    {
+        $words = self::words($before);
+        $count = count($words);
+        if ($count === 0) {
+            return false;
+        }
+
+        $word = $words[$count - 1];
+        $previous = $count > 1 ? $words[$count - 2] : '';
+        if (!self::isAbbreviation($word, $previous)) {
+            return false;
+        }
+        if (in_array(mb_strtolower(trim($word, '([{'), 'UTF-8'), self::NAME_PREFIXES, true)) {
+            return true;
+        }
+
+        // The first character of the next word: a capital starts a new term.
+        $total = count($chars);
+        while ($next < $total && self::isSpace($chars[$next])) {
+            $next++;
+        }
+
+        return $next >= $total || !preg_match('/^\p{Lu}$/u', $chars[$next]);
     }
 
     /**
