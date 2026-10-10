@@ -12,7 +12,7 @@ npx cypress run  --headless --browser chrome  --config '{"specPattern":["plugins
 cypress=$?
 [ $cypress -ne 0 ] && status=$cypress
 
-php lib/pkp/lib/vendor/bin/phpunit --configuration lib/pkp/tests/phpunit.xml --no-coverage plugins/generic/controlledVocabSplitter/tests
+php lib/pkp/lib/vendor/bin/phpunit --configuration lib/pkp/tests/phpunit.xml --no-coverage --display-warnings --display-deprecations plugins/generic/controlledVocabSplitter/tests
 phpunit=$?
 [ $phpunit -ne 0 ] && status=$phpunit
 

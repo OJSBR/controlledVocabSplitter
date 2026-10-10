@@ -32,10 +32,14 @@ class RepairToolTest extends PKPTestCase
         2 => 'second-journal',
     ];
 
+    /** JournalDAO in OJS, PressDAO in OMP: read once, before any mock is registered. */
+    private static ?string $contextDaoName = null;
+
     protected function getMockedDAOs(): array
     {
-        // JournalDAO in OJS, PressDAO in OMP.
-        return [...parent::getMockedDAOs(), (new \ReflectionClass(Application::getContextDAO()))->getShortName()];
+        self::$contextDaoName ??= (new \ReflectionClass(Application::getContextDAO()))->getShortName();
+
+        return [...parent::getMockedDAOs(), self::$contextDaoName];
     }
 
     public function testEveryEnabledContextIsListedWithoutAPath(): void
@@ -93,7 +97,7 @@ class RepairToolTest extends PKPTestCase
             fn (string $sql, array $params = []) => $rows(array_keys(self::ROWS, $params[0] ?? null, true))
         );
 
-        DAORegistry::registerDAO((new \ReflectionClass($real))->getShortName(), $dao);
+        DAORegistry::registerDAO(self::$contextDaoName, $dao);
 
         return $dao;
     }
